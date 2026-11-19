@@ -64,6 +64,17 @@ The **Courseo SecureWatch** challenge requires implementing an end-to-end, multi
   - Concurrent stream playback from geographically impossible IP addresses.
 - Implement instant revocation: revoking a session invalidates its rotating key ladder in $<200\text{ms}$, halting subsequent segment playback.
 
+### Subsystem 6: Hardware Content Protection & EME/CDM Integration (`hardware_protection`)
+- ISO/IEC 23001-7 Protection System Specific Header (PSSH) Box generator:
+  - Binary box synthesis for Widevine (`edef8ba9-79d6-4ace-a3c8-27dcd51d21ed`), Apple FairPlay (`94ce86fb-07ff-4f43-adb8-93d2fa968ca2`), and PlayReady (`9a04f079-9840-4286-ab92-e65be0885f95`).
+  - Correct v0/v1 fourcc `'pssh'` encoding with SystemID, KID array, and binary payload.
+- EME Hardware License Handshake Protocol:
+  - Evaluates client challenge, validates digital signature, and enforces HDCP 2.2 output protection policies.
+- OS Hardware Display Affinity & Window Protection abstractions:
+  - Models macOS `NSWindowSharingNone`, Windows `WDA_MONITOR`, and Android `FLAG_SECURE`.
+- Desktop Secure App bridge (`desktop/courseo_secure_desktop.js`):
+  - Electron/Tauri content protection integration enforcing `mainWindow.setContentProtection(true)`.
+
 ---
 
 ## 3. Required Deliverables
@@ -78,11 +89,13 @@ The **Courseo SecureWatch** challenge requires implementing an end-to-end, multi
    - `src/watermark.rs`: BCH error correction, A/B manifest synthesis, and forensic leak extractor.
    - `src/anti_cam.rs`: Rolling shutter mathematical simulator and GLSL shader generator.
    - `src/telemetry.rs`: Heartbeat monitor, anomaly detector, and revocation ledger.
+   - `src/hardware_protection.rs`: ISO/IEC 23001-7 PSSH box generator, EME license evaluator, and OS display affinity.
    - `src/error.rs`: Typed error domain.
-5. `courseo-player` (Web / TypeScript / GLSL):
+5. `courseo-player` (Web / TypeScript / GLSL & Desktop):
    - Secure WebGL video compositor with anti-camcording shader.
    - Prototype freezing and anti-tamper security shield.
    - DevTools timing trap and dynamic drifting watermark.
+   - `desktop/courseo_secure_desktop.js`: Electron/Tauri desktop content protection wrapper.
 6. `testscript/securewatch_adversarial_test.rs`:
-   - Comprehensive integration test suite executing 100+ adversarial scenarios (bit-flip corruption, camcorder blur, key rotation expiry, replay attacks, concurrent stream revocation).
+   - Comprehensive integration test suite executing 100+ adversarial scenarios (bit-flip corruption, camcorder blur, key rotation expiry, replay attacks, concurrent stream revocation, PSSH binary encoding, and HDCP 2.2 license evaluation).
    - Zero compiler warnings, zero Clippy warnings (`-D warnings`), 100% test pass rate.

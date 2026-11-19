@@ -9,6 +9,7 @@ This plan details the engineering milestones, verification criteria, and rollout
 | Phase 2 | Forensic Watermarking (`BCH(64,48)`) & CENC AES-128-CBCS Encryption | Completed |
 | Phase 3 | Technical Documentation (`SPEC.md`, `DESIGN.md`, `PLAN.md`) | Completed |
 | Phase 4 | Full Test Suite (`cargo test --all-targets`) & Lint Verification (`clippy -D warnings`) | Completed |
+| Phase 5 | Hardware Content Protection & EME/CDM Engine (`src/hardware_protection.rs` & `desktop/`) | Completed |
 
 ## 2. Core Engineering Tasks
 
@@ -22,6 +23,12 @@ This plan details the engineering milestones, verification criteria, and rollout
 ### 2.2 Cryptographic & Watermarking Integrity
 - **BCH(64,48):** Verify systematic encoding and syndrome decoding recover 48-bit subscriber IDs under multi-bit channel noise.
 - **CENC AES-128-CBCS:** Verify 1:9 pattern encryption preserves clear NAL headers and decrypts cleanly with constant 16-byte IV per subsample.
+
+### 2.3 Hardware Content Protection & EME/CDM Engine
+- **ISO/IEC 23001-7 PSSH Box:** Synthesize valid binary `'pssh'` atoms for Widevine, FairPlay, and PlayReady.
+- **EME License Manager:** Enforce `HDCP_V2_2` compliance on external displays; reject streams on insecure links.
+- **OS Display Affinity:** Bind `NSWindowSharingNone`, `WDA_EXCLUDEFROMCAPTURE`, and `FLAG_SECURE`.
+- **Desktop Launcher:** Implement Electron/Tauri bridge in `desktop/courseo_secure_desktop.js` enforcing `mainWindow.setContentProtection(true)`.
 
 ### 2.3 Client-Side WebGL2 Player Hardening
 - Integrate the generated GLSL ES 3.00 fragment shader into the browser WebGL2 rendering loop.

@@ -58,10 +58,28 @@ Media segments adhere to ISO/IEC 23001-7 (`cbcs`):
 - **Spatial-Temporal Checkering:** Combining `frameIndex` with `rowParity` (`mod(floor(gl_FragCoord.y), 2.0)`) further disrupts spatial de-banding filters.
 - **Anti-Tamper Guards:** EME/CDM hardware-backed decryption, `preserveDrawingBuffer: false`, and runtime integrity verification of shader uniforms and canvas prototypes.
 
-## 6. Adversarial Threat Matrix
+## 6. Hardware Content Protection & EME/CDM Integration
+- **PSSH Box Engine (`src/hardware_protection.rs`):**
+  - Synthesizes ISO/IEC 23001-7 Protection System Specific Header boxes for Widevine, FairPlay, and PlayReady.
+  - Generates binary `pssh` atoms injected into media initialization segments (`moov/trak/mdia/minf/stbl/stsd`).
+- **EME License Manager (`EmeLicenseManager`):**
+  - Validates client challenges, checks subscriber token validity and expiration, and evaluates display link HDCP compliance.
+  - Rejects streams requiring `HDCP_V2_2` when the client reports `HdcpLevel::None` or `HdcpLevel::V1_4`.
+- **OS Window Capture Blinding (`DisplayAffinityPolicy`):**
+  - Models OS-level display affinity masks:
+    * macOS: `NSWindowSharingNone` (0)
+    * Windows: `WDA_EXCLUDEFROMCAPTURE` (0x11)
+    * Android: `FLAG_SECURE` (0x00002000)
+- **Desktop Electron/Tauri Bridge (`desktop/courseo_secure_desktop.js`):**
+  - Enforces `mainWindow.setContentProtection(true)` on window creation to blind macOS WindowServer and Windows DWM during QuickTime/OBS/ShadowPlay.
+  - Intercepts and suppresses screenshot shortcuts (`PrintScreen`, `Cmd+Shift+3/4/5`).
+
+## 7. Adversarial Threat Matrix
 | Attack Class | Vector | Mitigation | Residual Risk |
 |---|---|---|---|
 | Optical Capture | Smartphone CMOS rolling shutter | $\alpha = 0.35$ temporal modulation ($C \ge 0.30$) | Global-shutter cinema cameras (mitigated by forensic watermark) |
 | Network Sniffing | TLS MITM / segment scraping | CENC AES-128-CBCS + EME license rotation | Compromised CDM key (mitigated by short TTL) |
 | Piracy Redistribution | Screen recorder / HDMI capture | BCH(64,48) forensic watermark | Collusion attacks (mitigated by anti-collusion codes) |
-| Client Tampering | Shader patching / DevTools | Prototype freezing, EME binding, integrity heartbeats | Custom Chromium builds (mitigated by attestation) |
+| OS Screen Recording | QuickTime, OBS, Cmd+Shift+5 | Hardware content protection (`NSWindowSharingNone`, `WDA_EXCLUDEFROMCAPTURE`, `FLAG_SECURE`) | Root-level kernel display tap (mitigated by HDCP 2.2) |
+| Insecure HDMI Output | External capture card / unencrypted display | EME License Manager enforcing HDCP 2.2 output protection | HDCP stripper hardware (mitigated by forensic watermark) |
+| Client Tampering | Shader patching / DevTools | Active prototype traps, EME binding, integrity heartbeats | Custom Chromium builds (mitigated by attestation) |

@@ -27,10 +27,28 @@ Courseo SecureWatch is a defense-in-depth DRM, forensic watermarking, and optica
 - **Rendering Pipeline:** Decrypted frames uploaded directly to WebGL2 textures (`sampler2D u_videoFrame`), processed by the anti-camcording fragment shader.
 - **Hardening:** Canvas readback (`readPixels`, `toDataURL`, `captureStream`) restricted/monitored; DevTools tamper detection and EME/CDM license binding.
 
-### 2.5 Adversarial Threat Matrix
+### 2.5 Hardware Content Protection & EME/CDM Integration
+- **ISO/IEC 23001-7 PSSH Box Synthesis:**
+  - Standard `'pssh'` box with 4-byte length, fourcc `b"pssh"`, 1-byte version, 3-byte flags, 16-byte SystemID UUID:
+    * Google Widevine: `edef8ba9-79d6-4ace-a3c8-27dcd51d21ed`
+    * Apple FairPlay: `94ce86fb-07ff-4f43-adb8-93d2fa968ca2`
+    * Microsoft PlayReady: `9a04f079-9840-4286-ab92-e65be0885f95`
+  - Version 1 supports 4-byte big-endian KID count followed by $N \times 16$-byte KID array.
+- **EME Hardware License Policy:**
+  - Enforces `HDCP_V2_2` compliance on client display links for 1080p/4K content; displays reporting `HdcpLevel::None` or `HdcpLevel::V1_4` are rejected with `DrmError::Unauthorized`.
+- **OS Hardware Display Affinity & Capture Blinding:**
+  - macOS `NSWindowSharingNone` (sharingType = 0): WindowServer excludes window buffer from all screen captures.
+  - Windows DWM `WDA_EXCLUDEFROMCAPTURE` (0x11): Renders black rectangle to screen recording software.
+  - Android `FLAG_SECURE` (`0x00002000`): Suppresses screenshots and screen capture at SurfaceFlinger level.
+- **Desktop Electron/Tauri Bridge:**
+  - `desktop/courseo_secure_desktop.js` enforces `mainWindow.setContentProtection(true)` and suppresses capture hotkeys (`PrintScreen`, `Cmd+Shift+3/4/5`).
+
+### 2.6 Adversarial Threat Matrix
 | Threat Vector | Attack Mechanism | SecureWatch Countermeasure |
 |---|---|---|
 | Physical Camcording | Smartphone/DSLR CMOS rolling shutter recording | Temporal luminance modulation ($\alpha = 0.35$) causing $\ge 30\%$ contrast banding |
 | Stream Ripping | Intercepting HLS/DASH segments | CENC AES-128-CBCS encryption with short-lived session keys |
 | Screen Capture / Leaking | OS-level capture or HDMI splitter | Forensic BCH(64,48) watermark tracing leak to subscriber ID |
-| Browser Tampering | Overriding WebGL shaders or canvas readback | Integrity checks, headroom-clamped shader injection, EME binding |
+| OS Screen Recording | QuickTime, OBS, Cmd+Shift+5 | Hardware content protection (`NSWindowSharingNone`, `WDA_EXCLUDEFROMCAPTURE`, `FLAG_SECURE`) |
+| Unencrypted HDMI Link | Insecure external display / capture card | EME License Manager enforcing HDCP 2.2 hardware policy |
+| Browser Tampering | Overriding WebGL shaders or canvas readback | Active prototype traps, headroom-clamped shader injection, EME binding |

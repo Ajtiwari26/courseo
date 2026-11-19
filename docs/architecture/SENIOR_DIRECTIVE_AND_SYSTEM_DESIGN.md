@@ -138,6 +138,33 @@ The Courseo SecureWatch engine is structured into 5 decoupled subsystems:
 ## 5. Senior Directive on Implementation
 
 All agents working on Courseo (Argon, Neon, Hydrogen) must strictly adhere to this architectural directive:
-* Backend modules (`crypto`, `watermark`, `manifest`, `telemetry`) must be implemented as a clean, idiomatic Rust crate under `#![forbid(unsafe_code)]` and `#![deny(clippy::all)]`.
-* Client compositor and anti-tamper shields must be implemented in clean TypeScript using standard WebGL2 shaders and Web APIs with zero external heavyweight frameworks.
+* Backend modules (`crypto`, `watermark`, `manifest`, `telemetry`, `hardware_protection`) must be implemented as a clean, idiomatic Rust crate under `#![forbid(unsafe_code)]` and `#![deny(clippy::all)]`.
+* Client compositor and anti-tamper shields must be implemented in clean TypeScript/JavaScript using standard WebGL2 shaders and Web APIs with zero external heavyweight frameworks.
 * All test suites and adversarial attack harnesses must be located strictly under `testscript/`.
+
+---
+
+## 6. Hardware Content Protection, EME/CDM Integration & Desktop Blind Surface Architecture
+
+### 6.1 OS-Level Window Blinding & Display Affinity
+To prevent OS-level screen capture tools (QuickTime, OBS, Cmd+Shift+5, ShadowPlay) from capturing the video stream, the system binds OS hardware display affinity:
+1. **macOS WindowServer (`NSWindowSharingNone`)**: The OS window is marked with `sharingType = 0` (`NSWindowSharingNone`), legally and cryptographically instructing WindowServer to omit the window buffer from all screen captures, rendering a pure black surface.
+2. **Windows DWM (`SetWindowDisplayAffinity`)**: Marked with `WDA_MONITOR` (0x01) or `WDA_EXCLUDEFROMCAPTURE` (0x11), rendering a black box to non-monitor capture APIs.
+3. **Android SurfaceView (`FLAG_SECURE`)**: Window flag `0x00002000` prevents screenshots and screen recording.
+
+### 6.2 ISO/IEC 23001-7 Protection System Specific Header (PSSH) Box Engine
+Media init segments require standard PSSH metadata boxes for browser EME (Encrypted Media Extensions) to route keys to the hardware Content Decryption Module (CDM):
+* **Widevine System ID**: `edef8ba9-79d6-4ace-a3c8-27dcd51d21ed`
+* **FairPlay System ID**: `94ce86fb-07ff-4f43-adb8-93d2fa968ca2`
+* **PlayReady System ID**: `9a04f079-9840-4286-ab92-e65be0885f95`
+* **Box Structure**: 4-byte big-endian length + 4-byte fourcc `'pssh'` + 1-byte version (0 or 1) + 3-byte flags (0) + 16-byte SystemID + (if v1: 4-byte key count + 16-byte KID array) + 4-byte data length + payload.
+
+### 6.3 EME Hardware License Handshake Protocol
+The license server validates client certificate claims and enforces output protection:
+* **HDCP Policy**: Requires `HDCP_V2_2` for 1080p/4K streams; falls back to 480p or rejects if external display lacks HDCP 2.2.
+* **Key Derivation**: Signs key responses with AES-128-CBCS session keys tied to active subscriber claims.
+
+### 6.4 Desktop Application Bridge (`desktop/courseo_secure_desktop.js`)
+For standalone desktop deployments (Electron/Tauri):
+* Enforces `mainWindow.setContentProtection(true)` on window creation.
+* Disables DevTools and keyboard shortcuts for screenshots (e.g. `PrintScreen`).

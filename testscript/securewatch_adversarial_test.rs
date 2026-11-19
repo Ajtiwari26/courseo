@@ -1,5 +1,9 @@
 use courseo_core::anti_cam::{AntiCamEngine, RollingShutterParams};
 use courseo_core::crypto::{decrypt_cbcs, encrypt_cbcs, KeyLadder, KEY_ROTATION_INTERVAL_SECS};
+use courseo_core::hardware_protection::{
+    DisplayAffinityPolicy, DrmSystem, EmeLicenseChallenge, EmeLicenseManager, HdcpLevel,
+    OsDisplayProtection, PsshBox,
+};
 use courseo_core::telemetry::{AnomalyEvent, SessionState, TelemetryGateway};
 use courseo_core::watermark::{WatermarkCodec, WatermarkPayload};
 use courseo_core::DrmError;
@@ -168,4 +172,144 @@ fn test_telemetry_heartbeat_and_instant_revocation() {
         matches!(post_revoke, Err(DrmError::SessionRevoked(_))),
         "subsequent heartbeat after revocation must fail"
     );
+}
+
+#[test]
+fn test_pssh_binary_box_synthesis() {
+    let kid = [0xAB_u8; 16];
+    let payload = vec![0x08, 0x01, 0x12, 0x10];
+
+    let expected_systems = [
+        (
+            DrmSystem::Widevine,
+            [
+                0xed, 0xef, 0x8b, 0xa9, 0x79, 0xd6, 0x4a, 0xce, 0xa3, 0xc8, 0x27, 0xdc, 0xd5, 0x1d,
+                0x21, 0xed,
+            ],
+        ),
+        (
+            DrmSystem::FairPlay,
+            [
+                0x94, 0xce, 0x86, 0xfb, 0x07, 0xff, 0x4f, 0x43, 0xad, 0xb8, 0x93, 0xd2, 0xfa, 0x96,
+                0x8c, 0xa2,
+            ],
+        ),
+        (
+            DrmSystem::PlayReady,
+            [
+                0x9a, 0x04, 0xf0, 0x79, 0x98, 0x40, 0x42, 0x86, 0xab, 0x92, 0xe6, 0x5b, 0xe0, 0x88,
+                0x5f, 0x95,
+            ],
+        ),
+    ];
+
+    for (system, expected_uuid) in expected_systems {
+        // Version 1 box with KID array
+        let pssh_v1 = PsshBox::new(system, vec![kid], payload.clone());
+        let bytes = pssh_v1.to_bytes();
+
+        let box_len = u32::from_be_bytes([bytes[0], bytes[1], bytes[2], bytes[3]]) as usize;
+        assert_eq!(box_len, bytes.len());
+        assert_eq!(&bytes[4..8], b"pssh");
+        assert_eq!(bytes[8], 1); // version 1
+        assert_eq!(&bytes[9..12], &[0, 0, 0]); // flags
+        assert_eq!(&bytes[12..28], &expected_uuid);
+        let kid_count = u32::from_be_bytes([bytes[28], bytes[29], bytes[30], bytes[31]]);
+        assert_eq!(kid_count, 1);
+        assert_eq!(&bytes[32..48], &kid);
+        let data_len = u32::from_be_bytes([bytes[48], bytes[49], bytes[50], bytes[51]]) as usize;
+        assert_eq!(data_len, payload.len());
+        assert_eq!(&bytes[52..52 + data_len], payload.as_slice());
+
+        // Version 0 box without KIDs
+        let pssh_v0 = PsshBox::new(system, vec![], payload.clone());
+        let bytes_v0 = pssh_v0.to_bytes();
+        assert_eq!(bytes_v0[8], 0);
+        assert_eq!(&bytes_v0[12..28], &expected_uuid);
+        let v0_data_len =
+            u32::from_be_bytes([bytes_v0[28], bytes_v0[29], bytes_v0[30], bytes_v0[31]]) as usize;
+        assert_eq!(v0_data_len, payload.len());
+        assert_eq!(&bytes_v0[32..32 + v0_data_len], payload.as_slice());
+    }
+}
+
+#[test]
+fn test_eme_license_hdcp_enforcement() {
+    let manager = EmeLicenseManager::new(HdcpLevel::V2_2, 300);
+    let now = 1_700_000_000_u64;
+
+    let compliant_challenge = EmeLicenseChallenge {
+        subscriber_id: 1001,
+        session_id: "sess_hdcp_ok".to_string(),
+        token_signature_valid: true,
+        token_expiry_unix: now + 600,
+        reported_hdcp: HdcpLevel::V2_2,
+        drm_system: DrmSystem::Widevine,
+    };
+
+    let grant = manager
+        .evaluate_challenge(&compliant_challenge, now)
+        .expect("HDCP 2.2 compliant display should be granted license");
+    assert_eq!(grant.enforced_hdcp, HdcpLevel::V2_2);
+    assert_eq!(grant.drm_system, DrmSystem::Widevine);
+    assert_eq!(grant.license_ttl_secs, 300);
+
+    let non_compliant_challenge = EmeLicenseChallenge {
+        reported_hdcp: HdcpLevel::None,
+        ..compliant_challenge.clone()
+    };
+    let err = manager.evaluate_challenge(&non_compliant_challenge, now);
+    assert!(
+        matches!(err, Err(DrmError::Unauthorized(_))),
+        "HDCP 2.2 stream must reject display reporting HdcpLevel::None"
+    );
+
+    let downgraded_challenge = EmeLicenseChallenge {
+        reported_hdcp: HdcpLevel::V1_4,
+        ..compliant_challenge
+    };
+    let err_v14 = manager.evaluate_challenge(&downgraded_challenge, now);
+    assert!(
+        matches!(err_v14, Err(DrmError::Unauthorized(_))),
+        "HDCP 2.2 stream must reject display reporting HdcpLevel::V1_4"
+    );
+}
+
+#[test]
+fn test_os_display_affinity_bitmasks() {
+    assert_eq!(OsDisplayProtection::MacSharingNone.bitmask(), 0);
+    assert_eq!(
+        OsDisplayProtection::WindowsExcludeFromCapture.bitmask(),
+        0x11
+    );
+    assert_eq!(
+        OsDisplayProtection::AndroidFlagSecure.bitmask(),
+        0x0000_2000
+    );
+
+    let mac_policy = DisplayAffinityPolicy::new(OsDisplayProtection::MacSharingNone);
+    assert!(mac_policy.validate(0).is_ok());
+    assert!(matches!(
+        mac_policy.validate(1),
+        Err(DrmError::Unauthorized(_))
+    ));
+
+    let win_policy = DisplayAffinityPolicy::new(OsDisplayProtection::WindowsExcludeFromCapture);
+    assert!(win_policy.validate(0x11).is_ok());
+    assert!(matches!(
+        win_policy.validate(0x01),
+        Err(DrmError::Unauthorized(_))
+    ));
+    assert!(matches!(
+        win_policy.validate(0x00),
+        Err(DrmError::Unauthorized(_))
+    ));
+
+    let android_policy = DisplayAffinityPolicy::new(OsDisplayProtection::AndroidFlagSecure);
+    assert!(android_policy.validate(0x0000_2000).is_ok());
+    assert!(android_policy.validate(0x0000_2004).is_ok());
+    assert!(matches!(
+        android_policy.validate(0x0000_0000),
+        Err(DrmError::Unauthorized(_))
+    ));
 }
