@@ -1,0 +1,61 @@
+
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/courseo.css[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/index.html[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/courses.html[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/course_detail.html[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/classroom.html[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/weborient_manifest.json[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/weborient_agent.js[0m
+    [90m└─[0m [38;2;190;200;215mWrote 1635 lines (34.8 KB)[0m [90m· 307.74s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 841 lines (38.0 KB)[0m [90m· 307.74s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 216 lines (14.3 KB)[0m [90m· 307.74s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 282 lines (17.5 KB)[0m [90m· 307.74s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 374 lines (18.0 KB)[0m [90m· 307.74s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 62 lines (3.0 KB)[0m [90m· 307.74s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 299 lines (12.6 KB)[0m [90m· 307.74s[0m
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #1)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #2)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #3)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #4)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #5)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #6)[0m Compiler gate error — repairing build/test failure
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #7)[0m Compiler gate error — repairing build/test failure
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #8)[0m Compiler gate error — repairing build/test failure
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #9)[0m Compiler gate error — repairing build/test failure
+  [1;38;2;250;85;85mAutonomous task failed: Exceeded maximum self-repair attempts (10)[0m
+{
+  "exit_code": 1,
+  "status": "failed",
+  "goal": "You are Gemini 4 Neon, the Lead Autonomous Architect & Systems Engineer for DeployMate Etta.\nYour workspace is /Users/ajaytiwari/Desktop/Projects/courseo.\n\nOBJECTIVE:\nBuild the full multi-page Courseo EdTech website design with cinematic scroll reveals, modern frosted glass theme, the 12-course AI/Creator curriculum, the embedded Courseo SecureWatch WebGL player, and the WebOrient Voice Co-Browsing Ghost Cursor Agent.\n\nBACKGROUND & SPECIFICATIONS:\nReview existing design assets in `assets/brand/`:\n- `courseo_logo_primary.jpg`: Primary lockup with 3D hexagonal orange ribbon and wordmark.\n- Brand colors: Primary Orange `#FD6902`, Luminous Hover `#FF8533`, Deep Obsidian `#0A0B0E`, Glass Card `#14161C`, Stroke `rgba(255, 255, 255, 0.08)`.\n- Research documentation: `docs/design/COURSEO_EXPANDED_CURRICULUM_AND_SCROLL_EXPERIENCE.md`, `docs/design/COURSEO_BRAND_IDENTITY_AND_DESIGN_SYSTEM.md`, and `docs/design/WEBSITE_ARCHITECTURE_AND_WIREFRAMES.md`.\n- Reference WebOrient project in `/Users/ajaytiwari/Desktop/Projects/weborient/`.\n\nDELIVERABLES TO IMPLEMENT:\n\n1. `web/courseo.css`:\n   - Unified design system tokens (obsidian foundation, frosted glassmorphism `backdrop-filter: blur(24px)`, specular highlights, radiant orange accents).\n   - Lenis smooth scroll and CSS `view-timeline` scroll-reveal animations (`fade-up`, `stagger-in`, `glow-pulse`).\n   - Responsive grid, navigation pill, course cards, bento cards, buttons, badges, and WebOrient voice pill styling.\n\n2. `web/index.html` (Master Landing Page):\n   - Floating glass navigation bar with Courseo brand lockup, search with ⌘K, nav links, and CTA.\n   - Split-text cinematic hero with value proposition and embedded live SecureWatch WebGL video player with active anti-camcording HUD.\n   - Social proof metrics ribbon (48,000+ Students, 94.6% Completion, $0 Piracy).\n   - Pinned horizontal curriculum showcase featuring all 3 tracks:\n     * Track 1: AI Engineering (Web Dev with AI, Autonomous Swarms with OpenClaw & Hermes, Voice Agents, Local LLM Inference with DeepSeek/vLLM/LoRA, AI Automation, Mobile App Dev).\n     * Track 2: Generative Film & Media (Higgsfield & Seedance 2.5 Cinema, Viral AI Video Ads, Motion Graphics in Premiere/AE, AI Music with Suno/Udio).\n     * Track 3: Growth & Commerce (Meta Ads 2026/2027 Scaling, Shopify E-Commerce Funnels).\n   - Sticky stacking Bento Grid (SecureWatch Zero-Leak DRM, In-browser Code Sandboxes, WebOrient Voice Agent, Cryptographic Certifications).\n   - Top Faculty Spotlight with practitioner profiles.\n   - High-conversion footer with radiant orange CTA and guarantee badges.\n   - Embedded WebOrient Voice Co-Browsing Agent widget with floating voice pill.\n\n3. `web/courses.html` (Course Catalog & Discovery):\n   - Dynamic track filters (All, AI Engineering, Generative Media, Growth & Commerce).\n   - Search bar with instant client-side filtering.\n   - 12 comprehensive course cards with 16:9 thumbnails, difficulty level pills, duration, rating, instructor avatar, price, and syllabus link.\n\n4. `web/course_detail.html` (Masterclass Detail & Syllabus View):\n   - Deep-dive course overview (featuring \"Autonomous Multi-Agent Swarms with OpenClaw & Hermes\").\n   - Course preview hero, what you'll build, interactive curriculum accordion (modules, lessons, durations).\n   - Instructor biography & credentials.\n   - Sticky checkout card with transparent pricing, 30-day money-back guarantee, and enroll button.\n\n5. `web/classroom.html` (Student Learning Room):\n   - Integrated Courseo SecureWatch WebGL player with active forensic watermark overlay.\n   - Lesson navigation sidebar / chapter playlist.\n   - Video notes, resources, and interactive project terminal sandbox.\n\n6. `web/weborient_agent.js` & `web/weborient_manifest.json`:\n   - Interactive client adapter for WebOrient Voice Co-Browsing agent.\n   - Configured with `#FD6902` theme and sitemap manifest enabling the Ghost Cursor to navigate between pages and spotlight courses.\n\nQUALITY GATES:\n- All HTML/CSS/JS must be valid, responsive, beautifully styled, and free of syntax errors.\n- Existing Rust test suite (`cargo test --all-targets`) must remain 100% passing.\n- Clippy (`cargo clippy --all-targets -- -D warnings`) and formatting (`cargo fmt --all -- --check`) must pass with zero errors.",
+  "etta_version": "2.31.74",
+  "provider": "google",
+  "model": "neon",
+  "thinking_level": "auto",
+  "tokens_used": 2920,
+  "input_tokens": 1950,
+  "output_tokens": 970,
+  "thinking_tokens": 0,
+  "cost": 0.000835,
+  "artifacts": [
+    "/Users/ajaytiwari/Desktop/Projects/courseo/.etta/artifacts/task_artifact.md"
+  ],
+  "events_count": 39,
+  "turns": 11,
+  "error": "Autonomous task failed: Exceeded maximum self-repair attempts (10)",
+  "response": "Autonomous task failed: Exceeded maximum self-repair attempts (10)"
+}

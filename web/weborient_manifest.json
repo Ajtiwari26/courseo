@@ -1,0 +1,62 @@
+{
+  "version": "1.0.0",
+  "agent": {
+    "name": "Courseo Guide",
+    "themeColor": "#FD6902",
+    "cursorStyle": "modern-glow",
+    "greeting": "Hi! I am your Courseo Guide. Ask me anything about our AI, filmmaking, or growth courses."
+  },
+  "routes": [
+    {
+      "id": "home",
+      "path": "./index.html",
+      "title": "Courseo Master Landing Page",
+      "keywords": ["home", "landing", "overview", "securewatch", "bento", "faculty"]
+    },
+    {
+      "id": "catalog",
+      "path": "./courses.html",
+      "title": "Course Catalog & Discovery",
+      "keywords": ["courses", "catalog", "all courses", "browse", "filter", "tracks"]
+    },
+    {
+      "id": "detail",
+      "path": "./course_detail.html",
+      "title": "Masterclass Detail & Syllabus",
+      "keywords": ["syllabus", "detail", "openclaw", "hermes", "swarm", "price", "enroll"]
+    },
+    {
+      "id": "classroom",
+      "path": "./classroom.html",
+      "title": "Student Learning Room",
+      "keywords": ["classroom", "player", "learn", "sandbox", "terminal", "notes", "video"]
+    }
+  ],
+  "tracks": [
+    {
+      "id": "ai-engineering",
+      "name": "AI Engineering & Autonomous Systems",
+      "catalogUrl": "./courses.html?track=ai-engineering",
+      "keywords": ["ai", "engineering", "agents", "swarms", "openclaw", "hermes", "voice", "local", "llm", "lora", "deepseek", "vllm", "automation", "mobile", "web dev"]
+    },
+    {
+      "id": "generative-media",
+      "name": "Generative AI Filmmaking & Creative Media",
+      "catalogUrl": "./courses.html?track=generative-media",
+      "keywords": ["film", "cinema", "higgsfield", "seedance", "video ads", "ugc", "motion", "premiere", "after effects", "music", "suno", "udio"]
+    },
+    {
+      "id": "growth-commerce",
+      "name": "High-ROI Growth, Commerce & Ad Scaling",
+      "catalogUrl": "./courses.html?track=growth-commerce",
+      "keywords": ["growth", "meta ads", "facebook", "instagram", "shopify", "ecommerce", "funnels", "marketing", "scaling"]
+    }
+  ],
+  "spotlights": [
+    { "intent": "securewatch", "selector": "#hero-securewatch, #classroom-player-frame, #bento-securewatch", "speech": "Here is Courseo SecureWatch running live 60Hz anti-camcording modulation and BCH forensic watermarking." },
+    { "intent": "curriculum", "selector": "#curriculum, #catalog-grid, #syllabus", "speech": "Here is our 12-course curriculum spanning AI Engineering, Generative Cinema, and Growth." },
+    { "intent": "openclaw", "selector": "[data-course-id='autonomous-swarms-openclaw-hermes'], #detail-title", "speech": "Our flagship masterclass on Autonomous Multi-Agent Swarms with OpenClaw and Hermes is taught by Dr. Aris Thorne." },
+    { "intent": "meta-ads", "selector": "[data-course-id='meta-ads-2026-scaling']", "speech": "Meta Ads 2026/2027 Scaling covers Advantage+ Shopping, Conversion API, and creative testing pipelines." },
+    { "intent": "sandbox", "selector": "#tab-sandbox, #bento-sandbox", "speech": "You can run OpenClaw DAGs and Cargo tests directly in the browser sandbox." }
+  ]
+}

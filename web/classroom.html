@@ -1,0 +1,374 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Student Classroom — Courseo SecureWatch Learning Room</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./courseo.css">
+</head>
+<body>
+  <!-- Classroom Top Bar -->
+  <header class="nav-shell">
+    <nav class="nav-pill" aria-label="Classroom navigation">
+      <div style="display:flex; align-items:center; gap:1rem;">
+        <a href="./index.html" class="brand-lockup">
+          <span class="brand-mark">
+            <img src="../assets/brand/courseo_logo_primary.jpg" alt="Courseo" onerror="this.style.display='none'">
+          </span>
+          <span class="brand-wordmark">cours<span>eo</span></span>
+        </a>
+        <span style="color:var(--border-glass-strong);">|</span>
+        <span style="font-size:0.86rem; font-weight:600; color:var(--text-secondary);">Autonomous Multi-Agent Swarms (OpenClaw &amp; Hermes)</span>
+      </div>
+
+      <div class="nav-actions">
+        <span class="badge badge-emerald badge-mono" id="classroom-progress-badge">2 / 6 Completed (33%)</span>
+        <a href="./course_detail.html" class="btn btn-ghost btn-sm">Syllabus</a>
+      </div>
+    </nav>
+  </header>
+
+  <main class="section" style="padding-top: 1.75rem; padding-bottom: 4rem;">
+    <div class="container classroom-grid">
+      <!-- Left: SecureWatch Player + Notes / Resources / Terminal Sandbox -->
+      <div style="display:flex; flex-direction:column; gap:1.5rem;">
+        <div class="securewatch-frame" id="classroom-player-frame">
+          <div class="securewatch-topbar">
+            <span class="badge badge-emerald badge-mono" id="cls-hud-badge">
+              <span class="pulse-dot"></span>
+              SECUREWATCH WEBGL2 ACTIVE
+            </span>
+            <span style="color:var(--text-muted);" id="cls-lesson-header">Lesson 1.3 — Building Your First OpenClaw DAG Scheduler</span>
+          </div>
+
+          <div class="securewatch-viewport" id="cls-player-container">
+            <video id="cls-source-video" src="./sample.mp4" playsinline webkit-playsinline muted autoplay loop crossorigin="anonymous" style="display:none;"></video>
+            <canvas id="cls-secure-canvas" width="960" height="540"></canvas>
+
+            <div class="player-hud-overlay">
+              <div class="hud-row">
+                <span class="hud-chip">4K 60fps • H.264/AAC</span>
+                <span class="hud-chip" id="cls-hdcp-chip">HDCP 2.2 • Hardware EME</span>
+              </div>
+              <div class="hud-row">
+                <span class="hud-chip">Anti-Cam: 60Hz (alpha=0.35)</span>
+                <span class="hud-chip">BCH(64,48) Forensic ID: 4290-1337</span>
+              </div>
+            </div>
+
+            <div class="forensic-wm-badge" id="cls-watermark" style="top: 32%; left: 48%;">
+              COURSEO-SECUREWATCH • usr_premium_42901337 • BCH64
+            </div>
+          </div>
+
+          <div class="securewatch-controls">
+            <button class="ctrl-btn active" id="cls-btn-play" type="button">Pause</button>
+            <button class="ctrl-btn" id="cls-btn-mute" type="button">Unmute</button>
+            <button class="ctrl-btn" id="cls-btn-restart" type="button">Restart</button>
+            <button class="ctrl-btn" id="cls-btn-fullscreen" type="button">Pseudo-Fullscreen</button>
+            <button class="ctrl-btn" id="cls-btn-hdcp" type="button">Simulate HDCP 1.4</button>
+            <span class="player-time" id="cls-time-display">00:00 / 38:20</span>
+          </div>
+        </div>
+
+        <!-- Tabbed Workspace: Sandbox Terminal, Notes, Resources -->
+        <section class="glass-card" style="overflow:hidden;">
+          <div class="workspace-tabs" role="tablist">
+            <button class="workspace-tab active" data-tab="sandbox" type="button">Project Terminal Sandbox</button>
+            <button class="workspace-tab" data-tab="notes" type="button">Lesson Notes</button>
+            <button class="workspace-tab" data-tab="resources" type="button">Resources &amp; Code</button>
+          </div>
+
+          <!-- Interactive Terminal Sandbox -->
+          <div id="tab-sandbox" style="padding:1.25rem;">
+            <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:0.85rem;">
+              <span style="font-size:0.85rem; color:var(--text-muted);">Isolated Linux/Rust Sandbox — try <code style="color:#FD6902;">help</code>, <code style="color:#FD6902;">ls</code>, <code style="color:#FD6902;">openclaw run</code>, <code style="color:#FD6902;">cargo test</code></span>
+              <span class="badge badge-emerald badge-mono">Sandbox Ready</span>
+            </div>
+            <div class="terminal-shell">
+              <div class="terminal-output" id="terminal-output">
+                <div style="color:#FD6902;">Courseo Interactive Sandbox v2.6 (OpenClaw + Hermes Runtime)</div>
+                <div style="color:#94A3B8;">Workspace: /workspace/openclaw-dag-lab — Type "help" for commands.</div>
+              </div>
+              <form class="terminal-input-row" id="terminal-form">
+                <span style="color:#FD6902;">etta@sandbox:~$</span>
+                <input type="text" class="terminal-input" id="terminal-input" autocomplete="off" placeholder="Enter command (e.g. openclaw run)..." aria-label="Sandbox terminal input">
+              </form>
+            </div>
+          </div>
+
+          <!-- Lesson Notes -->
+          <div id="tab-notes" style="padding:1.25rem; display:none;">
+            <label for="lesson-notes-area" style="display:block; font-size:0.85rem; color:var(--text-muted); margin-bottom:0.6rem;">
+              Timestamped personal notes (auto-saved locally in your browser):
+            </label>
+            <textarea id="lesson-notes-area" rows="7" style="width:100%; background:#080A0E; border:1px solid var(--border-glass); border-radius:12px; padding:0.9rem; color:#fff; font-size:0.9rem; resize:vertical; outline:none;" placeholder="Capture key DAG invariants, latency numbers, or architecture notes..."></textarea>
+            <div style="margin-top:0.6rem; font-family:var(--font-mono); font-size:0.74rem; color:#10B981;" id="notes-status">Synced to localStorage</div>
+          </div>
+
+          <!-- Resources -->
+          <div id="tab-resources" style="padding:1.25rem; display:none;">
+            <div style="display:flex; flex-direction:column; gap:0.75rem;">
+              <div class="lesson-row" style="padding:0.85rem; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid var(--border-glass);">
+                <div>
+                  <div style="font-weight:600; color:#fff;">openclaw-dag-starter.tar.gz</div>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Rust + TypeScript starter workspace with unit test harness</div>
+                </div>
+                <span class="badge badge-orange badge-mono">2.4 MB</span>
+              </div>
+              <div class="lesson-row" style="padding:0.85rem; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid var(--border-glass);">
+                <div>
+                  <div style="font-weight:600; color:#fff;">Hermes_Context_Compaction_Architecture.pdf</div>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Epoch-based sliding window diagrams &amp; KV-cache benchmarks</div>
+                </div>
+                <span class="badge badge-orange badge-mono">4.1 MB</span>
+              </div>
+              <div class="lesson-row" style="padding:0.85rem; background:rgba(255,255,255,0.03); border-radius:10px; border:1px solid var(--border-glass);">
+                <div>
+                  <div style="font-weight:600; color:#fff;">SecureWatch_DRM_Telemetry_Spec.md</div>
+                  <div style="font-size:0.78rem; color:var(--text-muted);">Reference specification for BCH(64,48) watermarking</div>
+                </div>
+                <span class="badge badge-orange badge-mono">128 KB</span>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+
+      <!-- Right: Chapter Playlist Sidebar -->
+      <aside class="glass-card playlist-card" aria-label="Course playlist">
+        <div style="padding:1.1rem 1.2rem; border-bottom:1px solid var(--border-glass); display:flex; align-items:center; justify-content:space-between;">
+          <h2 style="font-family:var(--font-display); font-size:1.05rem;">Chapter Playlist</h2>
+          <span class="badge badge-orange badge-mono">Module 1–2</span>
+        </div>
+        <div class="playlist-scroll" id="playlist-container"></div>
+      </aside>
+    </div>
+  </main>
+
+  <script
+    src="./weborient_agent.js"
+    data-theme-color="#FD6902"
+    data-cursor-style="modern-glow"
+    data-manifest="./weborient_manifest.json"
+    data-agent-name="Courseo Guide"
+    data-greeting="Welcome to the Classroom. Ask me to open your notes, highlight the terminal sandbox, or navigate back to the catalog."
+    defer></script>
+
+  <script type="module">
+    const LESSONS = [
+      { id: '1.1', title: '1.1 Why Linear Prompt Chains Fail in Production', duration: '18:40', done: true },
+      { id: '1.2', title: '1.2 Designing Typed Agent Handoff Contracts', duration: '26:15', done: true },
+      { id: '1.3', title: '1.3 Building Your First OpenClaw DAG Scheduler', duration: '38:20', done: false },
+      { id: '1.4', title: '1.4 Lab: Cycle Detection & Graceful Cancellation', duration: '51:45', done: false },
+      { id: '2.1', title: '2.1 KV-Cache Friendly Sliding Window Compaction', duration: '32:10', done: false },
+      { id: '2.2', title: '2.2 SQLite WAL + FTS5 Episodic Memory Store', duration: '44:00', done: false }
+    ];
+
+    let activeLessonId = '1.3';
+    const playlistEl = document.getElementById('playlist-container');
+    const lessonHeaderEl = document.getElementById('cls-lesson-header');
+    const progressBadgeEl = document.getElementById('classroom-progress-badge');
+
+    function updateProgress() {
+      const done = LESSONS.filter(l => l.done).length;
+      const pct = Math.round((done / LESSONS.length) * 100);
+      progressBadgeEl.textContent = `${done} / ${LESSONS.length} Completed (${pct}%)`;
+    }
+
+    function renderPlaylist() {
+      playlistEl.innerHTML = LESSONS.map(l => `
+        <button class="playlist-item ${l.id === activeLessonId ? 'active' : ''}" data-lesson-id="${l.id}" type="button">
+          <span style="width:20px; height:20px; border-radius:6px; border:1px solid ${l.done ? '#10B981' : 'rgba(255,255,255,0.2)'}; background:${l.done ? 'rgba(16,185,129,0.2)' : 'transparent'}; display:grid; place-items:center; flex-shrink:0; margin-top:2px; color:#10B981; font-size:0.72rem;">
+            ${l.done ? '✓' : ''}
+          </span>
+          <span style="display:flex; flex-direction:column; gap:0.2rem;">
+            <span style="font-size:0.86rem; font-weight:600; color:${l.id === activeLessonId ? '#FFFFFF' : '#CBD5E1'};">${l.title}</span>
+            <span style="font-family:var(--font-mono); font-size:0.72rem; color:#94A3B8;">${l.duration} • 4K SecureWatch</span>
+          </span>
+        </button>
+      `).join('');
+
+      playlistEl.querySelectorAll('.playlist-item').forEach(btn => {
+        btn.addEventListener('click', () => {
+          activeLessonId = btn.dataset.lessonId;
+          const lesson = LESSONS.find(x => x.id === activeLessonId);
+          lessonHeaderEl.textContent = `Lesson ${lesson.title}`;
+          document.getElementById('cls-time-display').textContent = `00:00 / ${lesson.duration}`;
+          renderPlaylist();
+        });
+      });
+      updateProgress();
+    }
+
+    renderPlaylist();
+
+    // Workspace Tabs
+    document.querySelectorAll('.workspace-tab').forEach(tab => {
+      tab.addEventListener('click', () => {
+        document.querySelectorAll('.workspace-tab').forEach(t => t.classList.remove('active'));
+        tab.classList.add('active');
+        ['sandbox', 'notes', 'resources'].forEach(name => {
+          document.getElementById(`tab-${name}`).style.display = name === tab.dataset.tab ? 'block' : 'none';
+        });
+      });
+    });
+
+    // Notes persistence
+    const notesArea = document.getElementById('lesson-notes-area');
+    const notesStatus = document.getElementById('notes-status');
+    notesArea.value = localStorage.getItem('courseo_classroom_notes') || '';
+    notesArea.addEventListener('input', () => {
+      localStorage.setItem('courseo_classroom_notes', notesArea.value);
+      notesStatus.textContent = `Saved at ${new Date().toLocaleTimeString()}`;
+    });
+
+    // Interactive Sandbox Terminal
+    const termOut = document.getElementById('terminal-output');
+    const termForm = document.getElementById('terminal-form');
+    const termInput = document.getElementById('terminal-input');
+
+    function appendTerm(text, color = '#CBD5E1') {
+      const div = document.createElement('div');
+      div.style.color = color;
+      div.textContent = text;
+      termOut.appendChild(div);
+      termOut.scrollTop = termOut.scrollHeight;
+    }
+
+    termForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const cmd = termInput.value.trim();
+      if (!cmd) return;
+      appendTerm(`etta@sandbox:~$ ${cmd}`, '#FFFFFF');
+      termInput.value = '';
+
+      switch (cmd) {
+        case 'help':
+          appendTerm('Available commands: help, ls, openclaw run, hermes status, cargo test, clear', '#94A3B8');
+          break;
+        case 'ls':
+          appendTerm('Cargo.toml  src/dag.rs  src/hermes.rs  agents.toml  tests/swarm_test.rs', '#CBD5E1');
+          break;
+        case 'openclaw run':
+          appendTerm('[openclaw] Compiling DAG (4 nodes, 0 cycles)...', '#FD6902');
+          appendTerm('[openclaw] Node planner -> researcher -> coder -> verifier completed in 142ms', '#10B981');
+          break;
+        case 'hermes status':
+          appendTerm('[hermes] Reflex tier: Qwen3.5-2B-4bit (18ms) | Frontier tier: Gemini 4 Neon (online)', '#10B981');
+          break;
+        case 'cargo test':
+          appendTerm('running 12 tests ... test result: ok. 12 passed; 0 failed; 0 ignored', '#10B981');
+          break;
+        case 'clear':
+          termOut.innerHTML = '';
+          break;
+        default:
+          appendTerm(`sandbox: command not found: ${cmd} (type "help")`, '#EF4444');
+      }
+    });
+
+    // SecureWatch Classroom Player Integration
+    const canvas = document.getElementById('cls-secure-canvas');
+    const video = document.getElementById('cls-source-video');
+    const container = document.getElementById('cls-player-container');
+    const watermark = document.getElementById('cls-watermark');
+    let player = null;
+    let playing = true;
+
+    async function initClassroomPlayer() {
+      try {
+        const mod = await import('./courseo_player.js');
+        if (mod && mod.CourseoSecurePlayer) {
+          player = new mod.CourseoSecurePlayer({
+            canvas,
+            video,
+            sessionToken: 'tok_classroom_' + Math.floor(Math.random() * 900000 + 100000),
+            userId: 'usr_premium_42901337',
+            refreshHz: 60,
+            onRevoke: (evt) => {
+              document.getElementById('cls-hud-badge').textContent = `SESSION LOCKED: ${evt.reason}`;
+            }
+          });
+          player.start();
+          video.play().catch(() => {});
+          return;
+        }
+      } catch (_) {}
+
+      // Fallback WebGL/Canvas live classroom stream visualizer
+      const ctx = canvas.getContext('2d');
+      let tick = 0;
+      const draw = () => {
+        if (playing) {
+          tick++;
+          ctx.fillStyle = '#090B10';
+          ctx.fillRect(0, 0, canvas.width, canvas.height);
+          ctx.strokeStyle = 'rgba(253, 105, 2, 0.5)';
+          ctx.lineWidth = 2;
+          for (let i = 0; i < 3; i++) {
+            ctx.beginPath();
+            for (let x = 0; x <= canvas.width; x += 16) {
+              const y = 260 + Math.sin(x * 0.012 + tick * 0.04 + i) * (35 + i * 14);
+              if (x === 0) ctx.moveTo(x, y);
+              else ctx.lineTo(x, y);
+            }
+            ctx.stroke();
+          }
+          ctx.fillStyle = '#FFFFFF';
+          ctx.font = '700 22px "Plus Jakarta Sans", sans-serif';
+          ctx.fillText(lessonHeaderEl.textContent, 38, canvas.height - 62);
+        }
+        requestAnimationFrame(draw);
+      };
+      requestAnimationFrame(draw);
+    }
+
+    initClassroomPlayer();
+
+    setInterval(() => {
+      watermark.style.top = `${18 + Math.floor(Math.random() * 58)}%`;
+      watermark.style.left = `${14 + Math.floor(Math.random() * 50)}%`;
+    }, 2800);
+
+    document.getElementById('cls-btn-play').addEventListener('click', (e) => {
+      playing = !playing;
+      if (playing) video.play().catch(() => {});
+      else video.pause();
+      e.currentTarget.textContent = playing ? 'Pause' : 'Play';
+      e.currentTarget.classList.toggle('active', playing);
+    });
+
+    document.getElementById('cls-btn-mute').addEventListener('click', (e) => {
+      video.muted = !video.muted;
+      e.currentTarget.textContent = video.muted ? 'Unmute' : 'Mute';
+    });
+
+    document.getElementById('cls-btn-restart').addEventListener('click', () => {
+      video.currentTime = 0;
+      video.play().catch(() => {});
+    });
+
+    document.getElementById('cls-btn-fullscreen').addEventListener('click', () => {
+      if (player && player.togglePseudoFullscreen) {
+        player.togglePseudoFullscreen(container);
+      } else {
+        container.classList.toggle('pseudo-fullscreen');
+      }
+    });
+
+    document.getElementById('cls-btn-hdcp').addEventListener('click', () => {
+      if (player && player.applyHdcpDegradation) {
+        const policy = player.applyHdcpDegradation('1.4');
+        document.getElementById('cls-hdcp-chip').textContent = `HDCP 1.4 • ${policy.maxHeight}p Graceful Tier`;
+      } else {
+        document.getElementById('cls-hdcp-chip').textContent = 'HDCP 1.4 • 720p Graceful Tier';
+      }
+      watermark.style.color = 'rgba(253, 105, 2, 0.72)';
+    });
+  </script>
+</body>
+</html>

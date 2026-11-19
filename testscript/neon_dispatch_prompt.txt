@@ -2,75 +2,56 @@ You are Gemini 4 Neon, the Lead Autonomous Architect & Systems Engineer for Depl
 Your workspace is /Users/ajaytiwari/Desktop/Projects/courseo.
 
 OBJECTIVE:
-Implement the complete, production-grade Open-Source Video DRM & Production Edge-Case Mitigation Suite in `courseo` under `#![forbid(unsafe_code)]` and `#![deny(clippy::all)]`.
+Build the full multi-page Courseo EdTech website design with cinematic scroll reveals, modern frosted glass theme, the 12-course AI/Creator curriculum, the embedded Courseo SecureWatch WebGL player, and the WebOrient Voice Co-Browsing Ghost Cursor Agent.
 
-BACKGROUND & REQUIREMENTS:
-Commercial DRM SaaS vendors charge $1,000-$5,000/mo plus $0.01-$0.05/license. We are standardizing on a 100% self-hosted, $0-license-fee pipeline with CMAF cbcs, W3C ClearKey EME, self-hosted FairPlay KSM, Tauri v2 desktop protection, and comprehensive handling of real-world production edge cases.
+BACKGROUND & SPECIFICATIONS:
+Review existing design assets in `assets/brand/`:
+- `courseo_logo_primary.jpg`: Primary lockup with 3D hexagonal orange ribbon and wordmark.
+- Brand colors: Primary Orange `#FD6902`, Luminous Hover `#FF8533`, Deep Obsidian `#0A0B0E`, Glass Card `#14161C`, Stroke `rgba(255, 255, 255, 0.08)`.
+- Research documentation: `docs/design/COURSEO_EXPANDED_CURRICULUM_AND_SCROLL_EXPERIENCE.md`, `docs/design/COURSEO_BRAND_IDENTITY_AND_DESIGN_SYSTEM.md`, and `docs/design/WEBSITE_ARCHITECTURE_AND_WIREFRAMES.md`.
+- Reference WebOrient project in `/Users/ajaytiwari/Desktop/Projects/weborient/`.
 
-SUBSYSTEMS TO IMPLEMENT:
+DELIVERABLES TO IMPLEMENT:
 
-1. `src/sliding_window_kms.rs`:
-   - Production Clock Skew & NTP Drift Tolerance.
-   - Students' system clocks often drift by 10 to 45 seconds.
-   - Implement `SlidingWindowKeyManager`:
-     * Primary key valid for duration (e.g. 30s).
-     * Sliding grace window: previous key remains acceptable for an additional `grace_period_secs` (e.g. 15s) after expiration.
-     * Lookahead pre-issuance: next key $N+1$ is generated and pre-issued `preissue_lead_secs` (e.g. 10s) before key $N$ expires.
-     * `evaluate_key_request(client_timestamp_epoch_secs, requested_key_id)` returns `KeyDecision::ValidKey { content_key, expires_in_secs, next_key_preview }` or `KeyDecision::ExpiredKeyGraceAllowed { content_key, warning: "clock_skew_detected" }` or `KeyDecision::RejectedExpired`.
-     * Zero external DB dependencies; in-memory thread-safe state with nanosecond latency.
+1. `web/courseo.css`:
+   - Unified design system tokens (obsidian foundation, frosted glassmorphism `backdrop-filter: blur(24px)`, specular highlights, radiant orange accents).
+   - Lenis smooth scroll and CSS `view-timeline` scroll-reveal animations (`fade-up`, `stagger-in`, `glow-pulse`).
+   - Responsive grid, navigation pill, course cards, bento cards, buttons, badges, and WebOrient voice pill styling.
 
-2. `src/hdcp_degradation.rs`:
-   - HDCP False-Alarm Resilience with Graceful ABR Degradation.
-   - In production, 8-12% of legitimate users on USB-C hubs, budget HDMI, or dual monitors fail HDCP 2.2.
-   - Instead of terminating playback with a black screen, implement `HdcpPolicyEngine`:
-     * If `reported_hdcp >= HdcpLevel::V2_2`: Tier `Pristine1080p` (1080p allowed, watermark opacity = 0.22).
-     * If `reported_hdcp == HdcpLevel::V1_4` or Type 0: Tier `Degraded720p` (max resolution capped at 720p, watermark opacity boosted to 0.45).
-     * If HDCP handshake fails / missing: Tier `Degraded480p` (max resolution capped at 480p, watermark opacity boosted to 0.55).
-     * Emits `HdcpPlaybackResolution { max_height: u32, watermark_opacity: f32, tier_name: &'static str, requires_downgrade: bool }`.
+2. `web/index.html` (Master Landing Page):
+   - Floating glass navigation bar with Courseo brand lockup, search with ⌘K, nav links, and CTA.
+   - Split-text cinematic hero with value proposition and embedded live SecureWatch WebGL video player with active anti-camcording HUD.
+   - Social proof metrics ribbon (48,000+ Students, 94.6% Completion, $0 Piracy).
+   - Pinned horizontal curriculum showcase featuring all 3 tracks:
+     * Track 1: AI Engineering (Web Dev with AI, Autonomous Swarms with OpenClaw & Hermes, Voice Agents, Local LLM Inference with DeepSeek/vLLM/LoRA, AI Automation, Mobile App Dev).
+     * Track 2: Generative Film & Media (Higgsfield & Seedance 2.5 Cinema, Viral AI Video Ads, Motion Graphics in Premiere/AE, AI Music with Suno/Udio).
+     * Track 3: Growth & Commerce (Meta Ads 2026/2027 Scaling, Shopify E-Commerce Funnels).
+   - Sticky stacking Bento Grid (SecureWatch Zero-Leak DRM, In-browser Code Sandboxes, WebOrient Voice Agent, Cryptographic Certifications).
+   - Top Faculty Spotlight with practitioner profiles.
+   - High-conversion footer with radiant orange CTA and guarantee badges.
+   - Embedded WebOrient Voice Co-Browsing Agent widget with floating voice pill.
 
-3. `src/fairplay_ksm.rs`:
-   - 100% Open-Source Self-Hosted Apple FairPlay Streaming (FPS) Key Security Module (KSM).
-   - Allows native Safari and iOS devices to stream CMAF cbcs HLS without third-party SaaS vendors.
-   - Implement `FairplayKsm`:
-     * Parses incoming SPC (Server Playback Context) binary payload.
-     * Validates D-Key (Application Secret Key / ASK) and IV.
-     * Unwraps content key for the requested Asset ID / Key ID.
-     * Encrypts Content Key with Session Key and synthesizes CKC (Content Key Context) binary response matching Apple FPS specification.
-     * Includes error handling for expired licenses, malformed SPC, or invalid asset IDs.
+3. `web/courses.html` (Course Catalog & Discovery):
+   - Dynamic track filters (All, AI Engineering, Generative Media, Growth & Commerce).
+   - Search bar with instant client-side filtering.
+   - 12 comprehensive course cards with 16:9 thumbnails, difficulty level pills, duration, rating, instructor avatar, price, and syllabus link.
 
-4. `src/cdn_hmac.rs`:
-   - Edge CDN Hotlink & Scraping Defense with HMAC-SHA256 Token Signing.
-   - Prevents attackers from scraping `.m4s` / `.ts` fragment URLs directly from CDN.
-   - Implement `CdnTokenSigner`:
-     * Generates signed URL query parameters: `token=exp={expires}&ip={client_ip}&hmac={sha256_hex}`.
-     * `validate_token(url_path, query_params, client_ip, current_time)` validates signature, expiration, and optional IP subnet binding.
-     * Prevents URL replay, parameter tampering, and token reuse.
+4. `web/course_detail.html` (Masterclass Detail & Syllabus View):
+   - Deep-dive course overview (featuring "Autonomous Multi-Agent Swarms with OpenClaw & Hermes").
+   - Course preview hero, what you'll build, interactive curriculum accordion (modules, lessons, durations).
+   - Instructor biography & credentials.
+   - Sticky checkout card with transparent pricing, 30-day money-back guarantee, and enroll button.
 
-5. Update `src/lib.rs` and `src/error.rs`:
-   - Re-export `sliding_window_kms`, `hdcp_degradation`, `fairplay_ksm`, `cdn_hmac`.
-   - Add typed errors in `src/error.rs` (`CdnTokenError`, `FairplayKsmError`, `HdcpDegradedError`).
+5. `web/classroom.html` (Student Learning Room):
+   - Integrated Courseo SecureWatch WebGL player with active forensic watermark overlay.
+   - Lesson navigation sidebar / chapter playlist.
+   - Video notes, resources, and interactive project terminal sandbox.
 
-6. Tauri v2 Desktop Bridge:
-   - Create `desktop/src-tauri/Cargo.toml` and `desktop/src-tauri/src/main.rs`:
-   - Shows the native Rust window setup using `cocoa`/`objc` for `NSWindowSharingNone` on macOS and `windows` for `WDA_EXCLUDEFROMCAPTURE` on Windows.
+6. `web/weborient_agent.js` & `web/weborient_manifest.json`:
+   - Interactive client adapter for WebOrient Voice Co-Browsing agent.
+   - Configured with `#FD6902` theme and sitemap manifest enabling the Ghost Cursor to navigate between pages and spotlight courses.
 
-7. Mobile Safari iOS Pseudo-Fullscreen & Web Player Update (`web/courseo_player.js`, `web/index.html`):
-   - Add `playsinline webkit-playsinline` on `<video>`.
-   - Add CSS pseudo-fullscreen container (`position: fixed; top: 0; left: 0; width: 100vw; height: 100vh; z-index: 999999;`) preventing iOS native WebKit QuickTime AVPlayer takeover.
-   - Add HDCP degradation handler and ClearKey license server simulation in `courseo_player.js`.
-
-8. Comprehensive Integration Tests (`testscript/securewatch_adversarial_test.rs`):
-   - Add integration tests:
-     * `test_sliding_window_clock_skew_grace_period` (verifying +15s grace allows playback with skew warning, -10s lookahead provides seamless handoff, >45s is rejected).
-     * `test_hdcp_graceful_abr_degradation` (verifying HDCP 1.4 degrades to 720p with 0.45 watermark opacity, no black screen crash).
-     * `test_fairplay_ksm_spc_ckc_exchange` (verifying SPC parsing and CKC generation with AES content key unwrapping).
-     * `test_cdn_edge_hmac_token_verification` (verifying valid tokens pass, expired tokens rejected, tampered URLs rejected).
-   - Ensure all previous 13 tests PLUS new tests (17+ total) pass with 0 failures!
-
-COMPILER & QUALITY INVARIANTS:
-- Run `cargo test --test securewatch_adversarial_test` -> MUST pass with Exit Code 0.
-- Run `cargo clippy --all-targets -- -D warnings` -> MUST pass with 0 warnings.
-- Run `cargo fmt --all -- --check` -> MUST pass with 0 diffs.
-- Invariant INV-CODE-QUALITY-01: Zero warnings, strict Rust typing, zero unwraps in library code.
-
-Execute this now, write the files to disk, run the tests, and report the results.
+QUALITY GATES:
+- All HTML/CSS/JS must be valid, responsive, beautifully styled, and free of syntax errors.
+- Existing Rust test suite (`cargo test --all-targets`) must remain 100% passing.
+- Clippy (`cargo clippy --all-targets -- -D warnings`) and formatting (`cargo fmt --all -- --check`) must pass with zero errors.
