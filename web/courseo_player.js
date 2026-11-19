@@ -1,45 +1,80 @@
 /**
  * Courseo SecureWatch Client-Side WebGL Player
- * - Prototype freezing for Canvas / MediaDevices / WebGL capture APIs
+ * - Active interception and prototype locking for Canvas / MediaDevices / WebGL capture APIs
  * - GLSL anti-camcording temporal luminance modulation shader
+ * - DOM MutationObserver anti-tampering for forensic watermark
  * - DevTools timing trap with session revocation callback
  * - Pseudo-random drifting forensic watermark overlay
  */
 
-(function freezeCapturePrototypes() {
+let activePlayerInstance = null;
+
+(function freezeAndTrapCapturePrototypes() {
   'use strict';
 
-  const lockMethod = (proto, prop) => {
+  const trapAndLock = (proto, prop, trapImpl) => {
     if (!proto || !(prop in proto)) return;
     try {
       Object.defineProperty(proto, prop, {
-        value: proto[prop],
+        value: trapImpl,
         writable: false,
         configurable: false,
       });
     } catch (_) {
-      // Already non-configurable
+      // Prototype already locked
     }
   };
 
   if (typeof HTMLCanvasElement !== 'undefined') {
-    lockMethod(HTMLCanvasElement.prototype, 'toDataURL');
-    lockMethod(HTMLCanvasElement.prototype, 'toBlob');
-    lockMethod(HTMLCanvasElement.prototype, 'captureStream');
+    trapAndLock(HTMLCanvasElement.prototype, 'toDataURL', function (...args) {
+      if (activePlayerInstance && !activePlayerInstance.revoked) {
+        activePlayerInstance.revoke('unauthorized_canvas_toDataURL_rip');
+      }
+      throw new DOMException('Canvas readback (toDataURL) is strictly forbidden by Courseo DRM Policy', 'SecurityError');
+    });
+
+    trapAndLock(HTMLCanvasElement.prototype, 'toBlob', function (...args) {
+      if (activePlayerInstance && !activePlayerInstance.revoked) {
+        activePlayerInstance.revoke('unauthorized_canvas_toBlob_rip');
+      }
+      throw new DOMException('Canvas export (toBlob) is strictly forbidden by Courseo DRM Policy', 'SecurityError');
+    });
+
+    trapAndLock(HTMLCanvasElement.prototype, 'captureStream', function (...args) {
+      if (activePlayerInstance && !activePlayerInstance.revoked) {
+        activePlayerInstance.revoke('unauthorized_canvas_captureStream_recording');
+      }
+      throw new DOMException('Canvas stream capture is strictly forbidden by Courseo DRM Policy', 'SecurityError');
+    });
   }
 
   if (typeof CanvasRenderingContext2D !== 'undefined') {
-    lockMethod(CanvasRenderingContext2D.prototype, 'getImageData');
+    trapAndLock(CanvasRenderingContext2D.prototype, 'getImageData', function (...args) {
+      if (activePlayerInstance && !activePlayerInstance.revoked) {
+        activePlayerInstance.revoke('unauthorized_canvas_getImageData_snoop');
+      }
+      throw new DOMException('Pixel readback (getImageData) is strictly forbidden by Courseo DRM Policy', 'SecurityError');
+    });
   }
 
   if (typeof WebGLRenderingContext !== 'undefined') {
-    lockMethod(WebGLRenderingContext.prototype, 'readPixels');
+    trapAndLock(WebGLRenderingContext.prototype, 'readPixels', function (...args) {
+      if (activePlayerInstance && !activePlayerInstance.revoked) {
+        activePlayerInstance.revoke('unauthorized_webgl_readPixels_snoop');
+      }
+      throw new DOMException('GPU pixel readback (readPixels) is strictly forbidden by Courseo DRM Policy', 'SecurityError');
+    });
   }
 
   if (typeof navigator !== 'undefined' && navigator.mediaDevices) {
     const mdProto = Object.getPrototypeOf(navigator.mediaDevices);
-    lockMethod(mdProto, 'getDisplayMedia');
-    lockMethod(mdProto, 'getUserMedia');
+    trapAndLock(mdProto, 'getDisplayMedia', function (...args) {
+      if (activePlayerInstance && !activePlayerInstance.revoked) {
+        activePlayerInstance.revoke('screen_recording_attempt_getDisplayMedia');
+      }
+      return Promise.reject(new DOMException('Screen recording and screen sharing are strictly forbidden by Courseo DRM Policy', 'NotAllowedError'));
+    });
+
     Object.freeze(navigator.mediaDevices);
   }
 })();
@@ -56,6 +91,9 @@ export class CourseoSecurePlayer {
     this.frameCount = 0;
     this.rafId = null;
     this.trapIntervalId = null;
+    this.mutationObserver = null;
+
+    activePlayerInstance = this;
 
     this.gl = this.canvas.getContext('webgl', {
       preserveDrawingBuffer: false,
@@ -69,6 +107,7 @@ export class CourseoSecurePlayer {
     this._initShaders();
     this._initWatermarkOverlay();
     this._startDevToolsTrap();
+    this._startDomGuard();
   }
 
   _initShaders() {
@@ -149,25 +188,56 @@ export class CourseoSecurePlayer {
   }
 
   _initWatermarkOverlay() {
+    const parent = this.canvas.parentElement || document.body;
+    // Clean up any stale watermark element
+    const existing = parent.querySelector('#courseo-forensic-watermark');
+    if (existing) {
+      existing.remove();
+    }
+
     const el = document.createElement('div');
+    el.id = 'courseo-forensic-watermark';
     el.textContent = `${this.userId} | ${this.sessionToken.slice(0, 8)}`;
     Object.assign(el.style, {
       position: 'absolute',
       pointerEvents: 'none',
       userSelect: 'none',
-      opacity: '0.18',
+      opacity: '0.22',
       color: '#ffffff',
       fontFamily: 'monospace',
-      fontSize: '12px',
-      textShadow: '0 0 2px #000',
+      fontSize: '13px',
+      fontWeight: 'bold',
+      textShadow: '0 0 3px #000',
       zIndex: '9999',
     });
 
-    const parent = this.canvas.parentElement || document.body;
     parent.style.position = parent.style.position || 'relative';
     parent.appendChild(el);
     this.watermarkEl = el;
     this._seed = this._hashSeed(`${this.userId}:${this.sessionToken}`);
+  }
+
+  _startDomGuard() {
+    if (typeof MutationObserver === 'undefined') return;
+    this.mutationObserver = new MutationObserver((mutations) => {
+      if (this.revoked) return;
+      if (!this.watermarkEl || !document.contains(this.watermarkEl)) {
+        this.revoke('watermark_element_removed_from_dom');
+        return;
+      }
+      const style = window.getComputedStyle(this.watermarkEl);
+      if (style.display === 'none' || style.visibility === 'hidden' || parseFloat(style.opacity) < 0.05) {
+        this.revoke('watermark_element_hidden_via_styles');
+      }
+    });
+
+    // Observe document body for any subtree deletions
+    this.mutationObserver.observe(document.body, {
+      childList: true,
+      subtree: true,
+      attributes: true,
+      attributeFilter: ['style', 'class', 'hidden'],
+    });
   }
 
   _hashSeed(str) {
@@ -198,14 +268,15 @@ export class CourseoSecurePlayer {
   }
 
   _startDevToolsTrap() {
+    // Background polling for debugger timing anomaly
     this.trapIntervalId = setInterval(() => {
       if (this.revoked) return;
       const t0 = performance.now();
       // eslint-disable-next-line no-debugger
       debugger;
       const elapsed = performance.now() - t0;
-      if (elapsed > 100) {
-        this.revoke('devtools_timing_trap');
+      if (elapsed > 120) {
+        this.revoke('devtools_debugger_breakpoint_stall');
       }
     }, 2000);
   }
@@ -215,7 +286,7 @@ export class CourseoSecurePlayer {
       if (this.revoked) return;
       const gl = this.gl;
 
-      if (this.video.readyState >= this.video.HAVE_CURRENT_DATA) {
+      if (this.video && this.video.readyState >= (this.video.HAVE_CURRENT_DATA || 2)) {
         gl.bindTexture(gl.TEXTURE_2D, this.texture);
         gl.texImage2D(gl.TEXTURE_2D, 0, gl.RGBA, gl.RGBA, gl.UNSIGNED_BYTE, this.video);
 
@@ -227,6 +298,13 @@ export class CourseoSecurePlayer {
         gl.uniform1f(this.uniforms.bands, this.refreshHz >= 120 ? 12.0 : 6.0);
 
         gl.drawArrays(gl.TRIANGLE_STRIP, 0, 4);
+      }
+
+      if (this.frameCount % 30 === 0) {
+        if (!this.watermarkEl || !document.contains(this.watermarkEl)) {
+          this.revoke('watermark_missing_heartbeat_check');
+          return;
+        }
       }
 
       this._updateWatermarkPosition();
@@ -242,6 +320,7 @@ export class CourseoSecurePlayer {
     this.revoked = true;
     if (this.rafId) cancelAnimationFrame(this.rafId);
     if (this.trapIntervalId) clearInterval(this.trapIntervalId);
+    if (this.mutationObserver) this.mutationObserver.disconnect();
     if (this.video && typeof this.video.pause === 'function') {
       this.video.pause();
     }

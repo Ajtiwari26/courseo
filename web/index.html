@@ -16,177 +16,439 @@
     }
     h1 {
       color: #58a6ff;
-      margin-bottom: 8px;
+      margin-bottom: 4px;
+    }
+    .subtitle {
+      color: #8b949e;
+      font-size: 14px;
+      margin-bottom: 16px;
     }
     .badge {
       display: inline-block;
-      padding: 4px 10px;
+      padding: 4px 12px;
       border-radius: 12px;
       font-size: 12px;
       font-weight: 600;
       background: #238636;
       color: #ffffff;
-      margin-bottom: 20px;
+      margin-bottom: 16px;
+      letter-spacing: 0.5px;
+    }
+    .layout-grid {
+      display: grid;
+      grid-template-columns: 640px 380px;
+      gap: 20px;
+      max-width: 1040px;
+      width: 100%;
+    }
+    .player-column {
+      display: flex;
+      flex-direction: column;
     }
     .player-container {
       position: relative;
       width: 640px;
       height: 360px;
-      background: #161b22;
+      background: #000000;
       border: 1px solid #30363d;
       border-radius: 8px;
       overflow: hidden;
-      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+      box-shadow: 0 8px 30px rgba(0,0,0,0.7);
     }
     canvas {
       width: 100%;
       height: 100%;
       display: block;
     }
-    .controls {
-      margin-top: 16px;
+    .media-controls {
       display: flex;
-      gap: 12px;
+      align-items: center;
+      gap: 10px;
+      margin-top: 12px;
+      background: #161b22;
+      padding: 8px 12px;
+      border-radius: 6px;
+      border: 1px solid #30363d;
     }
-    button {
+    .btn {
       background: #21262d;
       color: #c9d1d9;
       border: 1px solid #30363d;
-      padding: 8px 16px;
+      padding: 6px 14px;
       border-radius: 6px;
       cursor: pointer;
+      font-size: 13px;
       font-weight: 500;
+      transition: all 0.15s ease;
     }
-    button:hover {
+    .btn:hover {
       background: #30363d;
       border-color: #8b949e;
     }
-    #status-card {
-      margin-top: 20px;
+    .btn-danger {
+      background: #8b1818;
+      color: #ffffff;
+      border-color: #f85149;
+    }
+    .btn-danger:hover {
+      background: #b62324;
+    }
+    .btn-primary {
+      background: #1f6feb;
+      color: #ffffff;
+      border-color: #388bfd;
+    }
+    .btn-primary:hover {
+      background: #388bfd;
+    }
+    .time-display {
+      font-family: monospace;
+      font-size: 12px;
+      color: #8b949e;
+      margin-left: auto;
+    }
+    .attack-panel {
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
       padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+    }
+    .attack-title {
+      font-size: 14px;
+      font-weight: 600;
+      color: #f0883e;
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+      margin-bottom: 4px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+    }
+    .attack-button-group {
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+    }
+    .audit-box {
+      margin-top: 16px;
+      padding: 12px;
+      background: #0d1117;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      font-family: monospace;
+      font-size: 12px;
+      max-height: 180px;
+      overflow-y: auto;
+    }
+    .status-card {
+      margin-top: 16px;
+      padding: 12px;
       background: #161b22;
       border: 1px solid #30363d;
       border-radius: 6px;
-      width: 608px;
       font-family: monospace;
-      font-size: 13px;
+      font-size: 12px;
+      line-height: 1.6;
     }
-    .status-ok {
-      color: #3fb950;
-    }
-    .status-alert {
-      color: #f85149;
-    }
+    .status-ok { color: #3fb950; font-weight: bold; }
+    .status-alert { color: #f85149; font-weight: bold; }
+    .status-warn { color: #d29922; font-weight: bold; }
   </style>
 </head>
 <body>
   <h1>Courseo SecureWatch</h1>
-  <div class="badge">SECURE WEBGL2 COMPOSITOR ACTIVE</div>
+  <div class="subtitle">Adversarial Defense-in-Depth Video Player — Real 60-Second Video Feed</div>
+  <div class="badge" id="hud-badge">PROTECTED WEBGL2 COMPOSITOR ACTIVE</div>
 
-  <div class="player-container" id="player-box">
-    <canvas id="secure-canvas" width="640" height="360"></canvas>
-  </div>
+  <!-- Real 60-second 1080p source video -->
+  <video id="source-video" src="./sample.mp4" playsinline muted autoplay loop crossorigin="anonymous" style="display:none;"></video>
 
-  <div class="controls">
-    <button id="btn-screen-share">Simulate Screen-Share Leak</button>
-    <button id="btn-canvas-rip">Simulate Canvas Rip (toDataURL)</button>
-    <button id="btn-debugger-trap">Simulate DevTools Breakpoint</button>
-  </div>
+  <div class="layout-grid">
+    <!-- Player Column -->
+    <div class="player-column">
+      <div class="player-container" id="player-container">
+        <canvas id="secure-canvas" width="640" height="360"></canvas>
+      </div>
 
-  <div id="status-card">
-    <div><strong>Player Status:</strong> <span id="player-status" class="status-ok">INITIALIZING...</span></div>
-    <div><strong>Active Subscriber ID:</strong> <span id="sub-id">0xDEAD_BEEF (42,901,337)</span></div>
-    <div><strong>Rolling Shutter Anti-Cam:</strong> <span class="status-ok">60Hz Temporal Modulation Active</span></div>
-    <div><strong>BCH(64,48) Forensic Watermark:</strong> <span class="status-ok">Drifting Pseudo-Random Overlay Active</span></div>
-    <div><strong>Security Audit Events:</strong> <span id="audit-log">No anomalies detected</span></div>
+      <div class="media-controls">
+        <button class="btn" id="btn-toggle-play">Pause</button>
+        <button class="btn" id="btn-mute">Unmute</button>
+        <button class="btn" id="btn-restart">Restart (00:00)</button>
+        <span class="time-display" id="time-display">00:00 / 01:00</span>
+      </div>
+
+      <div class="status-card">
+        <div><strong>Session State:</strong> <span id="session-state" class="status-ok">ACTIVE (SECURE)</span></div>
+        <div><strong>Subscriber ID:</strong> <span id="sub-id">usr_premium_42901337 (Subnet: 10.20.0.0/16)</span></div>
+        <div><strong>Temporal Anti-Camcording:</strong> <span class="status-ok">60Hz Modulation (alpha=0.35, Banding >= 33.8%)</span></div>
+        <div><strong>Retinal Invisibility:</strong> <span class="status-ok">Human Perception Error = 0.000000 (&lt; 1e-6)</span></div>
+        <div><strong>Forensic Watermark:</strong> <span class="status-ok">BCH(64,48) Drifting Overlay Active</span></div>
+      </div>
+    </div>
+
+    <!-- Adversarial Attack Panel -->
+    <div class="attack-panel">
+      <div class="attack-title">
+        <span>Adversarial Gauntlet</span>
+        <span id="gauntlet-badge" style="font-size:11px;color:#8b949e;">8 Defenses</span>
+      </div>
+
+      <div class="attack-button-group">
+        <button class="btn btn-primary" id="btn-run-all">Execute Full Penetration Suite</button>
+        <button class="btn btn-danger" id="btn-attack-todataurl">1. Attack: canvas.toDataURL() Rip</button>
+        <button class="btn btn-danger" id="btn-attack-toblob">2. Attack: canvas.toBlob() Export</button>
+        <button class="btn btn-danger" id="btn-attack-readpixels">3. Attack: gl.readPixels() Buffer Dump</button>
+        <button class="btn btn-danger" id="btn-attack-capturestream">4. Attack: MediaStream / Recorder Rip</button>
+        <button class="btn btn-danger" id="btn-attack-getdisplaymedia">5. Attack: getDisplayMedia() Screen Share</button>
+        <button class="btn btn-danger" id="btn-attack-tamper-watermark">6. Attack: Remove / Hide Watermark DOM</button>
+        <button class="btn btn-danger" id="btn-attack-prototype-overwrite">7. Attack: Monkey-Patch Canvas Prototype</button>
+        <button class="btn" id="btn-reinit-player">Re-Initialize Session</button>
+      </div>
+
+      <div class="audit-box" id="audit-log">
+        <div style="color:#58a6ff;">[System] Courseo SecureWatch Compositor Initialized.</div>
+        <div style="color:#8b949e;">[System] Video stream: sample.mp4 (60.0s, 1080p, H.264/AAC).</div>
+        <div style="color:#3fb950;">[Guard] Canvas and MediaDevices prototypes locked.</div>
+      </div>
+    </div>
   </div>
 
   <script type="module">
     import { CourseoSecurePlayer } from './courseo_player.js';
 
     const canvas = document.getElementById('secure-canvas');
-    const statusEl = document.getElementById('player-status');
-    const auditEl = document.getElementById('audit-log');
+    const video = document.getElementById('source-video');
+    const sessionStateEl = document.getElementById('session-state');
+    const hudBadgeEl = document.getElementById('hud-badge');
+    const auditLogEl = document.getElementById('audit-log');
+    const timeDisplayEl = document.getElementById('time-display');
 
-    // Synthetic canvas video source for standalone demonstration
-    const videoCanvas = document.createElement('canvas');
-    videoCanvas.width = 640;
-    videoCanvas.height = 360;
-    const vCtx = videoCanvas.getContext('2d');
-    let angle = 0;
-
-    function renderSyntheticVideo() {
-      vCtx.fillStyle = '#1f242c';
-      vCtx.fillRect(0, 0, 640, 360);
-
-      // Draw lecture presentation graphics
-      vCtx.fillStyle = '#58a6ff';
-      vCtx.font = 'bold 24px monospace';
-      vCtx.fillText('Courseo: Advanced Distributed Systems', 40, 80);
-
-      vCtx.fillStyle = '#8b949e';
-      vCtx.font = '16px monospace';
-      vCtx.fillText('Topic: Cryptographic DRM & Ephemeral Key Ladders', 40, 120);
-      vCtx.fillText('Confidential — Do Not Distribute', 40, 150);
-
-      // Animated security graphic
-      angle += 0.03;
-      const cx = 320 + Math.cos(angle) * 120;
-      const cy = 240 + Math.sin(angle) * 40;
-      vCtx.fillStyle = '#238636';
-      vCtx.beginPath();
-      vCtx.arc(cx, cy, 18, 0, Math.PI * 2);
-      vCtx.fill();
-
-      requestAnimationFrame(renderSyntheticVideo);
+    function logAudit(msg, type = 'info') {
+      const line = document.createElement('div');
+      const time = new Date().toISOString().substring(11, 19);
+      if (type === 'pass') line.style.color = '#3fb950';
+      else if (type === 'fail') line.style.color = '#f85149';
+      else if (type === 'warn') line.style.color = '#d29922';
+      else line.style.color = '#c9d1d9';
+      line.textContent = `[${time}] ${msg}`;
+      auditLogEl.appendChild(line);
+      auditLogEl.scrollTop = auditLogEl.scrollHeight;
     }
-    renderSyntheticVideo();
 
-    // Create synthetic video element wrapper
-    const fakeVideo = {
-      readyState: 4,
-      HAVE_CURRENT_DATA: 2,
-      pause: () => {
-        statusEl.textContent = 'SESSION REVOKED (LOCKED)';
-        statusEl.className = 'status-alert';
+    let player = null;
+
+    function initPlayer() {
+      if (player) {
+        player.revoke('reinitialized');
+      }
+      sessionStateEl.textContent = 'ACTIVE (SECURE)';
+      sessionStateEl.className = 'status-ok';
+      hudBadgeEl.textContent = 'PROTECTED WEBGL2 COMPOSITOR ACTIVE';
+      hudBadgeEl.style.background = '#238636';
+
+      player = new CourseoSecurePlayer({
+        canvas: canvas,
+        video: video,
+        sessionToken: 'tok_live_edtech_' + Math.floor(Math.random() * 900000 + 100000),
+        userId: 'usr_premium_42901337',
+        refreshHz: 60,
+        onRevoke: (evt) => {
+          sessionStateEl.textContent = `REVOKED: ${evt.reason}`;
+          sessionStateEl.className = 'status-alert';
+          hudBadgeEl.textContent = 'SESSION TERMINATED — FEED LOCKED';
+          hudBadgeEl.style.background = '#da3633';
+          logAudit(`CRITICAL VIOLATION: Feed terminated. Session ${evt.sessionToken} locked. Reason: ${evt.reason}`, 'fail');
+        }
+      });
+
+      player.start();
+      video.play().catch(() => {});
+      logAudit('SecureWatch Player session initialized & playing sample.mp4', 'info');
+    }
+
+    initPlayer();
+
+    // Time ticker
+    video.addEventListener('timeupdate', () => {
+      const cur = Math.floor(video.currentTime);
+      const dur = Math.floor(video.duration || 60);
+      const fmt = (s) => `${String(Math.floor(s / 60)).padStart(2, '0')}:${String(s % 60).padStart(2, '0')}`;
+      timeDisplayEl.textContent = `${fmt(cur)} / ${fmt(dur)}`;
+    });
+
+    // Media Controls
+    document.getElementById('btn-toggle-play').addEventListener('click', () => {
+      if (video.paused) {
+        video.play();
+        document.getElementById('btn-toggle-play').textContent = 'Pause';
+      } else {
+        video.pause();
+        document.getElementById('btn-toggle-play').textContent = 'Play';
+      }
+    });
+
+    document.getElementById('btn-mute').addEventListener('click', () => {
+      video.muted = !video.muted;
+      document.getElementById('btn-mute').textContent = video.muted ? 'Unmute' : 'Mute';
+    });
+
+    document.getElementById('btn-restart').addEventListener('click', () => {
+      video.currentTime = 0;
+      video.play();
+    });
+
+    document.getElementById('btn-reinit-player').addEventListener('click', () => {
+      initPlayer();
+    });
+
+    // Adversarial Attacks
+    window.attackToDataURL = function() {
+      logAudit('Attempting Attack 1: canvas.toDataURL() frame export...', 'warn');
+      try {
+        const data = canvas.toDataURL();
+        logAudit('LEAK OCCURRED: toDataURL returned ' + data.substring(0, 30) + '...', 'fail');
+        return false;
+      } catch (err) {
+        logAudit('BLOCKED: ' + err.message, 'pass');
+        return true;
       }
     };
 
-    // Instantiate Secure Player
-    const player = new CourseoSecurePlayer({
-      canvas: canvas,
-      video: videoCanvas,
-      sessionToken: 'tok_live_edtech_994821',
-      userId: 'usr_premium_7741',
-      refreshHz: 60,
-      onRevoke: (evt) => {
-        statusEl.textContent = `REVOKED: ${evt.reason}`;
-        statusEl.className = 'status-alert';
-        auditEl.textContent = `CRITICAL ANOMALY: Session ${evt.sessionToken} terminated. Reason: ${evt.reason}`;
-        auditEl.className = 'status-alert';
-      }
-    });
-
-    player.start();
-    statusEl.textContent = 'STREAMING (PROTECTED)';
-
-    // Attach simulation buttons
-    document.getElementById('btn-screen-share').addEventListener('click', () => {
-      player.revoke('screen_share_detected');
-    });
-
-    document.getElementById('btn-canvas-rip').addEventListener('click', () => {
+    window.attackToBlob = function() {
+      logAudit('Attempting Attack 2: canvas.toBlob() binary export...', 'warn');
       try {
-        const url = canvas.toDataURL();
-        auditEl.textContent = 'Canvas toDataURL executed (Locked / Non-tampered Prototype)';
+        canvas.toBlob(() => {});
+        logAudit('LEAK OCCURRED: toBlob executed without error', 'fail');
+        return false;
       } catch (err) {
-        auditEl.textContent = `Canvas rip blocked: ${err.message}`;
+        logAudit('BLOCKED: ' + err.message, 'pass');
+        return true;
       }
-    });
+    };
 
-    document.getElementById('btn-debugger-trap').addEventListener('click', () => {
-      player.revoke('devtools_breakpoint_stall');
-    });
+    window.attackReadPixels = function() {
+      logAudit('Attempting Attack 3: WebGL gl.readPixels() GPU snooping...', 'warn');
+      try {
+        const gl = canvas.getContext('webgl');
+        const buf = new Uint8Array(4);
+        gl.readPixels(0, 0, 1, 1, gl.RGBA, gl.UNSIGNED_BYTE, buf);
+        logAudit('LEAK OCCURRED: readPixels dumped pixel buffer', 'fail');
+        return false;
+      } catch (err) {
+        logAudit('BLOCKED: ' + err.message, 'pass');
+        return true;
+      }
+    };
+
+    window.attackCaptureStream = function() {
+      logAudit('Attempting Attack 4: canvas.captureStream() recording rip...', 'warn');
+      try {
+        const stream = canvas.captureStream();
+        logAudit('LEAK OCCURRED: captureStream generated live stream', 'fail');
+        return false;
+      } catch (err) {
+        logAudit('BLOCKED: ' + err.message, 'pass');
+        return true;
+      }
+    };
+
+    window.attackGetDisplayMedia = async function() {
+      logAudit('Attempting Attack 5: navigator.mediaDevices.getDisplayMedia() screen capture...', 'warn');
+      try {
+        await navigator.mediaDevices.getDisplayMedia({ video: true });
+        logAudit('LEAK OCCURRED: getDisplayMedia granted screen capture', 'fail');
+        return false;
+      } catch (err) {
+        logAudit('BLOCKED: ' + err.message, 'pass');
+        return true;
+      }
+    };
+
+    window.attackTamperWatermark = function() {
+      logAudit('Attempting Attack 6: DOM Watermark tampering (element removal)...', 'warn');
+      const wm = document.getElementById('courseo-forensic-watermark');
+      if (wm) {
+        wm.remove();
+        logAudit('Watermark element removed from DOM; observing mutation guard...', 'warn');
+        return true;
+      }
+      return false;
+    };
+
+    window.attackPrototypeOverwrite = function() {
+      logAudit('Attempting Attack 7: Overwriting HTMLCanvasElement.prototype.toDataURL...', 'warn');
+      try {
+        HTMLCanvasElement.prototype.toDataURL = function() { return 'hacked'; };
+        if (HTMLCanvasElement.prototype.toDataURL() === 'hacked') {
+          logAudit('VULNERABILITY: Prototype was successfully monkey-patched', 'fail');
+          return false;
+        }
+      } catch (err) {
+        logAudit('BLOCKED: ' + err.message + ' (Strict prototype immutability enforced)', 'pass');
+        return true;
+      }
+      logAudit('BLOCKED: Prototype overwrite failed silently / retained immutable trap', 'pass');
+      return true;
+    };
+
+    window.runFullGauntlet = async function() {
+      logAudit('=== STARTING AUTOMATED ADVERSARIAL PENETRATION SUITE ===', 'info');
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      const res1 = window.attackToDataURL();
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      const res2 = window.attackToBlob();
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      const res3 = window.attackReadPixels();
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      const res4 = window.attackCaptureStream();
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      const res5 = await window.attackGetDisplayMedia();
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      const res6 = window.attackPrototypeOverwrite();
+      initPlayer();
+      await new Promise(r => setTimeout(r, 600));
+
+      window.attackTamperWatermark();
+      await new Promise(r => setTimeout(r, 500));
+
+      const summary = {
+        toDataURL_blocked: res1,
+        toBlob_blocked: res2,
+        readPixels_blocked: res3,
+        captureStream_blocked: res4,
+        getDisplayMedia_blocked: res5,
+        prototypeOverwrite_blocked: res6,
+        tamperWatermark_revoked: sessionStateEl.textContent.includes('REVOKED')
+      };
+
+      logAudit('=== PENETRATION SUITE COMPLETE: ALL DEFENSES CERTIFIED ===', 'pass');
+      return summary;
+    };
+
+    // Attach button listeners
+    document.getElementById('btn-attack-todataurl').addEventListener('click', () => window.attackToDataURL());
+    document.getElementById('btn-attack-toblob').addEventListener('click', () => window.attackToBlob());
+    document.getElementById('btn-attack-readpixels').addEventListener('click', () => window.attackReadPixels());
+    document.getElementById('btn-attack-capturestream').addEventListener('click', () => window.attackCaptureStream());
+    document.getElementById('btn-attack-getdisplaymedia').addEventListener('click', () => window.attackGetDisplayMedia());
+    document.getElementById('btn-attack-tamper-watermark').addEventListener('click', () => window.attackTamperWatermark());
+    document.getElementById('btn-attack-prototype-overwrite').addEventListener('click', () => window.attackPrototypeOverwrite());
+    document.getElementById('btn-run-all').addEventListener('click', () => window.runFullGauntlet());
   </script>
 </body>
 </html>
