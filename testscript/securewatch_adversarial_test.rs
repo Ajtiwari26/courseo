@@ -397,3 +397,116 @@ fn test_short_window_dct_watermark() {
         "expected high confidence, got {confidence}"
     );
 }
+
+#[test]
+fn test_sliding_window_clock_skew_grace_period() {
+    use courseo_core::sliding_window_kms::{KeyDecision, SlidingWindowKeyManager};
+
+    let epoch_start = 1_700_000_000_u64;
+    let kms = SlidingWindowKeyManager::with_defaults(epoch_start, [0x5A_u8; 32]);
+
+    // Within -10s lookahead window before key 0 expires at epoch_start + 30
+    let decision_lookahead = kms.evaluate_key_request(epoch_start + 22, 0);
+    match decision_lookahead {
+        KeyDecision::ValidKey {
+            expires_in_secs,
+            next_key_preview,
+            ..
+        } => {
+            assert_eq!(expires_in_secs, 8);
+            let preview = next_key_preview.expect("expected next key preview within lookahead");
+            assert_eq!(preview.key_id, 1);
+            assert_eq!(preview.valid_from_secs, epoch_start + 30);
+        }
+        other => panic!("expected ValidKey with lookahead preview, got {other:?}"),
+    }
+
+    // +15s after expiry (within grace period) must allow playback with skew warning
+    let decision_grace = kms.evaluate_key_request(epoch_start + 45, 0);
+    match decision_grace {
+        KeyDecision::ExpiredKeyGraceAllowed { warning, .. } => {
+            assert_eq!(warning, "clock_skew_detected");
+        }
+        other => panic!("expected ExpiredKeyGraceAllowed, got {other:?}"),
+    }
+
+    // Beyond 45s (> 30s duration + 15s grace) must be rejected
+    let decision_rejected = kms.evaluate_key_request(epoch_start + 46, 0);
+    assert_eq!(decision_rejected, KeyDecision::RejectedExpired);
+}
+
+#[test]
+fn test_hdcp_graceful_abr_degradation() {
+    use courseo_core::hdcp_degradation::HdcpPolicyEngine;
+
+    let engine = HdcpPolicyEngine::new();
+
+    let pristine = engine.evaluate_resolution(HdcpLevel::V2_2);
+    assert_eq!(pristine.max_height, 1080);
+    assert!((pristine.watermark_opacity - 0.22).abs() < f32::EPSILON);
+    assert_eq!(pristine.tier_name, "Pristine1080p");
+    assert!(!pristine.requires_downgrade);
+
+    let degraded_720 = engine.evaluate_resolution(HdcpLevel::V1_4);
+    assert_eq!(degraded_720.max_height, 720);
+    assert!((degraded_720.watermark_opacity - 0.45).abs() < f32::EPSILON);
+    assert_eq!(degraded_720.tier_name, "Degraded720p");
+    assert!(degraded_720.requires_downgrade);
+
+    let degraded_480 = engine.evaluate_resolution(HdcpLevel::None);
+    assert_eq!(degraded_480.max_height, 480);
+    assert!((degraded_480.watermark_opacity - 0.55).abs() < f32::EPSILON);
+    assert_eq!(degraded_480.tier_name, "Degraded480p");
+    assert!(degraded_480.requires_downgrade);
+}
+
+#[test]
+fn test_fairplay_ksm_spc_ckc_exchange() {
+    use courseo_core::fairplay_ksm::FairplayKsm;
+
+    let ask = [0x11_u8; 16];
+    let mut ksm = FairplayKsm::new(ask, 300);
+    let content_key = [0xAA_u8; 16];
+    ksm.register_asset_key("asset_courseo_101", content_key);
+
+    let session_key = [0x22_u8; 16];
+    let iv = [0x33_u8; 16];
+    let now = 1_700_000_000_u64;
+
+    let spc = FairplayKsm::build_spc(1, "asset_courseo_101", session_key, iv, now, &ask)
+        .expect("SPC build should succeed");
+    let ckc = ksm
+        .process_spc(&spc, now + 10)
+        .expect("CKC generation should succeed");
+    let (payload, unwrapped_key) =
+        FairplayKsm::unwrap_ckc(&ckc, &session_key).expect("CKC unwrap should succeed");
+
+    assert_eq!(payload.asset_id, "asset_courseo_101");
+    assert_eq!(payload.license_ttl_secs, 300);
+    assert_eq!(unwrapped_key, content_key);
+
+    let expired = ksm.process_spc(&spc, now + 301);
+    assert!(matches!(expired, Err(DrmError::FairplayKsmError(_))));
+}
+
+#[test]
+fn test_cdn_edge_hmac_token_verification() {
+    use courseo_core::cdn_hmac::CdnTokenSigner;
+
+    let signer = CdnTokenSigner::new(b"courseo-edge-hmac-secret-key".to_vec(), true);
+    let path = "/hls/course_101/seg_0001.m4s";
+    let client_ip = "203.0.113.10";
+    let now = 1_700_000_000_u64;
+
+    let query = signer.sign_url_params(path, client_ip, now + 60);
+    assert!(signer
+        .validate_token(path, &query, client_ip, now + 10)
+        .is_ok());
+
+    let expired = signer.validate_token(path, &query, client_ip, now + 61);
+    assert!(matches!(expired, Err(DrmError::CdnTokenError(_))));
+
+    let tampered_url =
+        signer.validate_token("/hls/course_101/seg_0002.m4s", &query, client_ip, now + 10);
+    assert!(matches!(tampered_url, Err(DrmError::CdnTokenError(_))));
+}

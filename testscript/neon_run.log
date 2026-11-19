@@ -1,0 +1,91 @@
+
+  [36m●[0m [1;37mfile::write[0m  [90mWrote desktop/src-tauri/Cargo.toml[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote desktop/src-tauri/src/main.rs[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/courseo_player.js[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/index.html[0m
+    [90m└─[0m [38;2;190;200;215mWrote 16 lines (425 B)[0m [90m· 90.23s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 45 lines (1.4 KB)[0m [90m· 90.23s[0m
+    [90m└─[0m [31mPre-commit syntax validation failed: unbalanced delimiter '}' at line 24[0m [90m· 90.23s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 10 lines (207 B)[0m [90m· 90.23s[0m
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #1)[0m Edge case verification incomplete — tests must be executed
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/index.html[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/courseo_player.js[0m
+    [90m└─[0m [38;2;190;200;215mWrote 1 lines (149 B)[0m [90m· 72.20s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 36 lines (1.2 KB)[0m [90m· 72.20s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 4.91s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 7.06s[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote src/sliding_window_kms.rs[0m
+    [90m└─[0m [38;2;190;200;215mWrote 163 lines (5.2 KB)[0m [90m· 25.71s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 9.83s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 7.48s[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote src/hdcp_degradation.rs[0m
+    [90m└─[0m [38;2;190;200;215mWrote 41 lines (1.2 KB)[0m [90m· 10.18s[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote /Users/ajaytiwari/Desktop/Projects/courseo/src/error.rs[0m
+    [90m└─[0m [38;2;190;200;215mWrote 40 lines (1.1 KB)[0m [90m· 16.20s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 7.35s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 6.67s[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote src/fairplay_ksm.rs[0m
+    [90m└─[0m [38;2;190;200;215mWrote 277 lines (8.9 KB)[0m [90m· 36.30s[0m
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #3)[0m Edge case verification incomplete — tests must be executed
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 6.33s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 5.77s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m199 bytes received[0m [90m· 9.81s[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote src/cdn_hmac.rs[0m
+    [90m└─[0m [38;2;190;200;215mWrote 184 lines (5.6 KB)[0m [90m· 21.33s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 6.06s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 6.77s[0m
+  [36m●[0m [1;37mfile::replace[0m  [90mEdited src/lib.rs[0m
+    [90m└─[0m [38;2;190;200;215mEdited (+9, -5 lines) · exact_match[0m [90m· 9.49s[0m
+  [36m●[0m [1;37mfile::read[0m  [90mRead Cargo.toml[0m
+    [90m└─[0m [38;2;190;200;215mRead 18 lines (461 B)[0m [90m· 7.26s[0m
+  [36m●[0m [1;37mfile::replace[0m  [90mEdited /Users/ajaytiwari/Desktop/Projects/courseo/Cargo....[0m
+    [90m└─[0m [38;2;190;200;215mEdited (+1, -0 lines) · exact_match[0m [90m· 8.24s[0m
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #5)[0m Quality gate linter/clippy check failed — repairing diagnostics
+  [36m●[0m [1;37mfile::replace[0m  [90mEdited src/cdn_hmac.rs[0m
+    [90m└─[0m [38;2;190;200;215mEdited (+6, -6 lines) · exact_match[0m [90m· 8.15s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 6.61s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 5.84s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m199 bytes received[0m [90m· 8.41s[0m
+  [36m●[0m [1;37mfile::replace[0m  [90mEdited testscript/securewatch_adversarial_test.rs[0m
+    [90m└─[0m [38;2;190;200;215mEdited (+111, -0 lines) · exact_match[0m [90m· 28.08s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 5.73s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m172 bytes received[0m [90m· 8.27s[0m
+  [36m●[0m [1;37mshell_execute[0m  [90mcargo test --test securewatch_adversarial_test && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215m199 bytes received[0m [90m· 8.75s[0m
+  [36m●[0m [1;37mfile::replace[0m  [90mEdited src/cdn_hmac.rs[0m
+    [90m└─[0m [38;2;190;200;215mEdited (+3, -3 lines) · exact_match[0m [90m· 16.31s[0m
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #9)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;75;220;120m→ Quality Gate:[0m Checking stage Lint...
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;75;220;120m→ Verification:[0m Edge Case validation...
+  [1;38;2;255;185;50m→ Resolving Compiler Diagnostics (Attempt #10)[0m Edge case verification incomplete — tests must be executed
+  [1;38;2;250;85;85mAutonomous task failed: Exceeded maximum self-repair attempts (10)[0m
+Autonomous task failed: Exceeded maximum self-repair attempts (10)
+
+Status: failed (code: 1) | Tokens: 7810 | Cost: $0.0029 | Artifacts: 1

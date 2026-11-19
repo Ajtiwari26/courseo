@@ -55,6 +55,19 @@
       overflow: hidden;
       box-shadow: 0 8px 30px rgba(0,0,0,0.7);
     }
+    .player-container.pseudo-fullscreen {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100vw;
+      height: 100vh;
+      z-index: 999999;
+      border-radius: 0;
+      border: none;
+    }
+    video::-webkit-media-controls-fullscreen-button {
+      display: none !important;
+    }
     canvas {
       width: 100%;
       height: 100%;
@@ -164,7 +177,7 @@
   <div class="badge" id="hud-badge">PROTECTED WEBGL2 COMPOSITOR ACTIVE</div>
 
   <!-- Real 60-second 1080p source video -->
-  <video id="source-video" src="./sample.mp4" playsinline muted autoplay loop crossorigin="anonymous" style="display:none;"></video>
+  <video id="source-video" src="./sample.mp4" playsinline webkit-playsinline muted autoplay loop crossorigin="anonymous" style="display:none;"></video>
 
   <div class="layout-grid">
     <!-- Player Column -->
@@ -177,6 +190,8 @@
         <button class="btn" id="btn-toggle-play">Pause</button>
         <button class="btn" id="btn-mute">Unmute</button>
         <button class="btn" id="btn-restart">Restart (00:00)</button>
+        <button class="btn" id="btn-pseudo-fullscreen">iOS Pseudo-Fullscreen</button>
+        <button class="btn" id="btn-hdcp-degrade">Simulate HDCP 1.4</button>
         <span class="time-display" id="time-display">00:00 / 01:00</span>
       </div>
 
@@ -301,6 +316,20 @@
     document.getElementById('btn-restart').addEventListener('click', () => {
       video.currentTime = 0;
       video.play();
+    });
+
+    document.getElementById('btn-pseudo-fullscreen').addEventListener('click', () => {
+      if (player) {
+        const isFull = player.togglePseudoFullscreen(document.getElementById('player-container'));
+        logAudit(`[Mobile Safari Guard] Pseudo-Fullscreen ${isFull ? 'ENABLED' : 'DISABLED'} (Kept in WebGL texture, native AVPlayer blocked)`, 'info');
+      }
+    });
+
+    document.getElementById('btn-hdcp-degrade').addEventListener('click', () => {
+      if (player) {
+        const policy = player.applyHdcpDegradation('1.4');
+        logAudit(`[HDCP Resilience Engine] Handshake degraded to HDCP 1.4: Tier=${policy.tierName}, MaxHeight=${policy.maxHeight}p, WatermarkOpacity=${policy.watermarkOpacity} (No black-screen termination)`, 'warn');
+      }
     });
 
     document.getElementById('btn-reinit-player').addEventListener('click', () => {

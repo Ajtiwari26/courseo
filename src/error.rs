@@ -28,4 +28,13 @@ pub enum DrmError {
 
     #[error("short-window DCT watermark error: {0}")]
     DctWatermarkError(String),
+
+    #[error("CDN HMAC token validation error: {0}")]
+    CdnTokenError(String),
+
+    #[error("FairPlay KSM error: {0}")]
+    FairplayKsmError(String),
+
+    #[error("HDCP degraded playback policy error: {0}")]
+    HdcpDegradedError(String),
 }

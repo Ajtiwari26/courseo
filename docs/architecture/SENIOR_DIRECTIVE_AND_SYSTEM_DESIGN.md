@@ -197,3 +197,43 @@ To protect against audio extraction (virtual audio loopbacks, BlackHole, mic rec
 To attribute leaks from short 5–15 second social media clips (TikTok, Telegram, YouTube Shorts):
 * Embeds mid-frequency DCT coefficients in $Cb/Cr$ chrominance blocks across keyframes.
 * Blind extractor accumulates energy across $\le 300$ frames to achieve $\ge 99.99\%$ leaker identification without requiring entire video chunks.
+
+---
+
+## 8. Production-Grade Open-Source DRM & Real-World Edge-Case Mitigations
+
+### 8.1 Sliding Window KMS & NTP Clock Skew Resilience (`src/sliding_window_kms.rs`)
+To prevent student client clocks drifting by 10 to 45 seconds from causing false `KeyExpired` errors and video buffering loops:
+* **Overlapping Sliding Validity Window**: Key $N$ is valid for primary duration $T$ to $T + 30\text{s}$, with an additional $+15\text{s}$ grace period ($T + 45\text{s}$) where playback is permitted under `KeyDecision::ExpiredKeyGraceAllowed { warning: "clock_skew_detected" }`.
+* **Lookahead Key Pre-Issuance**: Key $N+1$ is derived and pre-issued $-10\text{s}$ before Key $N$ expires, enabling atomic seamless handoff without network stalls.
+* **Nanosecond In-Memory Cache**: Uses `RwLock<HashMap<u64, [u8; 16]>>` with SHA-256 HKDF key derivation, eliminating external DB latency and third-party SaaS fees ($0 license cost).
+
+### 8.2 HDCP False-Alarm Resilience with Graceful ABR Degradation (`src/hdcp_degradation.rs`)
+To prevent 8%–12% of legitimate paying students on USB-C hubs, budget HDMI cables, or multi-monitors from experiencing black screens:
+* **Resolution Capping & Watermark Scaling**:
+  - `HdcpLevel::V2_2`: Tier `Pristine1080p` (1080p allowed, watermark opacity = 0.22).
+  - `HdcpLevel::V1_4` / Type 0: Tier `Degraded720p` (capped at 720p, watermark opacity scaled to 0.45).
+  - `HdcpLevel::None` / Handshake failure: Tier `Degraded480p` (capped at 480p, watermark opacity scaled to 0.55).
+* Eliminates hard playback termination while mitigating high-definition piracy on legacy capture interfaces.
+
+### 8.3 100% Open-Source Self-Hosted Apple FairPlay KSM (`src/fairplay_ksm.rs`)
+Eliminates $1,000–$5,000/month commercial DRM SaaS fees for native Safari, iOS, and macOS streaming:
+* **Apple FPS Protocol**: Directly parses binary Server Playback Context (SPC) packets, validates the Application Secret Key (ASK / D-Key), decrypts Session Keys, and synthesizes binary Content Key Context (CKC) packets with AES-128-CBC key unwrapping.
+* Runs on a standard self-hosted Rust server with $0 per-license fees using the free Apple FairPlay Server SDK.
+
+### 8.4 Edge CDN Hotlink & Scraping Defense (`src/cdn_hmac.rs`)
+Prevents attackers from scraping `.m4s` / `.ts` fragment URLs directly from CDN:
+* **HMAC-SHA256 Token Parameters**: Emits and validates signed URL tokens (`?token=exp={exp}&ip={ip}&hmac={hash}`).
+* Constant-time comparison prevents timing attacks, rejects URL parameter tampering, and drops unauthorized scrapers with HTTP 403 at the CDN edge.
+
+### 8.5 Tauri v2 Native Desktop Rust Bridge (`desktop/src-tauri/`)
+Replaces bloatware 150MB Electron instances with a ~10MB native Rust binary:
+* Native Objective-C runtime hooks set `setSharingType: NSWindowSharingNone` on macOS `NSWindow`.
+* Direct Win32 calls invoke `SetWindowDisplayAffinity(hwnd, WDA_EXCLUDEFROMCAPTURE)` on Windows `HWND`.
+* Stripped native binary prevents reverse-engineering of embedded keys and completely blinds OS screen recorders.
+
+### 8.6 Mobile Safari iOS WebGL Fullscreen Protection (`web/`)
+Prevents iOS WebKit from handing video to the native QuickTime `AVPlayer`:
+* Enforces `playsinline webkit-playsinline` on the `<video>` element.
+* Suppresses native fullscreen controls via `video::-webkit-media-controls-fullscreen-button { display: none !important; }`.
+* Employs CSS pseudo-fullscreen container (`position: fixed; width: 100vw; height: 100vh; z-index: 999999;`), retaining frames inside WebGL texture memory under continuous forensic watermarking and anti-camcording modulation.

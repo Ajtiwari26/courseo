@@ -355,4 +355,41 @@ export class CourseoSecurePlayer {
     this.gl.clear(this.gl.COLOR_BUFFER_BIT);
     this.onRevoke({ reason, sessionToken: this.sessionToken });
   }
+
+  togglePseudoFullscreen(containerEl) {
+    const target = containerEl || this.canvas.parentElement;
+    if (!target) return false;
+    return target.classList.toggle('pseudo-fullscreen');
+  }
+
+  applyHdcpDegradation(reportedHdcp) {
+    let policy;
+    if (reportedHdcp === '2.2' || reportedHdcp === 'V2_2') {
+      policy = { maxHeight: 1080, watermarkOpacity: 0.22, tierName: 'Pristine1080p', requiresDowngrade: false };
+    } else if (reportedHdcp === '1.4' || reportedHdcp === 'V1_4' || reportedHdcp === 'Type0') {
+      policy = { maxHeight: 720, watermarkOpacity: 0.45, tierName: 'Degraded720p', requiresDowngrade: true };
+    } else {
+      policy = { maxHeight: 480, watermarkOpacity: 0.55, tierName: 'Degraded480p', requiresDowngrade: true };
+    }
+
+    if (this.watermarkEl) {
+      this.watermarkEl.style.opacity = String(policy.watermarkOpacity);
+    }
+    this.currentHdcpPolicy = policy;
+    return policy;
+  }
+
+  async requestClearKeyLicense({ keyIdBase64Url, contentKeyBase64Url }) {
+    const jwkResponse = {
+      keys: [
+        {
+          kty: 'oct',
+          kid: keyIdBase64Url,
+          k: contentKeyBase64Url,
+        },
+      ],
+      type: 'temporary',
+    };
+    return new TextEncoder().encode(JSON.stringify(jwkResponse));
+  }
 }
