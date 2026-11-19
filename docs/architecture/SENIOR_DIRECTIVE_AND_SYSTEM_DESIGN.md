@@ -168,3 +168,32 @@ The license server validates client certificate claims and enforces output prote
 For standalone desktop deployments (Electron/Tauri):
 * Enforces `mainWindow.setContentProtection(true)` on window creation.
 * Disables DevTools and keyboard shortcuts for screenshots (e.g. `PrintScreen`).
+
+---
+
+## 7. Advanced Exploit Mitigation Suite (Hardened Defense-in-Depth)
+
+### 7.1 Non-Linear 2D Spatial-Temporal Anti-Camcording Modulation
+To defeat 2-frame temporal averaging attacks (`ffmpeg -vf "tblend=all_mode=average"` that cancel simple $I \pm \alpha$ sine waves):
+* **2D Pseudo-Random Spatial-Temporal Hash**:
+  $$p(x, y, t) = \text{sign}\left(\sin(2\pi \cdot f_d \cdot t + \phi(x, y)) + \gamma \cdot \text{hash2D}(\lfloor x/B \rfloor, \lfloor y/B \rfloor, t)\right)$$
+* **Anti-Averaging Invariant**: When two consecutive frames $t$ and $t+1$ are averaged:
+  $$\frac{L(x, y, t) + L(x, y, t+1)}{2} = L_0 + \Delta(x, y)$$
+  where residual distortion $\Delta(x, y)$ maintains $\ge 15\%$ contrast variance across 8x8 spatial tiles, rendering blended/de-banded footage heavily ghosted and unwatchable while maintaining smooth human retinal integration.
+
+### 7.2 Hypervisor & Virtual Machine Environment Detection
+To defeat host-level screen recording of guest VMs (VirtualBox, VMware, QEMU, Cloud Desktops):
+* **GPU Renderer Inspection**: Queries `WEBGL_debug_renderer_info` and native display drivers for virtualized GPU adapters (`llvmpipe`, `vmware`, `virtualbox`, `qemu`, `parallels`, `angle (software)`, `microsoft basic render driver`).
+* **Timing Jitter Analysis**: Measures High-Resolution Timer (`performance.now()` / `clock_gettime`) variance across 100 iterations; hypervisor context-switching induces microsecond jitter spikes $>50\mu\text{s}$.
+* **Revocation Policy**: Detected VMs trigger immediate session termination (`DrmError::HypervisorDetected`).
+
+### 7.3 Psychoacoustic Audio Spread-Spectrum Watermarking (DSSS)
+To protect against audio extraction (virtual audio loopbacks, BlackHole, mic recording):
+* **Modulation**: Direct Sequence Spread Spectrum (DSSS) modulating a 48-bit subscriber ID across 15kHz–19kHz psychoacoustic masking bands using a 127-bit Gold / m-sequence pseudo-noise (PN) code.
+* **Perceptual Inaudibility**: Signal energy kept below the Absolute Threshold of Hearing (ATH) and psychoacoustically masked by lecture audio frequencies.
+* **Attribution**: Blind cross-correlation extraction recovers subscriber ID from audio-only rips even after lossy AAC/MP3 transcoding.
+
+### 7.4 Short-Window Chrominance / DCT Per-Frame Watermarking
+To attribute leaks from short 5–15 second social media clips (TikTok, Telegram, YouTube Shorts):
+* Embeds mid-frequency DCT coefficients in $Cb/Cr$ chrominance blocks across keyframes.
+* Blind extractor accumulates energy across $\le 300$ frames to achieve $\ge 99.99\%$ leaker identification without requiring entire video chunks.

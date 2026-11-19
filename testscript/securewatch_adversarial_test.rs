@@ -1,9 +1,12 @@
 use courseo_core::anti_cam::{AntiCamEngine, RollingShutterParams};
+use courseo_core::audio_watermark::{AudioWatermarkCodec, PAYLOAD_BITS, PN_SEQUENCE_LEN};
 use courseo_core::crypto::{decrypt_cbcs, encrypt_cbcs, KeyLadder, KEY_ROTATION_INTERVAL_SECS};
+use courseo_core::dct_watermark::DctWatermarkCodec;
 use courseo_core::hardware_protection::{
     DisplayAffinityPolicy, DrmSystem, EmeLicenseChallenge, EmeLicenseManager, HdcpLevel,
     OsDisplayProtection, PsshBox,
 };
+use courseo_core::hypervisor_detector::HypervisorDetector;
 use courseo_core::telemetry::{AnomalyEvent, SessionState, TelemetryGateway};
 use courseo_core::watermark::{WatermarkCodec, WatermarkPayload};
 use courseo_core::DrmError;
@@ -312,4 +315,85 @@ fn test_os_display_affinity_bitmasks() {
         android_policy.validate(0x0000_0000),
         Err(DrmError::Unauthorized(_))
     ));
+}
+
+#[test]
+fn test_anti_averaging_tblend_resilience() {
+    let params = RollingShutterParams::default();
+    let residual_contrast = AntiCamEngine::simulate_two_frame_average_attack(&params)
+        .expect("2-frame averaging simulation should succeed");
+    assert!(
+        residual_contrast >= 0.15,
+        "expected residual spatial contrast variance >= 15% after 2-frame tblend, got {:.4}",
+        residual_contrast
+    );
+}
+
+#[test]
+fn test_hypervisor_detection() {
+    let blacklisted = [
+        "llvmpipe (LLVM 15.0.7, 256 bits)",
+        "VMware SVGA 3D",
+        "VirtualBox Graphics Adapter",
+        "QEMU Standard VGA",
+        "Parallels Display Adapter",
+        "ANGLE (Software Renderer)",
+        "Microsoft Basic Render Driver",
+    ];
+    let clean_timing = [10_u64, 12, 11, 13, 12, 11];
+
+    for renderer in blacklisted {
+        assert!(HypervisorDetector::is_blacklisted_renderer(renderer));
+        let res = HypervisorDetector::evaluate_environment(renderer, &clean_timing);
+        assert!(
+            matches!(res, Err(DrmError::HypervisorDetected(_))),
+            "expected HypervisorDetected for renderer {renderer}"
+        );
+    }
+
+    assert!(!HypervisorDetector::is_blacklisted_renderer("Apple M5 GPU"));
+    assert!(HypervisorDetector::evaluate_environment("Apple M5 GPU", &clean_timing).is_ok());
+
+    let spiky_timing = [10_u64, 12, 95, 11, 14];
+    assert!(HypervisorDetector::analyze_timing_jitter(&spiky_timing));
+    assert!(matches!(
+        HypervisorDetector::evaluate_environment("Apple M5 GPU", &spiky_timing),
+        Err(DrmError::HypervisorDetected(_))
+    ));
+}
+
+#[test]
+fn test_audio_spread_spectrum_watermark() {
+    let sample_rate = 48_000_u32;
+    let subscriber_id: u64 = 0x0000_ABCD_1234_5678;
+    let num_samples = PAYLOAD_BITS * PN_SEQUENCE_LEN * 2;
+    let mut pcm: Vec<f32> = (0..num_samples)
+        .map(|i| {
+            0.1 * ((2.0 * std::f64::consts::PI * 440.0 * (i as f64) / (sample_rate as f64)).sin()
+                as f32)
+        })
+        .collect();
+
+    AudioWatermarkCodec::encode_dsss(&mut pcm, subscriber_id, sample_rate)
+        .expect("DSSS audio watermark encoding should succeed");
+    let extracted = AudioWatermarkCodec::extract_dsss(&pcm, sample_rate)
+        .expect("DSSS audio watermark extraction should succeed");
+    assert_eq!(extracted, subscriber_id);
+}
+
+#[test]
+fn test_short_window_dct_watermark() {
+    let subscriber_id: u32 = 0xCAFE_BABE;
+    let mut blocks = vec![[0.0_f64; 64]; 128];
+
+    DctWatermarkCodec::embed_8x8_chroma(&mut blocks, subscriber_id)
+        .expect("DCT 8x8 chroma embedding should succeed");
+    let (extracted, confidence) = DctWatermarkCodec::extract_8x8_chroma(&blocks)
+        .expect("DCT 8x8 chroma extraction should succeed");
+
+    assert_eq!(extracted, subscriber_id);
+    assert!(
+        confidence >= 0.99,
+        "expected high confidence, got {confidence}"
+    );
 }

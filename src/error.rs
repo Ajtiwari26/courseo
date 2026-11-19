@@ -19,4 +19,13 @@ pub enum DrmError {
 
     #[error("invalid optical simulation parameter: {0}")]
     OpticalParamError(String),
+
+    #[error("virtual machine / hypervisor environment detected: {0}")]
+    HypervisorDetected(String),
+
+    #[error("audio spread-spectrum watermark error: {0}")]
+    AudioWatermarkError(String),
+
+    #[error("short-window DCT watermark error: {0}")]
+    DctWatermarkError(String),
 }

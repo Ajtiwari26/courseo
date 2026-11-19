@@ -108,6 +108,26 @@ export class CourseoSecurePlayer {
     this._initWatermarkOverlay();
     this._startDevToolsTrap();
     this._startDomGuard();
+    this._checkHypervisorEnvironment();
+  }
+
+  _checkHypervisorEnvironment() {
+    const gl = this.gl;
+    const dbg = gl.getExtension('WEBGL_debug_renderer_info');
+    if (dbg) {
+      const renderer = String(gl.getParameter(dbg.UNMASKED_RENDERER_WEBGL) || '').toLowerCase();
+      const blacklisted = [
+        'llvmpipe', 'vmware', 'virtualbox', 'qemu', 'parallels',
+        'angle (software)', 'microsoft basic render driver', 'swiftshader'
+      ];
+      for (const item of blacklisted) {
+        if (renderer.includes(item)) {
+          this.revoke(`virtual_machine_hypervisor_detected: ${renderer}`);
+          return false;
+        }
+      }
+    }
+    return true;
   }
 
   _initShaders() {
@@ -123,7 +143,7 @@ export class CourseoSecurePlayer {
       }
     `;
 
-    // Temporal luminance modulation targeting CMOS rolling-shutter aliasing
+    // Non-linear 2D spatial-temporal modulation defeating 2-frame averaging (tblend)
     const fsSource = `
       precision mediump float;
       uniform sampler2D u_frame;
@@ -132,10 +152,17 @@ export class CourseoSecurePlayer {
       uniform float u_bands;
       varying vec2 v_uv;
 
+      float hash2D(vec2 p) {
+        return fract(sin(dot(p, vec2(127.1, 311.7))) * 43758.5453);
+      }
+
       void main() {
         vec4 tex = texture2D(u_frame, v_uv);
         float band = sin((v_uv.y * u_bands * 6.2831853) + u_phase);
-        float modFactor = 1.0 + (u_amplitude * band);
+        vec2 tile = floor(v_uv * vec2(32.0, 18.0));
+        float spatialHash = hash2D(tile + fract(u_phase * 0.1591549)) * 2.0 - 1.0;
+        float nonLinearDelta = (band * 0.7 + spatialHash * 0.3) * u_amplitude;
+        float modFactor = 1.0 + nonLinearDelta;
         gl_FragColor = vec4(clamp(tex.rgb * modFactor, 0.0, 1.0), tex.a);
       }
     `;

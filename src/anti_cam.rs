@@ -91,6 +91,65 @@ impl AntiCamEngine {
         })
     }
 
+    /// Simulates an adversarial 2-frame temporal averaging attack (e.g., FFmpeg `tblend=all_mode=average`)
+    /// against the 2D non-linear spatial-temporal checkerboard modulation.
+    /// Returns the residual spatial contrast variance across 8x8 tiles (must remain >= 0.15).
+    pub fn simulate_two_frame_average_attack(
+        params: &RollingShutterParams,
+    ) -> Result<f64, DrmError> {
+        if params.modulation_alpha <= 0.0 || params.base_luminance <= 0.0 {
+            return Err(DrmError::OpticalParamError(
+                "modulation_alpha and base_luminance must be positive".to_string(),
+            ));
+        }
+
+        let grid_w = 64usize;
+        let grid_h = 64usize;
+        let tile_size = 8usize;
+        let mut blended_tiles = Vec::with_capacity((grid_w / tile_size) * (grid_h / tile_size));
+
+        for ty in 0..(grid_h / tile_size) {
+            for tx in 0..(grid_w / tile_size) {
+                let p0 = Self::spatial_temporal_hash(tx, ty, 0);
+                let p1 = Self::spatial_temporal_hash(tx, ty, 1);
+
+                let lum_t0 = (params.base_luminance + p0 * params.modulation_alpha).clamp(0.0, 1.0);
+                let lum_t1 = (params.base_luminance + p1 * params.modulation_alpha).clamp(0.0, 1.0);
+                blended_tiles.push(0.5 * (lum_t0 + lum_t1));
+            }
+        }
+
+        let min_lum = blended_tiles.iter().copied().fold(f64::INFINITY, f64::min);
+        let max_lum = blended_tiles
+            .iter()
+            .copied()
+            .fold(f64::NEG_INFINITY, f64::max);
+
+        let residual_contrast = if (max_lum + min_lum) > 0.0 {
+            (max_lum - min_lum) / (max_lum + min_lum)
+        } else {
+            0.0
+        };
+
+        Ok(residual_contrast)
+    }
+
+    fn spatial_temporal_hash(tx: usize, ty: usize, frame: usize) -> f64 {
+        let mut h = (tx as u64).wrapping_mul(0x9E37_79B9_7F4A_7C15)
+            ^ (ty as u64).wrapping_mul(0xBF58_476D_1CE4_E5B9)
+            ^ (frame as u64).wrapping_mul(0x94D0_49BB_1331_11EB);
+        h ^= h >> 30;
+        h = h.wrapping_mul(0xBF58_476D_1CE4_E5B9);
+        h ^= h >> 27;
+        h = h.wrapping_mul(0x94D0_49BB_1331_11EB);
+        h ^= h >> 31;
+        if (h & 1) == 1 {
+            1.0
+        } else {
+            -1.0
+        }
+    }
+
     /// Generates the WebGL2 GLSL ES 3.00 fragment shader for real-time anti-camcording modulation.
     pub fn generate_webgl2_fragment_shader(alpha: f32, refresh_hz: f32) -> String {
         format!(

@@ -75,11 +75,26 @@ The **Courseo SecureWatch** challenge requires implementing an end-to-end, multi
 - Desktop Secure App bridge (`desktop/courseo_secure_desktop.js`):
   - Electron/Tauri content protection integration enforcing `mainWindow.setContentProtection(true)`.
 
+### Subsystem 7: Non-Linear 2D Anti-Averaging Anti-Camcording Engine (`anti_cam`)
+- 2D pseudo-random spatial-temporal checkerboard modulation defeating FFmpeg 2-frame temporal averaging (`tblend=all_mode=average`).
+- Asserts that blended output maintains $\ge 15\%$ residual spatial contrast variance.
+
+### Subsystem 8: Hypervisor & Virtual Machine Detector (`hypervisor_detector`)
+- Detects virtualized graphics adapters (`llvmpipe`, `vmware`, `virtualbox`, `qemu`, `parallels`, `angle (software)`, `microsoft basic render driver`).
+- Timer jitter evaluation detecting VM context-switch spikes ($>50\mu\text{s}$).
+
+### Subsystem 9: Psychoacoustic Audio Spread-Spectrum Watermarking (`audio_watermark`)
+- Injects 48-bit subscriber ID into 15kHz–19kHz psychoacoustic masking bands using DSSS with 127-bit PN code.
+- Recovers subscriber ID from audio-only rips even after lossy audio transcoding.
+
+### Subsystem 10: Short-Window Chrominance / DCT Bias Watermark (`dct_watermark`)
+- Embeds forensic signature into 8x8 DCT blocks in $Cb/Cr$ channels across keyframes for 5–15 second clip attribution.
+
 ---
 
 ## 3. Required Deliverables
 
-1. `SPEC.md`: Exhaustive technical specification with mathematical derivations for rolling shutter interference, BCH codec polynomials, and CENC frame formats.
+1. `SPEC.md`: Exhaustive technical specification with mathematical derivations for rolling shutter interference, anti-averaging math, audio DSSS, and DCT watermarks.
 2. `DESIGN.md`: Concrete system design detailing module boundaries, data structures, state machines, and threat mitigation matrices.
 3. `PLAN.md`: Implementation milestones, file-level ownership, and test matrix.
 4. `courseo-core` (Rust Crate):
@@ -87,15 +102,18 @@ The **Courseo SecureWatch** challenge requires implementing an end-to-end, multi
    - `src/lib.rs`: Strict safety attributes (`#![forbid(unsafe_code)]`, `#![deny(clippy::all)]`).
    - `src/crypto.rs`: AES-128-CBCS CENC, Ed25519 tokens, and key rotation.
    - `src/watermark.rs`: BCH error correction, A/B manifest synthesis, and forensic leak extractor.
-   - `src/anti_cam.rs`: Rolling shutter mathematical simulator and GLSL shader generator.
+   - `src/anti_cam.rs`: Non-linear 2D anti-averaging simulator and GLSL shader generator.
    - `src/telemetry.rs`: Heartbeat monitor, anomaly detector, and revocation ledger.
    - `src/hardware_protection.rs`: ISO/IEC 23001-7 PSSH box generator, EME license evaluator, and OS display affinity.
-   - `src/error.rs`: Typed error domain.
+   - `src/hypervisor_detector.rs`: VM/hypervisor renderer and timer jitter detection.
+   - `src/audio_watermark.rs`: Psychoacoustic audio DSSS spread-spectrum watermarking engine.
+   - `src/dct_watermark.rs`: Short-window 8x8 DCT chrominance bias per-frame watermark.
+   - `src/error.rs`: Typed error domain (`HypervisorDetected`, `AudioWatermarkError`, etc.).
 5. `courseo-player` (Web / TypeScript / GLSL & Desktop):
-   - Secure WebGL video compositor with anti-camcording shader.
+   - Secure WebGL video compositor with 2D non-linear anti-averaging shader and VM detection.
    - Prototype freezing and anti-tamper security shield.
    - DevTools timing trap and dynamic drifting watermark.
    - `desktop/courseo_secure_desktop.js`: Electron/Tauri desktop content protection wrapper.
 6. `testscript/securewatch_adversarial_test.rs`:
-   - Comprehensive integration test suite executing 100+ adversarial scenarios (bit-flip corruption, camcorder blur, key rotation expiry, replay attacks, concurrent stream revocation, PSSH binary encoding, and HDCP 2.2 license evaluation).
+   - Comprehensive integration test suite executing 100+ adversarial scenarios (bit-flip corruption, camcorder blur, key rotation expiry, replay attacks, concurrent stream revocation, PSSH binary encoding, HDCP 2.2 license evaluation, 2-frame tblend anti-averaging defense, hypervisor detection, audio DSSS extraction, and DCT short-window attribution).
    - Zero compiler warnings, zero Clippy warnings (`-D warnings`), 100% test pass rate.
