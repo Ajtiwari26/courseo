@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Courseo SecureWatch — DRM & Anti-Camcording Test Deck</title>
+  <style>
+    body {
+      background: #0d1117;
+      color: #c9d1d9;
+      font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      margin: 0;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+    }
+    h1 {
+      color: #58a6ff;
+      margin-bottom: 8px;
+    }
+    .badge {
+      display: inline-block;
+      padding: 4px 10px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 600;
+      background: #238636;
+      color: #ffffff;
+      margin-bottom: 20px;
+    }
+    .player-container {
+      position: relative;
+      width: 640px;
+      height: 360px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 8px;
+      overflow: hidden;
+      box-shadow: 0 8px 24px rgba(0,0,0,0.5);
+    }
+    canvas {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .controls {
+      margin-top: 16px;
+      display: flex;
+      gap: 12px;
+    }
+    button {
+      background: #21262d;
+      color: #c9d1d9;
+      border: 1px solid #30363d;
+      padding: 8px 16px;
+      border-radius: 6px;
+      cursor: pointer;
+      font-weight: 500;
+    }
+    button:hover {
+      background: #30363d;
+      border-color: #8b949e;
+    }
+    #status-card {
+      margin-top: 20px;
+      padding: 16px;
+      background: #161b22;
+      border: 1px solid #30363d;
+      border-radius: 6px;
+      width: 608px;
+      font-family: monospace;
+      font-size: 13px;
+    }
+    .status-ok {
+      color: #3fb950;
+    }
+    .status-alert {
+      color: #f85149;
+    }
+  </style>
+</head>
+<body>
+  <h1>Courseo SecureWatch</h1>
+  <div class="badge">SECURE WEBGL2 COMPOSITOR ACTIVE</div>
+
+  <div class="player-container" id="player-box">
+    <canvas id="secure-canvas" width="640" height="360"></canvas>
+  </div>
+
+  <div class="controls">
+    <button id="btn-screen-share">Simulate Screen-Share Leak</button>
+    <button id="btn-canvas-rip">Simulate Canvas Rip (toDataURL)</button>
+    <button id="btn-debugger-trap">Simulate DevTools Breakpoint</button>
+  </div>
+
+  <div id="status-card">
+    <div><strong>Player Status:</strong> <span id="player-status" class="status-ok">INITIALIZING...</span></div>
+    <div><strong>Active Subscriber ID:</strong> <span id="sub-id">0xDEAD_BEEF (42,901,337)</span></div>
+    <div><strong>Rolling Shutter Anti-Cam:</strong> <span class="status-ok">60Hz Temporal Modulation Active</span></div>
+    <div><strong>BCH(64,48) Forensic Watermark:</strong> <span class="status-ok">Drifting Pseudo-Random Overlay Active</span></div>
+    <div><strong>Security Audit Events:</strong> <span id="audit-log">No anomalies detected</span></div>
+  </div>
+
+  <script type="module">
+    import { CourseoSecurePlayer } from './courseo_player.js';
+
+    const canvas = document.getElementById('secure-canvas');
+    const statusEl = document.getElementById('player-status');
+    const auditEl = document.getElementById('audit-log');
+
+    // Synthetic canvas video source for standalone demonstration
+    const videoCanvas = document.createElement('canvas');
+    videoCanvas.width = 640;
+    videoCanvas.height = 360;
+    const vCtx = videoCanvas.getContext('2d');
+    let angle = 0;
+
+    function renderSyntheticVideo() {
+      vCtx.fillStyle = '#1f242c';
+      vCtx.fillRect(0, 0, 640, 360);
+
+      // Draw lecture presentation graphics
+      vCtx.fillStyle = '#58a6ff';
+      vCtx.font = 'bold 24px monospace';
+      vCtx.fillText('Courseo: Advanced Distributed Systems', 40, 80);
+
+      vCtx.fillStyle = '#8b949e';
+      vCtx.font = '16px monospace';
+      vCtx.fillText('Topic: Cryptographic DRM & Ephemeral Key Ladders', 40, 120);
+      vCtx.fillText('Confidential — Do Not Distribute', 40, 150);
+
+      // Animated security graphic
+      angle += 0.03;
+      const cx = 320 + Math.cos(angle) * 120;
+      const cy = 240 + Math.sin(angle) * 40;
+      vCtx.fillStyle = '#238636';
+      vCtx.beginPath();
+      vCtx.arc(cx, cy, 18, 0, Math.PI * 2);
+      vCtx.fill();
+
+      requestAnimationFrame(renderSyntheticVideo);
+    }
+    renderSyntheticVideo();
+
+    // Create synthetic video element wrapper
+    const fakeVideo = {
+      readyState: 4,
+      HAVE_CURRENT_DATA: 2,
+      pause: () => {
+        statusEl.textContent = 'SESSION REVOKED (LOCKED)';
+        statusEl.className = 'status-alert';
+      }
+    };
+
+    // Instantiate Secure Player
+    const player = new CourseoSecurePlayer({
+      canvas: canvas,
+      video: videoCanvas,
+      sessionToken: 'tok_live_edtech_994821',
+      userId: 'usr_premium_7741',
+      refreshHz: 60,
+      onRevoke: (evt) => {
+        statusEl.textContent = `REVOKED: ${evt.reason}`;
+        statusEl.className = 'status-alert';
+        auditEl.textContent = `CRITICAL ANOMALY: Session ${evt.sessionToken} terminated. Reason: ${evt.reason}`;
+        auditEl.className = 'status-alert';
+      }
+    });
+
+    player.start();
+    statusEl.textContent = 'STREAMING (PROTECTED)';
+
+    // Attach simulation buttons
+    document.getElementById('btn-screen-share').addEventListener('click', () => {
+      player.revoke('screen_share_detected');
+    });
+
+    document.getElementById('btn-canvas-rip').addEventListener('click', () => {
+      try {
+        const url = canvas.toDataURL();
+        auditEl.textContent = 'Canvas toDataURL executed (Locked / Non-tampered Prototype)';
+      } catch (err) {
+        auditEl.textContent = `Canvas rip blocked: ${err.message}`;
+      }
+    });
+
+    document.getElementById('btn-debugger-trap').addEventListener('click', () => {
+      player.revoke('devtools_breakpoint_stall');
+    });
+  </script>
+</body>
+</html>
