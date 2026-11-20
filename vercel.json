@@ -1,6 +1,9 @@
 {
   "cleanUrls": true,
   "rewrites": [
-    { "source": "/", "destination": "/web/index.html" }
+    { "source": "/", "destination": "/web/index.html" },
+    { "source": "/assets/(.*)", "destination": "/web/assets/$1" },
+    { "source": "/courseo.css", "destination": "/web/courseo.css" },
+    { "source": "/hero-story.js", "destination": "/web/hero-story.js" }
   ]
 }
