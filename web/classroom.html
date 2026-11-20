@@ -182,12 +182,12 @@
     function renderPlaylist() {
       playlistEl.innerHTML = LESSONS.map(l => `
         <button class="playlist-item ${l.id === activeLessonId ? 'active' : ''}" data-lesson-id="${l.id}" type="button">
-          <span style="width:20px; height:20px; border-radius:6px; border:1px solid ${l.done ? '#10B981' : 'rgba(255,255,255,0.2)'}; background:${l.done ? 'rgba(16,185,129,0.2)' : 'transparent'}; display:grid; place-items:center; flex-shrink:0; margin-top:2px; color:#10B981; font-size:0.72rem;">
+          <span style="width:20px; height:20px; border-radius:6px; border:1px solid ${l.done ? '#10B981' : 'rgba(15,23,42,0.15)'}; background:${l.done ? 'rgba(16,185,129,0.15)' : 'transparent'}; display:grid; place-items:center; flex-shrink:0; margin-top:2px; color:#10B981; font-size:0.72rem; font-weight:700;">
             ${l.done ? '✓' : ''}
           </span>
           <span style="display:flex; flex-direction:column; gap:0.2rem;">
-            <span style="font-size:0.86rem; font-weight:600; color:${l.id === activeLessonId ? '#FFFFFF' : '#CBD5E1'};">${l.title}</span>
-            <span style="font-family:var(--font-mono); font-size:0.72rem; color:#94A3B8;">${l.duration} • 4K SecureWatch</span>
+            <span class="playlist-title">${l.title}</span>
+            <span class="playlist-meta">${l.duration} • 4K SecureWatch</span>
           </span>
         </button>
       `).join('');

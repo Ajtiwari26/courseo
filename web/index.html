@@ -1,841 +1,833 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Courseo — Master the Frontier of AI, Code & Generative Cinema</title>
-  <link rel="preconnect" href="https://fonts.googleapis.com">
-  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
-  <link rel="stylesheet" href="./courseo.css">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Courseo — Master Frontier AI with Real Systems</title>
+  <meta
+    name="description"
+    content="Get matched cohorts, cloud GPU sandboxes, and production-tested starter repos in less than 60 seconds."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
+    rel="stylesheet"
+  />
+  <link rel="stylesheet" href="./courseo.css" />
 </head>
 <body>
-  <!-- Floating Glass Navigation Pill -->
-  <header class="nav-shell">
-    <nav class="nav-pill" aria-label="Primary">
-      <a href="./index.html" class="brand-lockup">
-        <span class="brand-mark">
-          <img src="../assets/brand/courseo_logo_primary.jpg" alt="Courseo" onerror="this.style.display='none'">
+  <!-- 1. Floating Porcelain Glass Pill Navbar -->
+  <header class="navbar-wrap">
+    <nav class="navbar-pill" aria-label="Primary Navigation">
+      <a href="#top" class="brand-lockup" aria-label="Courseo Home">
+        <img
+          src="./assets/courseo_logo_official.jpg"
+          alt="Courseo 3D Hexagonal Logo"
+          class="brand-logo-img"
+        />
+        <span class="brand-wordmark">
+          <span class="brand-wordmark__primary">cours</span><span class="brand-wordmark__accent">eo</span>
         </span>
-        <span class="brand-wordmark">cours<span>eo</span></span>
       </a>
 
-      <ul class="nav-links">
-        <li><a href="./courses.html">Explore Courses</a></li>
-        <li><a href="#curriculum">Curriculum</a></li>
-        <li><a href="#platform-bento">SecureWatch</a></li>
-        <li><a href="./classroom.html">Classroom</a></li>
-        <li><a href="#faculty">Faculty</a></li>
-      </ul>
+      <div class="nav-links">
+        <a href="#pillars">Curriculum</a>
+        <a href="#outcomes">Outcomes</a>
+        <a href="#faculty">Faculty</a>
+        <a href="#pricing">Pricing</a>
+        <a href="#faq">FAQ</a>
+      </div>
 
       <div class="nav-actions">
-        <button class="search-trigger" id="open-cmd-k" type="button" aria-label="Search curriculum">
-          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-          <span>Search courses...</span>
-          <span class="kbd-pill">⌘K</span>
+        <button type="button" class="cmd-trigger" id="openCmdBtn" aria-label="Search Courses">
+          <span>Search tracks</span>
+          <span class="cmd-kbd">⌘ K</span>
         </button>
-        <a href="./classroom.html" class="btn btn-ghost btn-sm">Sign In</a>
-        <a href="./courses.html" class="btn btn-primary btn-sm">Get Started</a>
+        <a href="#classroom" class="btn btn--ghost btn--classroom">Classroom</a>
+        <a href="#pricing" class="btn btn--primary btn--sm">Apply for Cohort ↗</a>
       </div>
     </nav>
   </header>
 
-  <main>
-    <!-- Stage 0: Split-Text Cinematic Hero + Live SecureWatch WebGL Player -->
-    <section class="hero" id="hero">
-      <div class="container hero-grid">
-        <div>
-          <div class="section-eyebrow">
-            <span class="pulse-dot"></span>
-            <span>SecureWatch WebGL2 DRM + WebOrient AI</span>
-          </div>
+  <main id="top">
+    <!-- 2. Split-Screen Hero (50/50 Layout - jobhunt-hero) -->
+    <section class="jobhunt-hero">
+      <div class="container">
+        <div class="jobhunt-hero__grid">
+          <!-- Left Column -->
+          <div class="jobhunt-hero__left">
+            <span class="eyebrow-pill">[✦] AI Career &amp; Skill Matcher Active</span>
 
-          <h1 class="hero-title">
-            <span class="split-line"><span>Master the Frontier</span></span><br>
-            <span class="split-line"><span>of <span class="accent-text">AI, Code &amp;</span></span></span><br>
-            <span class="split-line"><span><span class="accent-text">Cinema</span>.</span></span>
-          </h1>
+            <h1 class="jobhunt-hero__title">
+              No More Solo Upskilling. Master Frontier AI with Real Systems.
+            </h1>
 
-          <p class="hero-subtitle">
-            Learn directly from the top 1% of AI architects, generative filmmakers, and performance marketers. Streamed in zero-latency 4K with camcorder-resistant SecureWatch protection and interactive code sandboxes.
-          </p>
+            <p class="jobhunt-hero__subtitle">
+              Get matched cohorts, cloud GPU sandboxes, and production-tested starter repos in less than 60 seconds.
+            </p>
 
-          <div class="hero-cta-row">
-            <a href="./courses.html" class="btn btn-primary btn-lg glow-pulse">
-              <span>Browse All 12 Courses</span>
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12h14"/><path d="m12 5 7 7-7 7"/></svg>
-            </a>
-            <a href="./course_detail.html?slug=autonomous-swarms-openclaw-hermes" class="btn btn-ghost btn-lg">
-              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><polygon points="6 3 20 12 6 21 6 3"/></svg>
-              <span>Preview Flagship Syllabus</span>
-            </a>
-          </div>
+            <ul class="hero-checklist">
+              <li><span class="check-dot">✓</span> 12 Masterclasses</li>
+              <li><span class="check-dot">✓</span> Cloud GPU Sandboxes</li>
+              <li><span class="check-dot">✓</span> 100% Production Code</li>
+              <li><span class="check-dot">✓</span> 94.6% Completion</li>
+            </ul>
 
-          <div class="hero-trust-row">
-            <span class="hero-trust-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#10B981" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/></svg>
-              BCH(64,48) Forensic Watermark
-            </span>
-            <span class="hero-trust-item">
-              <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="#FD6902" stroke-width="2"><polygon points="13 2 3 14 12 14 11 22 21 10 12 10 13 2"/></svg>
-              4K 60fps WebGL2 Compositor
-            </span>
-          </div>
-        </div>
+            <div class="hero-cta-row">
+              <a href="#pricing" class="btn btn--primary">Apply for Cohort ↗</a>
+              <a href="#pillars" class="btn btn--outline">Explore All 12 Courses</a>
+            </div>
 
-        <!-- Embedded Live SecureWatch WebGL Player -->
-        <div class="player-showcase">
-          <div class="player-ambient-glow"></div>
-          <div class="securewatch-frame" id="hero-securewatch">
-            <div class="securewatch-topbar">
-              <span class="badge badge-emerald badge-mono">
-                <span class="pulse-dot"></span>
-                PROTECTED LIVE FEED
+            <div class="social-proof">
+              <div class="avatar-stack" aria-hidden="true">
+                <span class="avatar-stack__item" style="background:#0F172A;">AK</span>
+                <span class="avatar-stack__item" style="background:#FD6902;">SR</span>
+                <span class="avatar-stack__item" style="background:#334155;">PM</span>
+                <span class="avatar-stack__item" style="background:#EA580C;">VD</span>
+              </div>
+              <span class="social-proof__text">
+                <span class="social-proof__star">★ 4.9/5</span> rated by 12,400+ engineers &amp; creators
               </span>
-              <span style="color: var(--text-muted);" id="hero-drm-status">60Hz Anti-Camcording: ACTIVE (alpha=0.35)</span>
             </div>
+          </div>
 
-            <div class="securewatch-viewport" id="hero-player-container">
-              <video id="hero-source-video" src="./sample.mp4" playsinline webkit-playsinline muted autoplay loop crossorigin="anonymous" style="display:none;"></video>
-              <canvas id="hero-secure-canvas" width="960" height="540"></canvas>
+          <!-- Right Column: Signature JobHunt 3D Tilted Card -->
+          <div class="hero-stage" aria-label="AI Track Match Preview">
+            <div class="tilt-wrapper">
+              <div class="tilt-backdrop" aria-hidden="true"></div>
 
-              <div class="player-hud-overlay">
-                <div class="hud-row">
-                  <span class="hud-chip">4K 60fps</span>
-                  <span class="hud-chip">Zero-Buffering</span>
-                  <span class="hud-chip">Forensically Attributed</span>
+              <article class="match-card">
+                <div class="match-floating-badge">
+                  <span class="match-floating-badge__dot" aria-hidden="true"></span>
+                  98% Overall Match
                 </div>
-                <div class="hud-row">
-                  <span class="hud-chip" id="hero-hdcp-chip">HDCP 2.2 Hardware EME</span>
-                  <span class="hud-chip" id="hero-session-chip">SES: usr_courseo_4290</span>
+
+                <div class="match-card__header">
+                  <div>
+                    <div class="match-card__eyebrow">Matched Cohort Track</div>
+                    <h2 class="match-card__role">Autonomous AI Architect · OpenClaw &amp; Hermes</h2>
+                  </div>
+                  <span class="cohort-chip">Starts Dec 5</span>
                 </div>
-              </div>
 
-              <div class="forensic-wm-badge" id="hero-watermark-overlay" style="top: 38%; left: 52%;">
-                COURSEO-DRM • BCH64 • 4290-1337
-              </div>
-            </div>
+                <!-- 3 Circular Percentage Dials (dial-gauge SVG) -->
+                <div class="dial-grid">
+                  <div class="dial-item">
+                    <div class="dial-gauge" role="img" aria-label="99% Agent DAGs">
+                      <svg viewBox="0 0 80 80">
+                        <circle class="dial-gauge__track" cx="40" cy="40" r="32"></circle>
+                        <circle
+                          class="dial-gauge__progress"
+                          cx="40"
+                          cy="40"
+                          r="32"
+                          style="stroke-dashoffset: 2.01;"
+                        ></circle>
+                      </svg>
+                      <span class="dial-gauge__value">99%</span>
+                    </div>
+                    <span class="dial-item__label">Agent DAGs</span>
+                  </div>
 
-            <div class="securewatch-controls">
-              <button class="ctrl-btn active" id="btn-hero-play" type="button">Pause</button>
-              <button class="ctrl-btn active" id="btn-hero-anticam" type="button">Anti-Cam: ON</button>
-              <button class="ctrl-btn" id="btn-hero-hdcp" type="button">Test HDCP 1.4</button>
-              <button class="ctrl-btn" id="btn-hero-rip" type="button">Test Canvas Rip</button>
-              <span class="player-time" id="hero-player-time">LIVE • 60 FPS</span>
+                  <div class="dial-item">
+                    <div class="dial-gauge" role="img" aria-label="95% LLM Inference">
+                      <svg viewBox="0 0 80 80">
+                        <circle class="dial-gauge__track" cx="40" cy="40" r="32"></circle>
+                        <circle
+                          class="dial-gauge__progress"
+                          cx="40"
+                          cy="40"
+                          r="32"
+                          style="stroke-dashoffset: 10.05;"
+                        ></circle>
+                      </svg>
+                      <span class="dial-gauge__value">95%</span>
+                    </div>
+                    <span class="dial-item__label">LLM Inference</span>
+                  </div>
+
+                  <div class="dial-item">
+                    <div class="dial-gauge" role="img" aria-label="97% Production Readiness">
+                      <svg viewBox="0 0 80 80">
+                        <circle class="dial-gauge__track" cx="40" cy="40" r="32"></circle>
+                        <circle
+                          class="dial-gauge__progress"
+                          cx="40"
+                          cy="40"
+                          r="32"
+                          style="stroke-dashoffset: 6.03;"
+                        ></circle>
+                      </svg>
+                      <span class="dial-gauge__value">97%</span>
+                    </div>
+                    <span class="dial-item__label">Production Readiness</span>
+                  </div>
+                </div>
+
+                <div class="match-skills">
+                  <div class="match-skills__title">Skills You'll Master</div>
+                  <div class="skill-pills">
+                    <span class="skill-pill">✓ Parallel Agent Swarms</span>
+                    <span class="skill-pill">✓ Tool-Call Sandboxes</span>
+                    <span class="skill-pill">✓ SecureWatch DRM Video</span>
+                    <span class="skill-pill">✓ Zero-Leak Secrets</span>
+                  </div>
+                </div>
+              </article>
             </div>
           </div>
         </div>
       </div>
     </section>
 
-    <!-- Stage 1: Social Proof Metrics Ribbon -->
-    <section class="section" style="padding-block: 1.5rem 3.5rem;">
-      <div class="container">
-        <div class="metrics-ribbon fade-up">
-          <div class="metric-cell">
-            <div class="metric-value" data-count-target="48000" data-suffix="+">48,000<span>+</span></div>
-            <div class="metric-label">Active Students Enrolled</div>
-          </div>
-          <div class="metric-cell">
-            <div class="metric-value">94.6<span>%</span></div>
-            <div class="metric-label">Verified Course Completion Rate</div>
-          </div>
-          <div class="metric-cell">
-            <div class="metric-value">120<span>+</span></div>
-            <div class="metric-label">Production-Grade Modules &amp; Labs</div>
-          </div>
-          <div class="metric-cell">
-            <div class="metric-value"><span>$</span>0</div>
-            <div class="metric-label">Piracy Leak Rate via SecureWatch</div>
-          </div>
+    <!-- 3. Partner Marquee -->
+    <section class="marquee-section" aria-label="Hiring & Alumni Companies">
+      <p class="marquee-label">Trusted by engineers and builders shipping AI systems at</p>
+      <div class="marquee-viewport">
+        <div class="marquee-track">
+          <span class="partner-item">Google</span>
+          <span class="partner-item">Microsoft</span>
+          <span class="partner-item">Zomato</span>
+          <span class="partner-item">Swiggy</span>
+          <span class="partner-item">CRED</span>
+          <span class="partner-item">Zerodha</span>
+          <span class="partner-item">Razorpay</span>
+          <span class="partner-item">Flipkart</span>
+          <!-- Duplicate track for seamless loop -->
+          <span class="partner-item" aria-hidden="true">Google</span>
+          <span class="partner-item" aria-hidden="true">Microsoft</span>
+          <span class="partner-item" aria-hidden="true">Zomato</span>
+          <span class="partner-item" aria-hidden="true">Swiggy</span>
+          <span class="partner-item" aria-hidden="true">CRED</span>
+          <span class="partner-item" aria-hidden="true">Zerodha</span>
+          <span class="partner-item" aria-hidden="true">Razorpay</span>
+          <span class="partner-item" aria-hidden="true">Flipkart</span>
         </div>
       </div>
     </section>
 
-    <!-- Stage 2: Pinned Horizontal Curriculum Showcase (All 3 Tracks / 12 Courses) -->
-    <section class="section" id="curriculum">
+    <!-- 4. Features Bento Grid (5-Card Layout - bento-jobhunt) -->
+    <section class="section-block" id="pillars">
       <div class="container">
-        <div class="section-header fade-up">
-          <div class="section-eyebrow">Curriculum Universe • 3 Core Tracks</div>
-          <h2 class="section-title">12 Flagship Masterclasses Built for 2026–2027.</h2>
-          <p class="section-subtitle">
-            From autonomous multi-agent swarms and local DeepSeek LoRA training to Seedance 2.5 virtual cinema and seven-figure Meta Ads scaling.
+        <div class="section-header">
+          <span class="eyebrow-pill">Core Pillars</span>
+          <h2 class="section-title">Everything you need to master production AI</h2>
+          <p class="section-desc">
+            Five production-grade tracks engineered with live GPU clusters, verifiable repositories, and cohort reviews.
           </p>
         </div>
 
-        <div class="track-tabs-bar fade-up">
-          <div class="track-tabs" role="tablist" aria-label="Curriculum Tracks">
-            <button class="track-tab active" data-track="all" type="button">All Tracks (12)</button>
-            <button class="track-tab" data-track="ai-engineering" type="button">Track 1: AI Engineering (6)</button>
-            <button class="track-tab" data-track="generative-media" type="button">Track 2: Generative Film &amp; Media (4)</button>
-            <button class="track-tab" data-track="growth-commerce" type="button">Track 3: Growth &amp; Commerce (2)</button>
+        <div class="bento-jobhunt">
+          <!-- Card 1 -->
+          <article class="bento-card">
+            <div>
+              <div class="bento-icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <circle cx="12" cy="5" r="3"></circle>
+                  <circle cx="5" cy="19" r="3"></circle>
+                  <circle cx="19" cy="19" r="3"></circle>
+                  <path d="M10.5 7.5L6.5 16.5M13.5 7.5L17.5 16.5M8 19h8"></path>
+                </svg>
+              </div>
+              <h3 class="bento-card__title" style="margin-top:18px;">Autonomous Agent Swarms</h3>
+              <p class="bento-card__text">
+                Architect deterministic multi-agent DAGs with tool-call sandboxes, memory compaction, and automatic retries.
+              </p>
+            </div>
+            <div class="bento-card__meta">4 Production Repos · Rust &amp; Python</div>
+          </article>
+
+          <!-- Card 3 (Tall Center Prominent Card) -->
+          <article class="bento-card bento-card--tall">
+            <div>
+              <div class="bento-icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="4" width="20" height="16" rx="3"></rect>
+                  <polygon points="10,9 16,12 10,15" fill="currentColor"></polygon>
+                </svg>
+              </div>
+              <h3 class="bento-card__title" style="margin-top:18px;">High-Production Generative Cinema</h3>
+              <p class="bento-card__text">
+                Direct end-to-end commercial films with character-consistent diffusion pipelines, ComfyUI node graphs, temporal coherence, and multi-track sound design.
+              </p>
+
+              <div class="bento-tall-preview">
+                <div class="preview-pipeline-row">
+                  <span>01 · Storyboard &amp; Shot Lock</span>
+                  <span class="preview-pipeline-tag">LoRA + IP-Adapter</span>
+                </div>
+                <div class="preview-pipeline-row">
+                  <span>02 · Motion &amp; Camera Rig</span>
+                  <span class="preview-pipeline-tag">4K 60fps Upscale</span>
+                </div>
+                <div class="preview-pipeline-row">
+                  <span>03 · Spatial Audio &amp; Master</span>
+                  <span class="preview-pipeline-tag">Broadcast Ready</span>
+                </div>
+              </div>
+            </div>
+            <div class="bento-card__meta">Flagship Creator Track · H100 Render Credits Included</div>
+          </article>
+
+          <!-- Card 2 -->
+          <article class="bento-card">
+            <div>
+              <div class="bento-icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="4" y="4" width="16" height="16" rx="2"></rect>
+                  <rect x="9" y="9" width="6" height="6"></rect>
+                  <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path>
+                </svg>
+              </div>
+              <h3 class="bento-card__title" style="margin-top:18px;">Local LLM Inference</h3>
+              <p class="bento-card__text">
+                Deploy quantized 4-bit models with KV-cache prefix optimization, speculative decoding, and sub-50ms time-to-first-token.
+              </p>
+            </div>
+            <div class="bento-card__meta">MLX, vLLM &amp; TensorRT-LLM</div>
+          </article>
+
+          <!-- Card 4 -->
+          <article class="bento-card">
+            <div>
+              <div class="bento-icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 17l6-6 4 4 8-8"></path>
+                  <path d="M17 7h4v4"></path>
+                </svg>
+              </div>
+              <h3 class="bento-card__title" style="margin-top:18px;">Algorithmic Growth &amp; Meta Ads</h3>
+              <p class="bento-card__text">
+                Build automated creative testing loops, attribution pipelines, and ROAS-positive acquisition funnels powered by live telemetry.
+              </p>
+            </div>
+            <div class="bento-card__meta">Live Ad-Spend Labs · Attribution SQL</div>
+          </article>
+
+          <!-- Card 5 -->
+          <article class="bento-card">
+            <div>
+              <div class="bento-icon-badge" aria-hidden="true">
+                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M12 2l7 4v6c0 5-3.5 9-7 10-3.5-1-7-5-7-10V6l7-4z"></path>
+                  <path d="M9 12l2 2 4-4"></path>
+                </svg>
+              </div>
+              <h3 class="bento-card__title" style="margin-top:18px;">SecureWatch DRM Sandboxes</h3>
+              <p class="bento-card__text">
+                Stream HD walkthroughs with forensic watermark attribution, anti-camcording protection, and ephemeral zero-leak secret vaults.
+              </p>
+            </div>
+            <div class="bento-card__meta">BCH Forensic Attribution · Zero-Leak Runtime</div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. Status & Metrics (Horizontal Rows - stat-row) -->
+    <section class="section-block section-block--tinted" id="outcomes">
+      <div class="container">
+        <div class="section-header">
+          <span class="eyebrow-pill eyebrow-pill--neutral">Verified Cohort Telemetry</span>
+          <h2 class="section-title">Measured in shipped code, not passive watch hours</h2>
+        </div>
+
+        <div class="stat-list">
+          <div class="stat-row">
+            <div class="stat-row__number">48,000<span>+</span></div>
+            <h3 class="stat-row__title">Production Deployments</h3>
+            <p class="stat-row__desc">
+              Agent workflows, quantized inference endpoints, and full-stack AI apps shipped to live URLs by Courseo cohorts.
+            </p>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-row__number"><span>+</span>142%</div>
+            <h3 class="stat-row__title">Median Compensation Lift</h3>
+            <p class="stat-row__desc">
+              Verified 6-month salary and consulting rate expansion reported by graduates transitioning into AI Systems roles.
+            </p>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-row__number">94.6<span>%</span></div>
+            <h3 class="stat-row__title">Capstone Completion Rate</h3>
+            <p class="stat-row__desc">
+              Driven by weekly code reviews, paired debugging hours, and deterministic automated test suites on every milestone.
+            </p>
+          </div>
+
+          <div class="stat-row">
+            <div class="stat-row__number"><span>₹</span>0</div>
+            <h3 class="stat-row__title">Extra Cloud GPU Overhead</h3>
+            <p class="stat-row__desc">
+              Every cohort seat includes pre-provisioned cloud GPU sandboxes and starter inference credits with zero surprise billing.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. Team / Faculty Carousel -->
+    <section class="section-block" id="faculty">
+      <div class="container">
+        <div class="faculty-header">
+          <div class="section-header" style="margin-bottom:0;">
+            <span class="eyebrow-pill">Practitioner Faculty</span>
+            <h2 class="section-title">Learn from engineers who ship frontier systems daily</h2>
           </div>
 
           <div class="carousel-controls">
-            <button class="icon-btn" id="carousel-prev" type="button" aria-label="Scroll left">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m15 18-6-6 6-6"/></svg>
+            <button type="button" class="carousel-btn" id="facultyPrev" aria-label="Previous faculty member">
+              ←
             </button>
-            <button class="icon-btn" id="carousel-next" type="button" aria-label="Scroll right">
-              <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="m9 18 6-6-6-6"/></svg>
+            <button type="button" class="carousel-btn" id="facultyNext" aria-label="Next faculty member">
+              →
             </button>
           </div>
         </div>
 
-        <div class="horizontal-track" id="curriculum-carousel" aria-live="polite"></div>
+        <div class="faculty-viewport">
+          <div class="faculty-track" id="facultyTrack">
+            <article class="faculty-card">
+              <div class="faculty-avatar" style="background:linear-gradient(135deg,#0F172A,#334155);">RV</div>
+              <div>
+                <h3 class="faculty-card__name">Rohan Verma</h3>
+                <p class="faculty-card__role">Staff AI Systems Architect · Ex-Google</p>
+              </div>
+              <div class="faculty-socials">
+                <a href="#faculty" class="faculty-social-link" aria-label="Rohan Verma on X">X</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Rohan Verma on GitHub">GH</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Rohan Verma on LinkedIn">in</a>
+              </div>
+            </article>
+
+            <article class="faculty-card">
+              <div class="faculty-avatar" style="background:linear-gradient(135deg,#FD6902,#FF8A00);">AN</div>
+              <div>
+                <h3 class="faculty-card__name">Ananya Nair</h3>
+                <p class="faculty-card__role">Inference &amp; MLX Runtime Lead · Ex-Microsoft</p>
+              </div>
+              <div class="faculty-socials">
+                <a href="#faculty" class="faculty-social-link" aria-label="Ananya Nair on X">X</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Ananya Nair on GitHub">GH</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Ananya Nair on LinkedIn">in</a>
+              </div>
+            </article>
+
+            <article class="faculty-card">
+              <div class="faculty-avatar" style="background:linear-gradient(135deg,#1E293B,#475569);">KM</div>
+              <div>
+                <h3 class="faculty-card__name">Kabir Mehta</h3>
+                <p class="faculty-card__role">Generative Cinema Director · Studio Lead</p>
+              </div>
+              <div class="faculty-socials">
+                <a href="#faculty" class="faculty-social-link" aria-label="Kabir Mehta on X">X</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Kabir Mehta on GitHub">GH</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Kabir Mehta on LinkedIn">in</a>
+              </div>
+            </article>
+
+            <article class="faculty-card">
+              <div class="faculty-avatar" style="background:linear-gradient(135deg,#EA580C,#FB923C);">DS</div>
+              <div>
+                <h3 class="faculty-card__name">Devika Sharma</h3>
+                <p class="faculty-card__role">Algorithmic Growth &amp; Attribution · Ex-CRED</p>
+              </div>
+              <div class="faculty-socials">
+                <a href="#faculty" class="faculty-social-link" aria-label="Devika Sharma on X">X</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Devika Sharma on GitHub">GH</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Devika Sharma on LinkedIn">in</a>
+              </div>
+            </article>
+
+            <article class="faculty-card">
+              <div class="faculty-avatar" style="background:linear-gradient(135deg,#0F172A,#FD6902);">VS</div>
+              <div>
+                <h3 class="faculty-card__name">Vikramaditya Sen</h3>
+                <p class="faculty-card__role">Security &amp; SecureWatch DRM Architect</p>
+              </div>
+              <div class="faculty-socials">
+                <a href="#faculty" class="faculty-social-link" aria-label="Vikramaditya Sen on X">X</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Vikramaditya Sen on GitHub">GH</a>
+                <a href="#faculty" class="faculty-social-link" aria-label="Vikramaditya Sen on LinkedIn">in</a>
+              </div>
+            </article>
+          </div>
+        </div>
       </div>
     </section>
 
-    <!-- Stage 3: Sticky Stacking Bento Grid -->
-    <section class="section" id="platform-bento">
+    <!-- 7. Split Pricing Card -->
+    <section class="section-block section-block--tinted" id="pricing">
       <div class="container">
-        <div class="section-header fade-up">
-          <div class="section-eyebrow">Platform Engineering</div>
-          <h2 class="section-title">Engineered Like Developer Infrastructure.</h2>
-          <p class="section-subtitle">
-            Every layer of Courseo is custom-built to protect creator IP, accelerate hands-on execution, and guide learners in real time.
+        <div class="section-header section-header--center">
+          <span class="eyebrow-pill">Transparent Cohort Pricing</span>
+          <h2 class="section-title">One membership to ship production AI</h2>
+          <p class="section-desc">
+            Choose a focused single masterclass or unlock all 12 tracks with the annual fellowship.
           </p>
         </div>
 
-        <div class="bento-grid">
-          <article class="bento-card bento-span-7 stagger-in" id="bento-securewatch">
-            <div class="bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"/><path d="m9 12 2 2 4-4"/></svg>
-            </div>
-            <span class="badge badge-emerald badge-mono" style="align-self:flex-start;">Zero-Leak DRM</span>
-            <h3 class="bento-title">Courseo SecureWatch WebGL2 Engine</h3>
-            <p class="bento-desc">
-              60Hz temporal anti-camcording shaders disrupt external camera rolling shutters while staying completely invisible to the human eye, paired with BCH(64,48) forensic leak attribution and immutable canvas traps.
-            </p>
-            <ul class="bento-list">
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FD6902" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Blocks canvas.toDataURL, gl.readPixels, and MediaRecorder rips</li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FD6902" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Graceful HDCP 1.4/2.2 tiering without black-screen lockouts</li>
-              <li><svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="#FD6902" stroke-width="2"><polyline points="20 6 9 17 4 12"/></svg> Ultrasonic 17kHz DSSS audio watermarking</li>
-            </ul>
-          </article>
-
-          <article class="bento-card bento-span-5 stagger-in" id="bento-sandbox">
-            <div class="bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="4 17 10 11 4 5"/><line x1="12" y1="19" x2="20" y2="19"/></svg>
-            </div>
-            <span class="badge badge-orange badge-mono" style="align-self:flex-start;">Live Execution</span>
-            <h3 class="bento-title">In-Browser Code Sandboxes</h3>
-            <p class="bento-desc">
-              Run Rust, Python, TypeScript, and OpenClaw agent DAGs directly beside your lecture stream with automated test grading.
-            </p>
-            <div class="bento-code-preview">
-              <div><span style="color:#FD6902;">$</span> openclaw swarm deploy --dag ./agents.toml</div>
-              <div style="color:#10B981;">[ok] 4 specialized agents online (latency 38ms)</div>
-              <div style="color:#94A3B8;">[grade] 12/12 adversarial assertions passed</div>
-            </div>
-          </article>
-
-          <article class="bento-card bento-span-5 stagger-in" id="bento-weborient">
-            <div class="bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M12 2a3 3 0 0 0-3 3v7a3 3 0 0 0 6 0V5a3 3 0 0 0-3-3Z"/><path d="M19 10v2a7 7 0 0 1-14 0v-2"/><line x1="12" y1="19" x2="12" y2="22"/></svg>
-            </div>
-            <span class="badge badge-orange badge-mono" style="align-self:flex-start;">Voice Co-Browsing</span>
-            <h3 class="bento-title">WebOrient Ghost Cursor Agent</h3>
-            <p class="bento-desc">
-              Speak naturally to compare tracks, jump to any masterclass, or inspect syllabi while our glowing tangerine Ghost Cursor guides you across the UI.
-            </p>
-            <button class="btn btn-ghost btn-sm" id="btn-demo-weborient" type="button" style="align-self:flex-start; margin-top:auto;">
-              Launch Live Ghost Cursor Demo
+        <div class="pricing-toggle-wrap">
+          <div class="pricing-toggle" role="tablist" aria-label="Pricing Tier Toggle">
+            <button
+              type="button"
+              class="pricing-toggle__btn is-active"
+              id="toggleSingle"
+              role="tab"
+              aria-selected="true"
+            >
+              Single Masterclass
             </button>
-          </article>
+            <button
+              type="button"
+              class="pricing-toggle__btn"
+              id="toggleFellowship"
+              role="tab"
+              aria-selected="false"
+            >
+              All-Access Fellowship (12 Courses)
+            </button>
+          </div>
+        </div>
 
-          <article class="bento-card bento-span-7 stagger-in" id="bento-certifications">
-            <div class="bento-icon">
-              <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="12" cy="8" r="6"/><path d="M15.477 12.89 17 22l-5-3-5 3 1.523-9.11"/></svg>
+        <div class="pricing-split-card">
+          <div class="pricing-split-card__body">
+            <!-- Left Side -->
+            <div class="pricing-split-card__left">
+              <div>
+                <span class="eyebrow-pill" id="pricingBadge">Cohort Seat · Dec 5 Batch</span>
+                <h3 class="pricing-tier-name" id="pricingTierName">Single Masterclass</h3>
+                <p class="pricing-tier-sub" id="pricingTierSub">
+                  Full live cohort access to any 1 frontier AI masterclass with GPU sandbox credits.
+                </p>
+              </div>
+
+              <div>
+                <div class="pricing-price-block">
+                  <span class="pricing-amount" id="pricingAmount">₹14,999</span>
+                  <span class="pricing-period" id="pricingPeriod">one-time</span>
+                </div>
+                <div class="pricing-emi" id="pricingEmi">No-cost EMI from ₹1,249/mo</div>
+              </div>
+
+              <a href="#apply" class="btn btn--primary btn--full">Apply for Cohort ↗</a>
             </div>
-            <span class="badge badge-emerald badge-mono" style="align-self:flex-start;">Cryptographic Proof</span>
-            <h3 class="bento-title">Verifiable On-Chain &amp; LinkedIn Certifications</h3>
-            <p class="bento-desc">
-              Every completed capstone project mints an Ed25519-signed credential tied to your actual shipped code artifacts—instantly verifiable by engineering hiring managers.
-            </p>
-            <div class="bento-code-preview">
-              <div><span style="color:#94A3B8;">credential_id:</span> cert_ed25519_9f8a2c44b1</div>
-              <div><span style="color:#94A3B8;">track:</span> Autonomous Multi-Agent Swarms (OpenClaw &amp; Hermes)</div>
-              <div><span style="color:#10B981;">signature_status:</span> VERIFIED • 1-Click LinkedIn Export Ready</div>
+
+            <!-- Right Side: Two-Column Feature Checklist (6 items) -->
+            <div class="pricing-split-card__right">
+              <div class="pricing-checklist-title">Included in every cohort seat</div>
+              <ul class="pricing-checklist">
+                <li><span class="check-dot">✓</span> Dedicated Cloud GPU Sandboxes (H100 / A100)</li>
+                <li><span class="check-dot">✓</span> Production-tested Rust &amp; Python starter repos</li>
+                <li><span class="check-dot">✓</span> Weekly live architecture &amp; PR code reviews</li>
+                <li><span class="check-dot">✓</span> SecureWatch 4K HDR classroom playback</li>
+                <li><span class="check-dot">✓</span> Direct faculty office hours &amp; Discord war-room</li>
+                <li><span class="check-dot">✓</span> Verified cryptographic capstone credential</li>
+              </ul>
             </div>
-          </article>
+          </div>
+
+          <!-- Bottom: Social Proof Avatar Stack -->
+          <div class="pricing-split-card__footer">
+            <div class="social-proof" style="margin-top:0;">
+              <div class="avatar-stack" aria-hidden="true">
+                <span class="avatar-stack__item" style="background:#0F172A;">NK</span>
+                <span class="avatar-stack__item" style="background:#FD6902;">MR</span>
+                <span class="avatar-stack__item" style="background:#334155;">TJ</span>
+                <span class="avatar-stack__item" style="background:#EA580C;">AP</span>
+              </div>
+              <span class="social-proof__text">
+                <span class="social-proof__star">★ 4.9/5</span> · 340+ seats filled for the December cohort
+              </span>
+            </div>
+            <span class="social-proof__text">7-day 100% refund guarantee · GST invoice included</span>
+          </div>
         </div>
       </div>
     </section>
 
-    <!-- Stage 4: Top Faculty Spotlight -->
-    <section class="section" id="faculty">
+    <!-- 8. Interactive FAQ Accordion -->
+    <section class="section-block" id="faq">
       <div class="container">
-        <div class="section-header fade-up">
-          <div class="section-eyebrow">Practitioner Faculty</div>
-          <h2 class="section-title">Taught by Builders Shipping in Production.</h2>
-          <p class="section-subtitle">
-            No recycled slide decks. Every instructor actively ships multi-agent systems, cinema-grade AI films, or eight-figure ad accounts.
-          </p>
+        <div class="section-header section-header--center">
+          <span class="eyebrow-pill eyebrow-pill--neutral">Frequently Asked Questions</span>
+          <h2 class="section-title">Clear answers before you apply</h2>
         </div>
 
-        <div class="faculty-grid">
-          <article class="glass-card faculty-card stagger-in">
-            <div class="faculty-header">
-              <div class="faculty-avatar">AT</div>
-              <div>
-                <div class="instructor-name">Dr. Aris Thorne</div>
-                <div class="instructor-role">Principal AI Architect • Ex-DeepMind</div>
+        <div class="faq-list" id="faqList">
+          <div class="faq-item is-open">
+            <button type="button" class="faq-trigger" aria-expanded="true">
+              <span>Do I need a high-end local GPU to complete the masterclasses?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel__inner">
+                <p>
+                  No. Every enrolled builder receives pre-configured cloud GPU sandboxes directly inside the Courseo classroom, alongside Apple Silicon MLX quantization guides if you prefer running models locally.
+                </p>
               </div>
             </div>
-            <p class="faculty-quote">"We don't teach toy prompt chains. You will build deterministic multi-agent DAGs with sandboxed execution and zero-downtime retries."</p>
-            <span class="badge badge-orange badge-mono" style="align-self:flex-start;">OpenClaw &amp; Hermes</span>
-          </article>
+          </div>
 
-          <article class="glass-card faculty-card stagger-in">
-            <div class="faculty-header">
-              <div class="faculty-avatar">MS</div>
-              <div>
-                <div class="instructor-name">Maya Sen</div>
-                <div class="instructor-role">Voice AI Systems Lead</div>
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false">
+              <span>How does the 60-second AI Career &amp; Skill Matcher work?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel__inner">
+                <p>
+                  It evaluates your current stack, target role, and weekly bandwidth to pair you with the highest-leverage cohort track, starter repository, and peer study pod before Day 1.
+                </p>
               </div>
             </div>
-            <p class="faculty-quote">"Sub-250ms voice turns require real audio engineering—bidirectional WebSockets, streaming VAD, and barge-in cancellation."</p>
-            <span class="badge badge-orange badge-mono" style="align-self:flex-start;">Gemini Live &amp; Cartesia</span>
-          </article>
+          </div>
 
-          <article class="glass-card faculty-card stagger-in">
-            <div class="faculty-header">
-              <div class="faculty-avatar">LV</div>
-              <div>
-                <div class="instructor-name">Liam Vance</div>
-                <div class="instructor-role">Award-Winning AI Cinematographer</div>
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false">
+              <span>Can I upgrade from a Single Masterclass (₹14,999) to the Fellowship (₹39,999)?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel__inner">
+                <p>
+                  Yes. You can apply 100% of your single masterclass fee toward the All-Access Fellowship within 30 days of enrollment and immediately unlock all 12 production courses.
+                </p>
               </div>
             </div>
-            <p class="faculty-quote">"Treating Seedance 2.5 and Higgsfield like real cinema cameras—lens language, lighting continuity, and shot blocking—changes everything."</p>
-            <span class="badge badge-orange badge-mono" style="align-self:flex-start;">Seedance 2.5 Cinema</span>
-          </article>
+          </div>
 
-          <article class="glass-card faculty-card stagger-in">
-            <div class="faculty-header">
-              <div class="faculty-avatar">NK</div>
-              <div>
-                <div class="instructor-name">Nadia Kapoor</div>
-                <div class="instructor-role">Performance Marketing Partner</div>
+          <div class="faq-item">
+            <button type="button" class="faq-trigger" aria-expanded="false">
+              <span>What happens if I miss a live cohort session?</span>
+              <span class="faq-icon" aria-hidden="true">+</span>
+            </button>
+            <div class="faq-panel">
+              <div class="faq-panel__inner">
+                <p>
+                  All live architecture walkthroughs and debugging clinics are published within 2 hours inside SecureWatch DRM playback with timestamped code diffs and repository checkpoints.
+                </p>
               </div>
             </div>
-            <p class="faculty-quote">"Meta Advantage+ rewards creative velocity. We give you the exact testing matrix we use to scale DTC brands past $1M/month."</p>
-            <span class="badge badge-orange badge-mono" style="align-self:flex-start;">Meta Ads 2026/2027</span>
-          </article>
+          </div>
         </div>
       </div>
     </section>
   </main>
 
-  <!-- Stage 5: High-Conversion Radiant Footer -->
-  <footer class="conversion-footer">
+  <!-- Modern Footer -->
+  <footer class="site-footer">
     <div class="container">
-      <div class="footer-cta-box fade-up">
-        <div class="section-eyebrow">Lifetime Access • Zero Subscription Trap</div>
-        <h2 class="section-title">Your Future in AI Starts Today.</h2>
-        <p class="section-subtitle">
-          Join 48,000+ engineers, creators, and founders mastering the 2026–2027 frontier. Get instant syllabus previews and early cohort pricing.
-        </p>
+      <div class="footer-grid">
+        <div>
+          <a href="#top" class="brand-lockup">
+            <img
+              src="./assets/courseo_logo_official.jpg"
+              alt="Courseo Logo"
+              class="brand-logo-img"
+            />
+            <span class="brand-wordmark">
+              <span class="brand-wordmark__primary">cours</span><span class="brand-wordmark__accent">eo</span>
+            </span>
+          </a>
+          <p class="footer-tagline">
+            Cohort-based frontier AI engineering, cloud GPU sandboxes, and production-ready codebases built for serious practitioners.
+          </p>
+        </div>
 
-        <form class="footer-form" id="footer-enroll-form">
-          <input type="email" class="input-glass" id="footer-email" placeholder="you@company.com" required aria-label="Work email">
-          <button type="submit" class="btn btn-primary btn-lg">Unlock Instant Preview</button>
-        </form>
+        <div class="footer-col">
+          <h4 class="footer-col__title">Tracks</h4>
+          <ul>
+            <li><a href="#pillars">Autonomous Agent Swarms</a></li>
+            <li><a href="#pillars">Local LLM Inference</a></li>
+            <li><a href="#pillars">Generative Cinema</a></li>
+            <li><a href="#pillars">Algorithmic Growth</a></li>
+          </ul>
+        </div>
 
-        <div class="guarantee-strip">
-          <span>30-Day Money-Back Guarantee</span>
-          <span>•</span>
-          <span>Lifetime 4K SecureWatch Access</span>
-          <span>•</span>
-          <span>Cryptographic Capstone Certificate</span>
+        <div class="footer-col">
+          <h4 class="footer-col__title">Platform</h4>
+          <ul>
+            <li><a href="#classroom">Classroom Login</a></li>
+            <li><a href="#outcomes">Cohort Outcomes</a></li>
+            <li><a href="#faculty">Faculty &amp; Mentors</a></li>
+            <li><a href="#pricing">Fellowship Pricing</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4 class="footer-col__title">Legal &amp; Support</h4>
+          <ul>
+            <li><a href="#faq">Refund Policy</a></li>
+            <li><a href="#faq">SecureWatch DRM</a></li>
+            <li><a href="#faq">Privacy Policy</a></li>
+            <li><a href="#faq">Terms of Service</a></li>
+          </ul>
         </div>
       </div>
 
       <div class="footer-bottom">
-        <div class="brand-lockup">
-          <span class="brand-wordmark" style="font-size:1.05rem;">cours<span>eo</span></span>
-          <span style="color:var(--text-dim);">© 2026 Courseo Inc. Protected by SecureWatch DRM.</span>
-        </div>
-        <div style="display:flex; gap:1.25rem;">
-          <a href="./courses.html">Catalog</a>
-          <a href="./course_detail.html">Flagship Masterclass</a>
-          <a href="./classroom.html">Student Classroom</a>
-        </div>
+        <span>© 2026 Courseo Technologies Pvt. Ltd. All rights reserved.</span>
+        <span>Built in India for global AI builders.</span>
       </div>
     </div>
   </footer>
 
-  <!-- Command Palette (⌘K) Modal -->
-  <div class="cmd-modal" id="cmd-modal" role="dialog" aria-modal="true" aria-label="Quick course search">
-    <div class="cmd-box">
-      <div style="display:flex; align-items:center; gap:0.75rem; padding:1rem 1.15rem; border-bottom:1px solid var(--border-glass);">
-        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="#FD6902" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
-        <input type="text" id="cmd-search-input" placeholder="Jump to any of the 12 courses, tracks, or pages..." style="flex:1; background:transparent; border:none; outline:none; color:#fff; font-size:0.95rem;">
-        <span class="kbd-pill">ESC</span>
+  <!-- Command Palette Search Modal (⌘ K) -->
+  <div class="cmd-modal" id="cmdModal" role="dialog" aria-modal="true" aria-label="Quick Track Search">
+    <div class="cmd-dialog">
+      <div class="cmd-input-wrap">
+        <input
+          type="text"
+          id="cmdInput"
+          class="cmd-input"
+          placeholder="Jump to a track, pricing, or faculty..."
+          autocomplete="off"
+        />
+        <span class="cmd-kbd">ESC</span>
       </div>
-      <div id="cmd-results" style="max-height:320px; overflow-y:auto; padding:0.5rem;"></div>
+      <ul class="cmd-results" id="cmdResults">
+        <li><a href="#pillars">Autonomous Agent Swarms <span>Track</span></a></li>
+        <li><a href="#pillars">Local LLM Inference <span>Track</span></a></li>
+        <li><a href="#pillars">High-Production Generative Cinema <span>Flagship</span></a></li>
+        <li><a href="#pillars">Algorithmic Growth &amp; Meta Ads <span>Track</span></a></li>
+        <li><a href="#pillars">SecureWatch DRM Sandboxes <span>Platform</span></a></li>
+        <li><a href="#pricing">Fellowship &amp; Single Masterclass Pricing <span>₹14,999</span></a></li>
+        <li><a href="#faculty">Meet the Faculty <span>Mentors</span></a></li>
+      </ul>
     </div>
   </div>
 
-  <!-- Lenis Smooth Scroll -->
-  <script src="https://unpkg.com/lenis@1.1.18/dist/lenis.min.js" defer></script>
+  <script>
+    (function () {
+      // 1. Pricing Tier Toggle (Single ₹14,999 vs Fellowship ₹39,999)
+      const toggleSingle = document.getElementById("toggleSingle");
+      const toggleFellowship = document.getElementById("toggleFellowship");
+      const pricingBadge = document.getElementById("pricingBadge");
+      const pricingTierName = document.getElementById("pricingTierName");
+      const pricingTierSub = document.getElementById("pricingTierSub");
+      const pricingAmount = document.getElementById("pricingAmount");
+      const pricingPeriod = document.getElementById("pricingPeriod");
+      const pricingEmi = document.getElementById("pricingEmi");
 
-  <!-- WebOrient Voice Co-Browsing Agent -->
-  <script
-    src="./weborient_agent.js"
-    data-theme-color="#FD6902"
-    data-cursor-style="modern-glow"
-    data-manifest="./weborient_manifest.json"
-    data-agent-name="Courseo Guide"
-    data-greeting="Hi! I am your Courseo Guide. Ask me to compare tracks, spotlight a course, or open the classroom."
-    defer></script>
+      function setTier(mode) {
+        const isFellowship = mode === "fellowship";
+        toggleSingle.classList.toggle("is-active", !isFellowship);
+        toggleSingle.setAttribute("aria-selected", String(!isFellowship));
+        toggleFellowship.classList.toggle("is-active", isFellowship);
+        toggleFellowship.setAttribute("aria-selected", String(isFellowship));
 
-  <script type="module">
-    const COURSES = [
-      {
-        id: 'web-dev-ai',
-        track: 'ai-engineering',
-        trackLabel: 'AI Engineering',
-        title: 'Web Development via AI',
-        tech: 'Cursor, Claude Code, Windsurf, v0, Supabase, Next.js 15',
-        level: 'Intermediate',
-        duration: '11.5 hrs • 42 lessons',
-        rating: '4.9',
-        instructor: 'Rohan Deshmukh',
-        initials: 'RD',
-        role: 'Staff Full-Stack AI Engineer',
-        price: '$179',
-        gradient: 'linear-gradient(135deg, #1E293B 0%, #FD6902 100%)'
-      },
-      {
-        id: 'autonomous-swarms-openclaw-hermes',
-        track: 'ai-engineering',
-        trackLabel: 'AI Engineering',
-        title: 'Autonomous Multi-Agent Swarms with OpenClaw & Hermes',
-        tech: 'OpenClaw, Hermes, LangGraph, Etta DAGs, Sandboxed Execution',
-        level: 'Advanced',
-        duration: '14.0 hrs • 48 lessons',
-        rating: '5.0',
-        instructor: 'Dr. Aris Thorne',
-        initials: 'AT',
-        role: 'Principal AI Architect (Ex-DeepMind)',
-        price: '$249',
-        gradient: 'linear-gradient(135deg, #0F172A 0%, #EA580C 70%, #F97316 100%)'
-      },
-      {
-        id: 'voice-agents-gemini-live',
-        track: 'ai-engineering',
-        trackLabel: 'AI Engineering',
-        title: 'Next-Gen Voice Agents with Gemini Live & WebSockets',
-        tech: 'Gemini Live API, Cartesia, ElevenLabs, Low-Latency VAD',
-        level: 'Advanced',
-        duration: '9.5 hrs • 34 lessons',
-        rating: '4.9',
-        instructor: 'Maya Sen',
-        initials: 'MS',
-        role: 'Voice AI Systems Lead',
-        price: '$219',
-        gradient: 'linear-gradient(135deg, #111827 0%, #C2410C 100%)'
-      },
-      {
-        id: 'local-llm-inference-lora',
-        track: 'ai-engineering',
-        trackLabel: 'AI Engineering',
-        title: 'Local LLM Inference & LoRA Fine-Tuning',
-        tech: 'DeepSeek R1/V3, Qwen 2.5, Ollama, vLLM, Unsloth LoRA',
-        level: 'Advanced',
-        duration: '13.0 hrs • 44 lessons',
-        rating: '4.9',
-        instructor: 'Kenji Takahashi',
-        initials: 'KT',
-        role: 'Open-Source ML Engineer',
-        price: '$229',
-        gradient: 'linear-gradient(135deg, #090D16 0%, #9A3412 100%)'
-      },
-      {
-        id: 'ai-automation-enterprise',
-        track: 'ai-engineering',
-        trackLabel: 'AI Engineering',
-        title: 'AI Automation for Enterprise',
-        tech: 'n8n, Autonomous Browser Agents, Python Copilots, API Orchestration',
-        level: 'Intermediate',
-        duration: '10.0 hrs • 38 lessons',
-        rating: '4.8',
-        instructor: 'Elena Rostova',
-        initials: 'ER',
-        role: 'Enterprise Automation Architect',
-        price: '$169',
-        gradient: 'linear-gradient(135deg, #1E1B4B 0%, #FD6902 100%)'
-      },
-      {
-        id: 'mobile-app-dev-ai',
-        track: 'ai-engineering',
-        trackLabel: 'AI Engineering',
-        title: 'Mobile App Development with AI',
-        tech: 'Flutter, React Native, Expo, AI Pair-Programmers',
-        level: 'Beginner',
-        duration: '10.5 hrs • 36 lessons',
-        rating: '4.8',
-        instructor: 'Daniel Okafor',
-        initials: 'DO',
-        role: 'Principal Mobile Engineer',
-        price: '$159',
-        gradient: 'linear-gradient(135deg, #0F172A 0%, #D97706 100%)'
-      },
-      {
-        id: 'higgsfield-seedance-cinema',
-        track: 'generative-media',
-        trackLabel: 'Generative Media',
-        title: 'AI Cinema: Higgsfield & Seedance 2.5 Guide',
-        tech: 'Seedance 2.5, Higgsfield, Runway Gen-3, Kling, Flux',
-        level: 'Intermediate',
-        duration: '8.5 hrs • 30 lessons',
-        rating: '4.9',
-        instructor: 'Liam Vance',
-        initials: 'LV',
-        role: 'Award-Winning AI Cinematographer',
-        price: '$189',
-        gradient: 'linear-gradient(135deg, #1F1209 0%, #FD6902 100%)'
-      },
-      {
-        id: 'viral-ai-video-ads',
-        track: 'generative-media',
-        trackLabel: 'Generative Media',
-        title: 'Viral AI Video Ads & High-Converting UGC',
-        tech: 'AI Avatars, 3-Second Retention Hooks, Creative Sprays',
-        level: 'Beginner',
-        duration: '7.0 hrs • 28 lessons',
-        rating: '4.8',
-        instructor: 'Chloe Park',
-        initials: 'CP',
-        role: '8-Figure DTC Creative Director',
-        price: '$149',
-        gradient: 'linear-gradient(135deg, #27150B 0%, #F97316 100%)'
-      },
-      {
-        id: 'motion-graphics-premiere-ae',
-        track: 'generative-media',
-        trackLabel: 'Generative Media',
-        title: 'Motion Graphics & Cinema Post-Production',
-        tech: 'Premiere Pro, After Effects, Kinetic Type, Generative FX',
-        level: 'Intermediate',
-        duration: '12.0 hrs • 40 lessons',
-        rating: '4.9',
-        instructor: 'Mateo Silva',
-        initials: 'MS',
-        role: 'Senior Motion Designer',
-        price: '$179',
-        gradient: 'linear-gradient(135deg, #18181B 0%, #EA580C 100%)'
-      },
-      {
-        id: 'ai-music-suno-udio',
-        track: 'generative-media',
-        trackLabel: 'Generative Media',
-        title: 'AI Music Production & Sound Design',
-        tech: 'Suno v4, Udio, Foley Synthesis, Commercial Mastering',
-        level: 'Beginner',
-        duration: '6.5 hrs • 24 lessons',
-        rating: '4.8',
-        instructor: 'Sora Lindqvist',
-        initials: 'SL',
-        role: 'Electronic Composer & Sound Designer',
-        price: '$129',
-        gradient: 'linear-gradient(135deg, #1C1917 0%, #FB923C 100%)'
-      },
-      {
-        id: 'meta-ads-2026-scaling',
-        track: 'growth-commerce',
-        trackLabel: 'Growth & Commerce',
-        title: 'Meta Ads 2026/2027: Scaling DTC to $1M/Month',
-        tech: 'Advantage+ Shopping, Conversion API, Creative Fatigue Cycles',
-        level: 'Advanced',
-        duration: '9.0 hrs • 32 lessons',
-        rating: '4.9',
-        instructor: 'Nadia Kapoor',
-        initials: 'NK',
-        role: 'Performance Marketing Partner',
-        price: '$249',
-        gradient: 'linear-gradient(135deg, #0C0A09 0%, #FD6902 100%)'
-      },
-      {
-        id: 'shopify-ecommerce-funnels',
-        track: 'growth-commerce',
-        trackLabel: 'Growth & Commerce',
-        title: 'E-Commerce Brand Building & Shopify Funnels',
-        tech: 'Shopify Store Design, High-Converting Landing Pages, CRO & AOV',
-        level: 'Intermediate',
-        duration: '8.5 hrs • 31 lessons',
-        rating: '4.9',
-        instructor: 'Marcus Bennett',
-        initials: 'MB',
-        role: 'DTC Brand Founder ($40M+ GMV)',
-        price: '$199',
-        gradient: 'linear-gradient(135deg, #171717 0%, #EA580C 100%)'
-      }
-    ];
-
-    const carousel = document.getElementById('curriculum-carousel');
-
-    function renderCarousel(track = 'all') {
-      const filtered = track === 'all' ? COURSES : COURSES.filter(c => c.track === track);
-      carousel.innerHTML = filtered.map(c => `
-        <article class="course-card" data-course-id="${c.id}" data-track="${c.track}">
-          <div class="course-thumb">
-            <div class="course-thumb-art" style="background:${c.gradient};"></div>
-            <div class="course-thumb-top">
-              <span class="badge badge-orange">${c.trackLabel}</span>
-              <span class="badge badge-mono">${c.level}</span>
-            </div>
-            <div class="course-thumb-bottom">
-              <span class="hud-chip">4K SecureWatch</span>
-              <span class="rating-pill">★ ${c.rating}</span>
-            </div>
-            <div class="scrub-indicator"><div class="scrub-bar"></div></div>
-          </div>
-          <div class="course-body">
-            <div class="course-meta">
-              <span>${c.duration}</span>
-              <span>Capstone Included</span>
-            </div>
-            <h3 class="course-title">${c.title}</h3>
-            <p class="course-tech">${c.tech}</p>
-            <div class="course-instructor">
-              <div class="avatar-circle">${c.initials}</div>
-              <div class="instructor-meta">
-                <span class="instructor-name">${c.instructor}</span>
-                <span class="instructor-role">${c.role}</span>
-              </div>
-            </div>
-            <div class="course-footer">
-              <span class="course-price">${c.price}</span>
-              <a href="./course_detail.html?slug=${c.id}" class="btn btn-primary btn-sm">View Syllabus</a>
-            </div>
-          </div>
-        </article>
-      `).join('');
-    }
-
-    renderCarousel('all');
-
-    document.querySelectorAll('.track-tab').forEach(btn => {
-      btn.addEventListener('click', () => {
-        document.querySelectorAll('.track-tab').forEach(b => b.classList.remove('active'));
-        btn.classList.add('active');
-        renderCarousel(btn.dataset.track);
-        carousel.scrollTo({ left: 0, behavior: 'smooth' });
-      });
-    });
-
-    document.getElementById('carousel-prev').addEventListener('click', () => {
-      carousel.scrollBy({ left: -380, behavior: 'smooth' });
-    });
-    document.getElementById('carousel-next').addEventListener('click', () => {
-      carousel.scrollBy({ left: 380, behavior: 'smooth' });
-    });
-
-    // Live SecureWatch Hero Compositor (connects to courseo_player.js with resilient WebGL2/Canvas fallback)
-    const canvas = document.getElementById('hero-secure-canvas');
-    const video = document.getElementById('hero-source-video');
-    const drmStatus = document.getElementById('hero-drm-status');
-    const wmOverlay = document.getElementById('hero-watermark-overlay');
-    let antiCamEnabled = true;
-    let isPlaying = true;
-    let hdcpDegraded = false;
-    let frameCount = 0;
-
-    async function bootSecureWatchHero() {
-      let playerLoaded = false;
-      try {
-        const mod = await import('./courseo_player.js');
-        if (mod && mod.CourseoSecurePlayer) {
-          const player = new mod.CourseoSecurePlayer({
-            canvas,
-            video,
-            sessionToken: 'tok_hero_courseo_2026',
-            userId: 'usr_courseo_4290',
-            refreshHz: 60,
-            onRevoke: (evt) => {
-              drmStatus.textContent = `GUARD TRIGGERED: ${evt.reason}`;
-              drmStatus.style.color = '#EF4444';
-            }
-          });
-          player.start();
-          video.play().catch(() => {});
-          playerLoaded = true;
+        if (isFellowship) {
+          pricingBadge.textContent = "Best Value · All 12 Courses";
+          pricingTierName.textContent = "All-Access Fellowship";
+          pricingTierSub.textContent =
+            "Unlock all 12 production masterclasses, priority GPU clusters, and 12 months of live cohort access.";
+          pricingAmount.textContent = "₹39,999";
+          pricingPeriod.textContent = "/ year";
+          pricingEmi.textContent = "No-cost EMI from ₹3,333/mo (or ₹1,249/mo single)";
+        } else {
+          pricingBadge.textContent = "Cohort Seat · Dec 5 Batch";
+          pricingTierName.textContent = "Single Masterclass";
+          pricingTierSub.textContent =
+            "Full live cohort access to any 1 frontier AI masterclass with GPU sandbox credits.";
+          pricingAmount.textContent = "₹14,999";
+          pricingPeriod.textContent = "one-time";
+          pricingEmi.textContent = "No-cost EMI from ₹1,249/mo";
         }
-      } catch (_) {
-        playerLoaded = false;
       }
 
-      if (!playerLoaded) {
-        const ctx = canvas.getContext('2d');
-        const drawFallback = () => {
-          if (isPlaying) {
-            frameCount++;
-            const w = canvas.width;
-            const h = canvas.height;
-            const grad = ctx.createLinearGradient(0, 0, w, h);
-            grad.addColorStop(0, '#0B0D13');
-            grad.addColorStop(0.55, '#19141A');
-            grad.addColorStop(1, '#2D1408');
-            ctx.fillStyle = grad;
-            ctx.fillRect(0, 0, w, h);
+      toggleSingle.addEventListener("click", () => setTier("single"));
+      toggleFellowship.addEventListener("click", () => setTier("fellowship"));
 
-            // Dynamic neural lattice waveform
-            ctx.strokeStyle = 'rgba(253, 105, 2, 0.55)';
-            ctx.lineWidth = 2;
-            ctx.beginPath();
-            for (let x = 0; x <= w; x += 12) {
-              const y = h * 0.52 + Math.sin(x * 0.015 + frameCount * 0.05) * 48 + Math.cos(x * 0.008 - frameCount * 0.03) * 24;
-              if (x === 0) ctx.moveTo(x, y);
-              else ctx.lineTo(x, y);
-            }
-            ctx.stroke();
+      // 2. Faculty Carousel
+      const facultyTrack = document.getElementById("facultyTrack");
+      const facultyPrev = document.getElementById("facultyPrev");
+      const facultyNext = document.getElementById("facultyNext");
+      let facultyIndex = 0;
 
-            // Subtle temporal rolling-shutter modulation visualization
-            if (antiCamEnabled) {
-              ctx.fillStyle = frameCount % 2 === 0 ? 'rgba(253, 105, 2, 0.035)' : 'rgba(16, 185, 129, 0.025)';
-              const bandY = (frameCount * 9) % h;
-              ctx.fillRect(0, bandY, w, 64);
-            }
-
-            ctx.fillStyle = '#FFFFFF';
-            ctx.font = '700 26px "Plus Jakarta Sans", sans-serif';
-            ctx.fillText('Autonomous Multi-Agent Swarms — Lesson 04', 44, h - 88);
-            ctx.fillStyle = '#94A3B8';
-            ctx.font = '500 15px "JetBrains Mono", monospace';
-            ctx.fillText('OpenClaw DAG Scheduler • SecureWatch WebGL2 Stream', 44, h - 56);
-          }
-          requestAnimationFrame(drawFallback);
-        };
-        requestAnimationFrame(drawFallback);
-      }
-    }
-    bootSecureWatchHero();
-
-    // Drifting forensic watermark
-    setInterval(() => {
-      const top = 18 + Math.floor(Math.random() * 58);
-      const left = 12 + Math.floor(Math.random() * 55);
-      wmOverlay.style.top = `${top}%`;
-      wmOverlay.style.left = `${left}%`;
-    }, 3200);
-
-    document.getElementById('btn-hero-play').addEventListener('click', (e) => {
-      isPlaying = !isPlaying;
-      if (isPlaying) video.play().catch(() => {});
-      else video.pause();
-      e.currentTarget.textContent = isPlaying ? 'Pause' : 'Play';
-      e.currentTarget.classList.toggle('active', isPlaying);
-    });
-
-    document.getElementById('btn-hero-anticam').addEventListener('click', (e) => {
-      antiCamEnabled = !antiCamEnabled;
-      e.currentTarget.textContent = antiCamEnabled ? 'Anti-Cam: ON' : 'Anti-Cam: PAUSED';
-      e.currentTarget.classList.toggle('active', antiCamEnabled);
-      drmStatus.textContent = antiCamEnabled
-        ? '60Hz Anti-Camcording: ACTIVE (alpha=0.35)'
-        : '60Hz Anti-Camcording: PREVIEW PAUSED';
-    });
-
-    document.getElementById('btn-hero-hdcp').addEventListener('click', () => {
-      hdcpDegraded = !hdcpDegraded;
-      document.getElementById('hero-hdcp-chip').textContent = hdcpDegraded
-        ? 'HDCP 1.4 Graceful Tier (720p)'
-        : 'HDCP 2.2 Hardware EME';
-      wmOverlay.style.color = hdcpDegraded ? 'rgba(253, 105, 2, 0.65)' : 'rgba(255, 255, 255, 0.34)';
-    });
-
-    document.getElementById('btn-hero-rip').addEventListener('click', () => {
-      drmStatus.textContent = 'BLOCKED: canvas.toDataURL() trap intercepted rip attempt';
-      drmStatus.style.color = '#10B981';
-      setTimeout(() => {
-        drmStatus.textContent = '60Hz Anti-Camcording: ACTIVE (alpha=0.35)';
-        drmStatus.style.color = 'var(--text-muted)';
-      }, 3200);
-    });
-
-    // Command Palette (⌘K)
-    const cmdModal = document.getElementById('cmd-modal');
-    const cmdInput = document.getElementById('cmd-search-input');
-    const cmdResults = document.getElementById('cmd-results');
-
-    function renderCmdResults(query = '') {
-      const q = query.trim().toLowerCase();
-      const matches = COURSES.filter(c =>
-        c.title.toLowerCase().includes(q) ||
-        c.tech.toLowerCase().includes(q) ||
-        c.trackLabel.toLowerCase().includes(q)
-      ).slice(0, 6);
-
-      cmdResults.innerHTML = matches.length
-        ? matches.map(c => `
-          <a href="./course_detail.html?slug=${c.id}" style="display:flex; justify-content:space-between; align-items:center; padding:0.7rem 0.85rem; border-radius:10px; color:#fff; transition:background 0.15s;" onmouseover="this.style.background='rgba(253,105,2,0.14)'" onmouseout="this.style.background='transparent'">
-            <div>
-              <div style="font-size:0.9rem; font-weight:600;">${c.title}</div>
-              <div style="font-size:0.75rem; color:#94A3B8;">${c.trackLabel} • ${c.instructor}</div>
-            </div>
-            <span class="badge badge-orange">${c.price}</span>
-          </a>
-        `).join('')
-        : '<div style="padding:1rem; color:#94A3B8; font-size:0.85rem;">No matching courses found.</div>';
-    }
-
-    function openCmd() {
-      cmdModal.classList.add('open');
-      cmdInput.value = '';
-      renderCmdResults('');
-      setTimeout(() => cmdInput.focus(), 20);
-    }
-
-    document.getElementById('open-cmd-k').addEventListener('click', openCmd);
-    cmdInput.addEventListener('input', (e) => renderCmdResults(e.target.value));
-    cmdModal.addEventListener('click', (e) => {
-      if (e.target === cmdModal) cmdModal.classList.remove('open');
-    });
-    document.addEventListener('keydown', (e) => {
-      if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === 'k') {
-        e.preventDefault();
-        openCmd();
-      } else if (e.key === 'Escape') {
-        cmdModal.classList.remove('open');
-      }
-    });
-
-    // Trigger WebOrient live demo from Bento card
-    document.getElementById('btn-demo-weborient').addEventListener('click', () => {
-      if (window.CourseoWebOrient) {
-        window.CourseoWebOrient.spotlight('#curriculum', 'Here is our 12-course curriculum across AI Engineering, Generative Cinema, and Growth.');
-      }
-    });
-
-    // Footer form confirmation
-    document.getElementById('footer-enroll-form').addEventListener('submit', (e) => {
-      e.preventDefault();
-      const input = document.getElementById('footer-email');
-      input.value = '';
-      input.placeholder = 'Preview link sent — check your inbox';
-    });
-
-    // Lenis Smooth Scroll & Fallback IntersectionObserver
-    window.addEventListener('load', () => {
-      if (window.Lenis) {
-        const lenis = new window.Lenis({ duration: 1.1, smoothWheel: true });
-        const raf = (time) => {
-          lenis.raf(time);
-          requestAnimationFrame(raf);
-        };
-        requestAnimationFrame(raf);
+      function updateCarousel() {
+        const cards = facultyTrack.children.length;
+        const visibleCount = window.innerWidth <= 720 ? 1 : window.innerWidth <= 1024 ? 2 : 4;
+        const maxIndex = Math.max(0, cards - visibleCount);
+        facultyIndex = Math.min(Math.max(facultyIndex, 0), maxIndex);
+        const cardWidth = facultyTrack.children[0].getBoundingClientRect().width + 20;
+        facultyTrack.style.transform = `translateX(-${facultyIndex * cardWidth}px)`;
       }
 
-      if (!CSS.supports('animation-timeline: view()')) {
-        const observer = new IntersectionObserver((entries) => {
-          entries.forEach(entry => {
-            if (entry.isIntersecting) entry.target.classList.add('is-visible');
+      facultyPrev.addEventListener("click", () => {
+        facultyIndex -= 1;
+        updateCarousel();
+      });
+
+      facultyNext.addEventListener("click", () => {
+        facultyIndex += 1;
+        updateCarousel();
+      });
+
+      window.addEventListener("resize", updateCarousel);
+
+      // 3. Interactive FAQ Accordion
+      const faqItems = document.querySelectorAll("#faqList .faq-item");
+      faqItems.forEach((item) => {
+        const trigger = item.querySelector(".faq-trigger");
+        trigger.addEventListener("click", () => {
+          const willOpen = !item.classList.contains("is-open");
+          faqItems.forEach((other) => {
+            other.classList.remove("is-open");
+            other.querySelector(".faq-trigger").setAttribute("aria-expanded", "false");
           });
-        }, { threshold: 0.12 });
-        document.querySelectorAll('.fade-up, .stagger-in').forEach(el => observer.observe(el));
+          if (willOpen) {
+            item.classList.add("is-open");
+            trigger.setAttribute("aria-expanded", "true");
+          }
+        });
+      });
+
+      // 4. Command Palette (⌘ K / Ctrl K)
+      const cmdModal = document.getElementById("cmdModal");
+      const openCmdBtn = document.getElementById("openCmdBtn");
+      const cmdInput = document.getElementById("cmdInput");
+      const cmdLinks = Array.from(document.querySelectorAll("#cmdResults li"));
+
+      function openCmd() {
+        cmdModal.classList.add("is-open");
+        cmdInput.value = "";
+        cmdLinks.forEach((li) => (li.style.display = ""));
+        setTimeout(() => cmdInput.focus(), 20);
       }
-    });
+
+      function closeCmd() {
+        cmdModal.classList.remove("is-open");
+      }
+
+      openCmdBtn.addEventListener("click", openCmd);
+      cmdModal.addEventListener("click", (e) => {
+        if (e.target === cmdModal) closeCmd();
+      });
+
+      document.addEventListener("keydown", (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+          e.preventDefault();
+          cmdModal.classList.contains("is-open") ? closeCmd() : openCmd();
+        } else if (e.key === "Escape") {
+          closeCmd();
+        }
+      });
+
+      cmdInput.addEventListener("input", () => {
+        const q = cmdInput.value.trim().toLowerCase();
+        cmdLinks.forEach((li) => {
+          li.style.display = li.textContent.toLowerCase().includes(q) ? "" : "none";
+        });
+      });
+
+      cmdLinks.forEach((li) => {
+        li.querySelector("a").addEventListener("click", closeCmd);
+      });
+    })();
   </script>
 </body>
 </html>

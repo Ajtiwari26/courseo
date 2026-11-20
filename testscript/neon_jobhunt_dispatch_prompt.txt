@@ -1,0 +1,53 @@
+You are Gemini 4 Neon operating via the Etta harness.
+Your task is to implement the exact visual design, layout architecture, and component tokens of the Jiro Build JobHunt landing page template (https://jiro.build/templates/education-careers/ai-job-finder-landing-page-jobhunt) into Courseo's web frontend in web/index.html and web/courseo.css.
+
+Brand Identity & Theme Tokens:
+- Primary Action Accent: #FD6902 (Courseo Tangerine)
+- Secondary Accent / Hover: #FF7A1A / #FF8A00
+- Subtle Glow / Pill Tint: rgba(253, 105, 2, 0.12)
+- Base Surfaces: #FFFFFF (Porcelain White) and #F8FAFC / #F7F7F7 (Snow)
+- Text & Strokes: #0F172A (Deep Slate Obsidian), #525252 / #64748B (Muted text), #EBEBEB / rgba(15,23,42,0.08) (Borders)
+- Typography: Inter / Plus Jakarta Sans, tracking: -0.02em, clean modern weights (font-medium / font-bold)
+- Pill Radii: rounded-full (9999px) for buttons/badges, rounded-[28px] to rounded-[32px] for hero frames, rounded-[24px] for bento cards
+- Signature Multi-stop Shadow: box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.06)
+
+Key Sections to Implement in web/index.html & web/courseo.css:
+1. Header & Navigation:
+   - Floating porcelain glass pill navbar
+   - Official Courseo 3D hexagonal logo mark (./assets/courseo_logo_official.jpg) with two-tone typography "cours" (#0F172A) + "eo" (#FD6902)
+   - Search trigger [ ⌘ K ], Classroom ghost button, and "Apply for Cohort ↗" primary pill button
+2. Split-Screen Hero (50/50 Layout - jobhunt-hero):
+   - Left Column:
+     - Badge: "[✦] AI Career & Skill Matcher Active"
+     - H1: "No More Solo Upskilling. Master Frontier AI with Real Systems."
+     - Subheadline: "Get matched cohorts, cloud GPU sandboxes, and production-tested starter repos in less than 60 seconds."
+     - Value proposition bullet list with checkmarks (12 Masterclasses, Cloud GPU Sandboxes, 100% Production Code, 94.6% Completion).
+     - Dual pill CTAs: "Apply for Cohort ↗" (primary #FD6902 pill) + "Explore All 12 Courses" (white outlined pill).
+     - Social proof: Stacked circular avatars + "★ 4.9/5 rated by 12,400+ engineers & creators".
+   - Right Column (Signature JobHunt 3D Tilted Card):
+     - Large rounded container (bg-[#F7F7F7], rounded-[32px], border border-[#EBEBEB], p-8)
+     - Tilted floating card with tangerine accent background (#FD6902, -3deg tilt), layered with a crisp white card (rounded-[24px], p-6, shadow-xl)
+     - Floating top badge: "98% Overall Match"
+     - Role/Track lockup: "Autonomous AI Architect · OpenClaw & Hermes" with "Starts Dec 5" chip
+     - 3 Circular percentage dials (dial-gauge SVG): 99% Agent DAGs, 95% LLM Inference, 97% Production Readiness
+     - "Skills You'll Master" tag pills: "✓ Parallel Agent Swarms", "✓ Tool-Call Sandboxes", "✓ SecureWatch DRM Video", "✓ Zero-Leak Secrets"
+3. Partner Marquee:
+   - Ribbon with Google, Microsoft, Zomato, Swiggy, CRED, Zerodha, Razorpay, Flipkart in grayscale with hover transition.
+4. Features Bento Grid (5-Card Layout - bento-jobhunt):
+   - Badge: "Core Pillars" + H2: "Everything you need to master production AI"
+   - 5 cards (rounded-[24px] bg-[#F7F7F7]) with white floating squircle icon badges (w-11 h-11 rounded-xl shadow-sm)
+   - Cards: Autonomous Agent Swarms, Local LLM Inference, High-Production Generative Cinema (tall center prominent card), Algorithmic Growth & Meta Ads, SecureWatch DRM Sandboxes.
+5. Status & Metrics (Horizontal Rows - stat-row):
+   - 4 clean rows with 48px numbers on left (48,000+, +142%, 94.6%, ₹0), title in center, description on right.
+6. Team / Faculty Carousel:
+   - Circular portraits (w-36 h-36 rounded-full), names, titles, and social icons with prev/next arrow buttons.
+7. Split Pricing Card:
+   - Left side: Tier name, dynamic price (₹14,999 single / ₹39,999 fellowship, EMI from ₹1,249/mo), full-width pill button.
+   - Right side: Two-column feature checklist (6 items).
+   - Bottom: Social proof avatar stack.
+8. Interactive FAQ Accordion & Modern Footer.
+
+Verification Criteria:
+Execute `python3 testscript/verify_jobhunt_redesign.py` to ensure all tokens and classes exist.
+Verify that `cargo test --all-targets` passes with 0 errors.
+Keep all code clean, shippable, and free of generic AI placeholders.

@@ -10,6 +10,7 @@
   <link rel="stylesheet" href="./courseo.css">
 </head>
 <body>
+  <!-- Floating Porcelain Glass Navigation -->
   <header class="nav-shell">
     <nav class="nav-pill" aria-label="Primary">
       <a href="./index.html" class="brand-lockup">
@@ -21,25 +22,26 @@
 
       <ul class="nav-links">
         <li><a href="./courses.html" class="active">Explore Courses</a></li>
+        <li><a href="./index.html#the-shift">The Story</a></li>
         <li><a href="./index.html#curriculum">Curriculum</a></li>
-        <li><a href="./course_detail.html">Flagship</a></li>
+        <li><a href="./index.html#faculty">Mentors</a></li>
         <li><a href="./classroom.html">Classroom</a></li>
       </ul>
 
       <div class="nav-actions">
-        <a href="./classroom.html" class="btn btn-ghost btn-sm">My Learning</a>
-        <a href="./course_detail.html" class="btn btn-primary btn-sm">Enroll Now</a>
+        <a href="./classroom.html" class="btn btn-ghost btn-sm">Classroom</a>
+        <a href="./index.html#pricing" class="btn btn-primary btn-sm">Apply for Cohort</a>
       </div>
     </nav>
   </header>
 
-  <main class="section" style="padding-top: 3rem;">
+  <main class="section" style="padding-top: 3.5rem;">
     <div class="container">
       <div class="section-header" style="max-width: 820px;">
         <div class="section-eyebrow">Course Catalog • 12 Masterclasses</div>
         <h1 class="section-title">Explore the Complete 2026–2027 Curriculum.</h1>
         <p class="section-subtitle">
-          Filter by track, difficulty, or technology stack. Every course includes lifetime 4K SecureWatch streaming, hands-on sandboxes, and cryptographic certification.
+          Filter by track, difficulty, or technology stack. Every course includes lifetime 4K streaming, cloud GPU sandbox runtime, starter repositories, and verifiable certification.
         </p>
       </div>
 
@@ -47,14 +49,14 @@
       <div class="glass-card" style="padding: 1.15rem; margin-bottom: 2rem; display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: 1rem;">
         <div class="track-tabs" role="tablist" aria-label="Filter by track">
           <button class="track-tab active" data-track="all" type="button">All (12)</button>
-          <button class="track-tab" data-track="ai-engineering" type="button">AI Engineering (6)</button>
-          <button class="track-tab" data-track="generative-media" type="button">Generative Media (4)</button>
-          <button class="track-tab" data-track="growth-commerce" type="button">Growth &amp; Commerce (2)</button>
+          <button class="track-tab" data-track="ai-engineering" type="button">Track 1: AI Engineering (6)</button>
+          <button class="track-tab" data-track="generative-media" type="button">Track 2: Generative Media (4)</button>
+          <button class="track-tab" data-track="growth-commerce" type="button">Track 3: Growth &amp; Commerce (2)</button>
         </div>
 
         <div style="display: flex; flex-wrap: wrap; align-items: center; gap: 0.75rem; flex: 1; justify-content: flex-end;">
           <select id="level-filter" class="input-glass" style="min-width: 155px; padding: 0.62rem 1rem;" aria-label="Filter by difficulty">
-            <option value="all">All Levels</option>
+            <option value="all">All Difficulty Levels</option>
             <option value="Beginner">Beginner</option>
             <option value="Intermediate">Intermediate</option>
             <option value="Advanced">Advanced</option>
@@ -67,26 +69,26 @@
         </div>
       </div>
 
-      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; font-size:0.85rem; color:var(--text-muted);">
-        <span id="results-count">Showing 12 of 12 masterclasses</span>
-        <span class="badge badge-emerald badge-mono">All Streams Protected by SecureWatch</span>
+      <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:1.25rem; font-size:0.85rem; color:var(--text-slate-500);">
+        <span id="results-count" style="font-weight:600;">Showing 12 of 12 masterclasses</span>
+        <span class="badge badge-emerald badge-mono">All Tracks Include Cloud GPU Sandboxes</span>
       </div>
 
       <div class="course-grid" id="catalog-grid" aria-live="polite"></div>
     </div>
   </main>
 
-  <footer class="conversion-footer" style="padding-block: 3rem 2rem;">
+  <footer class="site-footer" style="margin-top: 5rem;">
     <div class="container">
       <div class="footer-bottom" style="border-top: none; padding-top: 0;">
         <div class="brand-lockup">
           <span class="brand-wordmark" style="font-size:1.05rem;">cours<span>eo</span></span>
-          <span style="color:var(--text-dim);">© 2026 Courseo Inc.</span>
+          <span style="color:var(--text-slate-400);">© 2026 Courseo Technologies Inc.</span>
         </div>
         <div style="display:flex; gap:1.25rem;">
           <a href="./index.html">Home</a>
-          <a href="./course_detail.html">Flagship Course</a>
-          <a href="./classroom.html">Classroom</a>
+          <a href="./course_detail.html">Flagship Swarms Masterclass</a>
+          <a href="./classroom.html">Student Classroom</a>
         </div>
       </div>
     </div>
@@ -103,18 +105,18 @@
 
   <script>
     const CATALOG = [
-      { id: 'web-dev-ai', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Web Development via AI', tech: 'Cursor, Claude Code, Windsurf, v0, Supabase, Next.js 15', level: 'Intermediate', duration: '11.5 hrs • 42 lessons', rating: '4.9 (1,420)', instructor: 'Rohan Deshmukh', initials: 'RD', role: 'Staff Full-Stack AI Engineer', price: '$179', gradient: 'linear-gradient(135deg, #1E293B 0%, #FD6902 100%)' },
-      { id: 'autonomous-swarms-openclaw-hermes', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Autonomous Multi-Agent Swarms with OpenClaw & Hermes', tech: 'OpenClaw, Hermes, LangGraph, Etta DAGs, Sandboxed Execution', level: 'Advanced', duration: '14.0 hrs • 48 lessons', rating: '5.0 (2,180)', instructor: 'Dr. Aris Thorne', initials: 'AT', role: 'Principal AI Architect (Ex-DeepMind)', price: '$249', gradient: 'linear-gradient(135deg, #0F172A 0%, #EA580C 70%, #F97316 100%)' },
-      { id: 'voice-agents-gemini-live', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Next-Gen Voice Agents with Gemini Live & WebSockets', tech: 'Gemini Live API, Cartesia, ElevenLabs, Low-Latency VAD', level: 'Advanced', duration: '9.5 hrs • 34 lessons', rating: '4.9 (980)', instructor: 'Maya Sen', initials: 'MS', role: 'Voice AI Systems Lead', price: '$219', gradient: 'linear-gradient(135deg, #111827 0%, #C2410C 100%)' },
-      { id: 'local-llm-inference-lora', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Local LLM Inference & LoRA Fine-Tuning', tech: 'DeepSeek R1/V3, Qwen 2.5, Ollama, vLLM, Unsloth LoRA', level: 'Advanced', duration: '13.0 hrs • 44 lessons', rating: '4.9 (1,640)', instructor: 'Kenji Takahashi', initials: 'KT', role: 'Open-Source ML Engineer', price: '$229', gradient: 'linear-gradient(135deg, #090D16 0%, #9A3412 100%)' },
-      { id: 'ai-automation-enterprise', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'AI Automation for Enterprise', tech: 'n8n, Autonomous Browser Agents, Python Copilots, API Orchestration', level: 'Intermediate', duration: '10.0 hrs • 38 lessons', rating: '4.8 (1,110)', instructor: 'Elena Rostova', initials: 'ER', role: 'Enterprise Automation Architect', price: '$169', gradient: 'linear-gradient(135deg, #1E1B4B 0%, #FD6902 100%)' },
-      { id: 'mobile-app-dev-ai', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Mobile App Development with AI', tech: 'Flutter, React Native, Expo, AI Pair-Programmers', level: 'Beginner', duration: '10.5 hrs • 36 lessons', rating: '4.8 (890)', instructor: 'Daniel Okafor', initials: 'DO', role: 'Principal Mobile Engineer', price: '$159', gradient: 'linear-gradient(135deg, #0F172A 0%, #D97706 100%)' },
-      { id: 'higgsfield-seedance-cinema', track: 'generative-media', trackLabel: 'Generative Media', title: 'AI Cinema: Higgsfield & Seedance 2.5 Guide', tech: 'Seedance 2.5, Higgsfield, Runway Gen-3, Kling, Flux', level: 'Intermediate', duration: '8.5 hrs • 30 lessons', rating: '4.9 (1,530)', instructor: 'Liam Vance', initials: 'LV', role: 'Award-Winning AI Cinematographer', price: '$189', gradient: 'linear-gradient(135deg, #1F1209 0%, #FD6902 100%)' },
-      { id: 'viral-ai-video-ads', track: 'generative-media', trackLabel: 'Generative Media', title: 'Viral AI Video Ads & High-Converting UGC', tech: 'AI Avatars, 3-Second Retention Hooks, Creative Sprays', level: 'Beginner', duration: '7.0 hrs • 28 lessons', rating: '4.8 (1,290)', instructor: 'Chloe Park', initials: 'CP', role: '8-Figure DTC Creative Director', price: '$149', gradient: 'linear-gradient(135deg, #27150B 0%, #F97316 100%)' },
-      { id: 'motion-graphics-premiere-ae', track: 'generative-media', trackLabel: 'Generative Media', title: 'Motion Graphics & Cinema Post-Production', tech: 'Premiere Pro, After Effects, Kinetic Type, Generative FX', level: 'Intermediate', duration: '12.0 hrs • 40 lessons', rating: '4.9 (940)', instructor: 'Mateo Silva', initials: 'MS', role: 'Senior Motion Designer', price: '$179', gradient: 'linear-gradient(135deg, #18181B 0%, #EA580C 100%)' },
-      { id: 'ai-music-suno-udio', track: 'generative-media', trackLabel: 'Generative Media', title: 'AI Music Production & Sound Design', tech: 'Suno v4, Udio, Foley Synthesis, Commercial Mastering', level: 'Beginner', duration: '6.5 hrs • 24 lessons', rating: '4.8 (760)', instructor: 'Sora Lindqvist', initials: 'SL', role: 'Electronic Composer & Sound Designer', price: '$129', gradient: 'linear-gradient(135deg, #1C1917 0%, #FB923C 100%)' },
-      { id: 'meta-ads-2026-scaling', track: 'growth-commerce', trackLabel: 'Growth & Commerce', title: 'Meta Ads 2026/2027: Scaling DTC to $1M/Month', tech: 'Advantage+ Shopping, Conversion API, Creative Fatigue Cycles', level: 'Advanced', duration: '9.0 hrs • 32 lessons', rating: '4.9 (1,870)', instructor: 'Nadia Kapoor', initials: 'NK', role: 'Performance Marketing Partner', price: '$249', gradient: 'linear-gradient(135deg, #0C0A09 0%, #FD6902 100%)' },
-      { id: 'shopify-ecommerce-funnels', track: 'growth-commerce', trackLabel: 'Growth & Commerce', title: 'E-Commerce Brand Building & Shopify Funnels', tech: 'Shopify Store Design, High-Converting Landing Pages, CRO & AOV', level: 'Intermediate', duration: '8.5 hrs • 31 lessons', rating: '4.9 (1,340)', instructor: 'Marcus Bennett', initials: 'MB', role: 'DTC Brand Founder ($40M+ GMV)', price: '$199', gradient: 'linear-gradient(135deg, #171717 0%, #EA580C 100%)' }
+      { id: 'full-stack-web-dev-ai', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Full-Stack Web Development via AI', outcome: 'Build & deploy production SaaS apps with Cursor & Claude Code', tech: 'Cursor, Claude Code, Windsurf, v0, Supabase, Next.js 15', level: 'Intermediate', duration: '11.5 hrs • 42 lessons', rating: '4.9 (1,420)', instructor: 'Rohan Deshmukh', initials: 'RD', role: 'Staff AI Engineer', priceInr: '₹14,999', priceUsd: '$179', gradient: 'linear-gradient(135deg, #FFF7ED 0%, #FFEDD5 100%)' },
+      { id: 'autonomous-swarms-openclaw-hermes', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Autonomous Multi-Agent Swarms with OpenClaw & Hermes', outcome: 'Architect deterministic parallel agent DAGs with sandboxed execution', tech: 'OpenClaw, Hermes, LangGraph, Etta DAGs, Rust', level: 'Advanced', duration: '14.0 hrs • 48 lessons', rating: '5.0 (2,180)', instructor: 'Dr. Aris Thorne', initials: 'AT', role: 'Principal AI Architect (Ex-DeepMind)', priceInr: '₹14,999', priceUsd: '$249', gradient: 'linear-gradient(135deg, #FEF3C7 0%, #FED7AA 100%)' },
+      { id: 'voice-agents-gemini-live', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Next-Gen Voice Agents with Gemini Live & WebSockets', outcome: 'Sub-250ms voice turns with streaming VAD and live translation', tech: 'Gemini Live API, Cartesia, ElevenLabs, WebSockets', level: 'Advanced', duration: '9.5 hrs • 34 lessons', rating: '4.9 (980)', instructor: 'Maya Sen', initials: 'MS', role: 'Voice AI Systems Lead', priceInr: '₹14,999', priceUsd: '$219', gradient: 'linear-gradient(135deg, #E0E7FF 0%, #C7D2FE 100%)' },
+      { id: 'local-llm-inference-small-models-vllm-lora', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Local LLM Inference & Small Model Fine-Tuning', outcome: 'Host DeepSeek-R1, Llama 3 & Qwen locally with vLLM & LoRA', tech: 'DeepSeek-R1, Ollama, vLLM, Unsloth LoRA, MLX', level: 'Advanced', duration: '13.0 hrs • 44 lessons', rating: '4.9 (1,640)', instructor: 'Vikram Mehta', initials: 'VM', role: 'Distributed Systems Lead', priceInr: '₹14,999', priceUsd: '$229', gradient: 'linear-gradient(135deg, #F3E8FF 0%, #E9D5FF 100%)' },
+      { id: 'enterprise-ai-automation-custom-workflows', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Enterprise AI Automation & Custom Workflows', outcome: 'Automate enterprise backoffices with n8n, MCP servers & AGY', tech: 'n8n, MCP Protocol, AGY SDK, Python, Webhooks', level: 'Intermediate', duration: '10.0 hrs • 38 lessons', rating: '4.8 (1,110)', instructor: 'Neha Rao', initials: 'NR', role: 'Enterprise Automation Architect', priceInr: '₹14,999', priceUsd: '$189', gradient: 'linear-gradient(135deg, #ECFDF5 0%, #D1FAE5 100%)' },
+      { id: 'mobile-app-dev-ai', track: 'ai-engineering', trackLabel: 'AI Engineering', title: 'Mobile App Development with AI', outcome: 'Ship cross-platform React Native & Flutter apps with on-device models', tech: 'React Native, Flutter, Expo, Mobile ML, Supabase', level: 'Beginner', duration: '10.5 hrs • 36 lessons', rating: '4.8 (890)', instructor: 'Sameer Joshi', initials: 'SJ', role: 'Mobile Architect', priceInr: '₹14,999', priceUsd: '$179', gradient: 'linear-gradient(135deg, #F0FDF4 0%, #DCFCE7 100%)' },
+      { id: 'ai-cinema-higgsfield-seedance', track: 'generative-media', trackLabel: 'Generative Media', title: 'AI Cinema: Higgsfield & Seedance 2.5 Guide', outcome: 'Direct photorealistic narrative film sequences with 4K camera motion', tech: 'Seedance 2.5, Higgsfield, Runway Gen-3, Kling, Flux', level: 'Intermediate', duration: '8.5 hrs • 30 lessons', rating: '4.9 (1,530)', instructor: 'Liam Vance', initials: 'LV', role: 'Commercial AI Cinematographer', priceInr: '₹14,999', priceUsd: '$189', gradient: 'linear-gradient(135deg, #FFFBEB 0%, #FEF3C7 100%)' },
+      { id: 'viral-ai-video-ads-ugc-generation', track: 'generative-media', trackLabel: 'Generative Media', title: 'Viral AI Video Ads & High-Converting UGC', outcome: 'Produce 40+ high-retention TikTok & Meta ad creative sprays per week', tech: 'AI Avatars, 3-Second Retention Hooks, Creative Sprays', level: 'Beginner', duration: '7.0 hrs • 28 lessons', rating: '4.8 (1,290)', instructor: 'Chloe Park', initials: 'CP', role: '8-Figure DTC Creative Director', priceInr: '₹14,999', priceUsd: '$149', gradient: 'linear-gradient(135deg, #FFF1F2 0%, #FFE4E6 100%)' },
+      { id: 'motion-graphics-cinema-post-production', track: 'generative-media', trackLabel: 'Generative Media', title: 'Motion Graphics & Cinema Post-Production', outcome: 'Master professional kinetic typography and compositing in Premiere & AE', tech: 'Premiere Pro, After Effects, Kinetic Type, Generative FX', level: 'Intermediate', duration: '12.0 hrs • 40 lessons', rating: '4.9 (940)', instructor: 'Mateo Silva', initials: 'MS', role: 'Senior Motion Designer', priceInr: '₹14,999', priceUsd: '$179', gradient: 'linear-gradient(135deg, #FDF4FF 0%, #FAE8FF 100%)' },
+      { id: 'ai-music-production-sound-design', track: 'generative-media', trackLabel: 'Generative Media', title: 'AI Music Production & Sound Design', outcome: 'Compose broadcast-quality commercial soundtracks with Suno & Udio', tech: 'Suno v3.5, Udio 1.5, Stem Splitters, Logic Pro', level: 'Beginner', duration: '6.5 hrs • 24 lessons', rating: '4.8 (760)', instructor: 'Julian Mercer', initials: 'JM', role: 'Commercial Music Producer', priceInr: '₹14,999', priceUsd: '$139', gradient: 'linear-gradient(135deg, #F5F3FF 0%, #EDE9FE 100%)' },
+      { id: 'meta-ads-scaling-architecture-2026', track: 'growth-commerce', trackLabel: 'Growth & Commerce', title: 'Meta Ads Scaling Architecture (2026/2027 Playbook)', outcome: 'Scale Meta Advantage+ ad budgets profitably to ₹1 Crore/month', tech: 'Advantage+ Budget, Creative Velocity, TripleWhale, CRO', level: 'Advanced', duration: '9.0 hrs • 32 lessons', rating: '5.0 (1,870)', instructor: 'Nadia Kapoor', initials: 'NK', role: 'Performance Marketing Partner', priceInr: '₹14,999', priceUsd: '$229', gradient: 'linear-gradient(135deg, #EFF6FF 0%, #DBEAFE 100%)' },
+      { id: 'ai-ecommerce-dtc-funnels-shopify', track: 'growth-commerce', trackLabel: 'Growth & Commerce', title: 'AI-Powered E-Commerce & DTC Funnels', outcome: 'Launch high-converting Shopify stores with automated dynamic funnels', tech: 'Shopify, Klaviyo AI, Replo, Dynamic Funnels, Post-Purchase', level: 'Intermediate', duration: '8.5 hrs • 31 lessons', rating: '4.9 (1,340)', instructor: 'Aditya Nair', initials: 'AN', role: 'DTC Brand Accelerator', priceInr: '₹14,999', priceUsd: '$199', gradient: 'linear-gradient(135deg, #FEF2F2 0%, #FEE2E2 100%)' }
     ];
 
     let activeTrack = 'all';
@@ -133,6 +135,7 @@
           c.title.toLowerCase().includes(q) ||
           c.tech.toLowerCase().includes(q) ||
           c.instructor.toLowerCase().includes(q) ||
+          c.outcome.toLowerCase().includes(q) ||
           c.trackLabel.toLowerCase().includes(q);
         return matchTrack && matchLevel && matchQuery;
       });
@@ -140,7 +143,7 @@
       countEl.textContent = `Showing ${list.length} of ${CATALOG.length} masterclasses`;
 
       if (!list.length) {
-        grid.innerHTML = `<div class="glass-card" style="grid-column:1/-1; padding:3rem; text-align:center; color:var(--text-muted);">No masterclasses match your current filter. Try clearing the search query.</div>`;
+        grid.innerHTML = `<div class="glass-card" style="grid-column:1/-1; padding:3rem; text-align:center; color:var(--text-slate-500);">No masterclasses match your current filter. Try clearing the search query.</div>`;
         return;
       }
 
@@ -153,18 +156,18 @@
               <span class="badge badge-mono">${c.level}</span>
             </div>
             <div class="course-thumb-bottom">
-              <span class="hud-chip">4K SecureWatch</span>
+              <span class="hud-chip">${c.duration}</span>
               <span class="rating-pill">★ ${c.rating}</span>
             </div>
-            <div class="scrub-indicator"><div class="scrub-bar"></div></div>
           </div>
           <div class="course-body">
-            <div class="course-meta">
-              <span>${c.duration}</span>
-              <span>Certificate</span>
-            </div>
             <h2 class="course-title">${c.title}</h2>
-            <p class="course-tech">${c.tech}</p>
+            <div class="course-outcome">
+              <strong>Outcome:</strong> ${c.outcome}
+            </div>
+            <div class="tech-stack-row">
+              ${c.tech.split(',').map(t => `<span class="tech-chip">${t.trim()}</span>`).join('')}
+            </div>
             <div class="course-instructor">
               <div class="avatar-circle">${c.initials}</div>
               <div class="instructor-meta">
@@ -172,8 +175,11 @@
                 <span class="instructor-role">${c.role}</span>
               </div>
             </div>
-            <div class="course-footer">
-              <span class="course-price">${c.price}</span>
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-top:auto; padding-top:0.85rem; border-top:1px solid var(--border-subtle);">
+              <div>
+                <span style="font-family:var(--font-display); font-size:1.15rem; font-weight:800; color:var(--text-slate-900);">${c.priceInr}</span>
+                <span style="font-size:0.75rem; color:var(--text-slate-400); margin-left:0.25rem;">(${c.priceUsd})</span>
+              </div>
               <a href="./course_detail.html?slug=${c.id}" class="btn btn-primary btn-sm">View Syllabus</a>
             </div>
           </div>
@@ -200,7 +206,6 @@
       renderCatalog();
     });
 
-    // Support URL query ?track=ai-engineering
     const params = new URLSearchParams(window.location.search);
     const initialTrack = params.get('track');
     if (initialTrack && ['ai-engineering', 'generative-media', 'growth-commerce'].includes(initialTrack)) {

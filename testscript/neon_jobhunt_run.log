@@ -1,0 +1,31 @@
+
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/courseo.css[0m
+  [36m●[0m [1;37mfile::write[0m  [90mWrote web/index.html[0m
+    [90m└─[0m [38;2;190;200;215mWrote 1461 lines (29.7 KB)[0m [90m· 149.73s[0m
+    [90m└─[0m [38;2;190;200;215mWrote 833 lines (36.8 KB)[0m [90m· 149.73s[0m
+  [36m●[0m [1;37mshell::execute[0m  [90mpython3 testscript/verify_jobhunt_redesign.py && cargo ...[0m
+    [90m└─[0m [38;2;190;200;215mtest result: ok. 0 passed; 0 failed; 0 ignored; 0 measured; 0 filtered out; finished in 0.00s[0m [90m· 6.14s[0m
+  [1;38;2;75;220;120m→ Verification:[0m Validating acceptance gate criteria...
+  [1;38;2;250;85;85m❌ Fault:[0m authorization denied: Symlink cycle detected at "/Users/ajaytiwari/Desktop/Projects/courseo/web/assets"
+  [1;38;2;250;85;85mAutonomous task stopped without sufficient progress.[0m
+{
+  "exit_code": 1,
+  "status": "failed",
+  "goal": "You are Gemini 4 Neon operating via the Etta harness.\nYour task is to implement the exact visual design, layout architecture, and component tokens of the Jiro Build JobHunt landing page template (https://jiro.build/templates/education-careers/ai-job-finder-landing-page-jobhunt) into Courseo's web frontend in web/index.html and web/courseo.css.\n\nBrand Identity & Theme Tokens:\n- Primary Action Accent: #FD6902 (Courseo Tangerine)\n- Secondary Accent / Hover: #FF7A1A / #FF8A00\n- Subtle Glow / Pill Tint: rgba(253, 105, 2, 0.12)\n- Base Surfaces: #FFFFFF (Porcelain White) and #F8FAFC / #F7F7F7 (Snow)\n- Text & Strokes: #0F172A (Deep Slate Obsidian), #525252 / #64748B (Muted text), #EBEBEB / rgba(15,23,42,0.08) (Borders)\n- Typography: Inter / Plus Jakarta Sans, tracking: -0.02em, clean modern weights (font-medium / font-bold)\n- Pill Radii: rounded-full (9999px) for buttons/badges, rounded-[28px] to rounded-[32px] for hero frames, rounded-[24px] for bento cards\n- Signature Multi-stop Shadow: box-shadow: 0 0 0 1px rgba(15, 23, 42, 0.06), 0 1px 2px rgba(15, 23, 42, 0.04), 0 4px 12px -2px rgba(15, 23, 42, 0.06)\n\nKey Sections to Implement in web/index.html & web/courseo.css:\n1. Header & Navigation:\n   - Floating porcelain glass pill navbar\n   - Official Courseo 3D hexagonal logo mark (./assets/courseo_logo_official.jpg) with two-tone typography \"cours\" (#0F172A) + \"eo\" (#FD6902)\n   - Search trigger [ ⌘ K ], Classroom ghost button, and \"Apply for Cohort ↗\" primary pill button\n2. Split-Screen Hero (50/50 Layout - jobhunt-hero):\n   - Left Column:\n     - Badge: \"[✦] AI Career & Skill Matcher Active\"\n     - H1: \"No More Solo Upskilling. Master Frontier AI with Real Systems.\"\n     - Subheadline: \"Get matched cohorts, cloud GPU sandboxes, and production-tested starter repos in less than 60 seconds.\"\n     - Value proposition bullet list with checkmarks (12 Masterclasses, Cloud GPU Sandboxes, 100% Production Code, 94.6% Completion).\n     - Dual pill CTAs: \"Apply for Cohort ↗\" (primary #FD6902 pill) + \"Explore All 12 Courses\" (white outlined pill).\n     - Social proof: Stacked circular avatars + \"★ 4.9/5 rated by 12,400+ engineers & creators\".\n   - Right Column (Signature JobHunt 3D Tilted Card):\n     - Large rounded container (bg-[#F7F7F7], rounded-[32px], border border-[#EBEBEB], p-8)\n     - Tilted floating card with tangerine accent background (#FD6902, -3deg tilt), layered with a crisp white card (rounded-[24px], p-6, shadow-xl)\n     - Floating top badge: \"98% Overall Match\"\n     - Role/Track lockup: \"Autonomous AI Architect · OpenClaw & Hermes\" with \"Starts Dec 5\" chip\n     - 3 Circular percentage dials (dial-gauge SVG): 99% Agent DAGs, 95% LLM Inference, 97% Production Readiness\n     - \"Skills You'll Master\" tag pills: \"✓ Parallel Agent Swarms\", \"✓ Tool-Call Sandboxes\", \"✓ SecureWatch DRM Video\", \"✓ Zero-Leak Secrets\"\n3. Partner Marquee:\n   - Ribbon with Google, Microsoft, Zomato, Swiggy, CRED, Zerodha, Razorpay, Flipkart in grayscale with hover transition.\n4. Features Bento Grid (5-Card Layout - bento-jobhunt):\n   - Badge: \"Core Pillars\" + H2: \"Everything you need to master production AI\"\n   - 5 cards (rounded-[24px] bg-[#F7F7F7]) with white floating squircle icon badges (w-11 h-11 rounded-xl shadow-sm)\n   - Cards: Autonomous Agent Swarms, Local LLM Inference, High-Production Generative Cinema (tall center prominent card), Algorithmic Growth & Meta Ads, SecureWatch DRM Sandboxes.\n5. Status & Metrics (Horizontal Rows - stat-row):\n   - 4 clean rows with 48px numbers on left (48,000+, +142%, 94.6%, ₹0), title in center, description on right.\n6. Team / Faculty Carousel:\n   - Circular portraits (w-36 h-36 rounded-full), names, titles, and social icons with prev/next arrow buttons.\n7. Split Pricing Card:\n   - Left side: Tier name, dynamic price (₹14,999 single / ₹39,999 fellowship, EMI from ₹1,249/mo), full-width pill button.\n   - Right side: Two-column feature checklist (6 items).\n   - Bottom: Social proof avatar stack.\n8. Interactive FAQ Accordion & Modern Footer.\n\nVerification Criteria:\nExecute `python3 testscript/verify_jobhunt_redesign.py` to ensure all tokens and classes exist.\nVerify that `cargo test --all-targets` passes with 0 errors.\nKeep all code clean, shippable, and free of generic AI placeholders.",
+  "etta_version": "2.31.81",
+  "provider": "google",
+  "model": "neon",
+  "thinking_level": "high",
+  "tokens_used": 790,
+  "input_tokens": 530,
+  "output_tokens": 260,
+  "thinking_tokens": 0,
+  "cost": 0.00028,
+  "artifacts": [
+    "/Users/ajaytiwari/Desktop/Projects/courseo/.etta/artifacts/task_artifact.md"
+  ],
+  "events_count": 21,
+  "turns": 4,
+  "error": "Autonomous task stopped without sufficient progress.",
+  "response": "Autonomous task stopped without sufficient progress."
+}

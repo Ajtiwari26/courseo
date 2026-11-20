@@ -1,0 +1,57 @@
+You are Gemini 4 Neon, the Lead Autonomous Architect & Design Systems Engineer for DeployMate Etta.
+Your workspace is /Users/ajaytiwari/Desktop/Projects/courseo.
+
+CRITICAL ARCHITECTURAL PIVOT:
+The previous v1 design was too dark, generic, and mistakenly featured back-end DRM technology on the hero section. DRM is internal security infrastructure, NOT what students buy!
+You are tasked with rebuilding the Courseo EdTech platform with an ELITE LUMINOUS LIGHT THEME (Apple, Stripe, Linear, 100xDevs, GrowthSchool standard) and high-converting, student-centric storytelling.
+
+REVIEW SPECIFICATIONS:
+Read `docs/design/COURSEO_LIGHT_THEME_AND_STORYTELLING_BLUEPRINT.md` and `docs/design/COURSEO_BRAND_IDENTITY_AND_DESIGN_SYSTEM.md`.
+Use authentic brand assets in `assets/brand/`:
+- `courseo_logo_primary.jpg`: Primary 3D hexagonal orange ribbon mark.
+- `courseo_logo_reveal_motion.mp4`: Brand reveal showreel.
+- `motion_frame_01.jpg` through `motion_frame_05.jpg`: Motion graphic frames.
+
+DELIVERABLES TO IMPLEMENT:
+
+1. `web/courseo.css` (Luminous Light Design System):
+   - Backgrounds: Crisp porcelain `#FFFFFF`, snow `#F8FAFC`, subtle slate tint `#F1F5F9`.
+   - Brand Accent: Radiant Tangerine `#FD6902`, hover `#EA5E00`, subtle tint `rgba(253, 105, 2, 0.08)`.
+   - Typography: Deep slate-900 `#0F172A` headlines, slate-700 `#334155` body, slate-500 `#64748B` labels.
+   - Cards: Pure white with delicate borders `1px solid #E2E8F0` and Apple-grade soft depth shadows `0 4px 20px -2px rgba(15, 23, 42, 0.06)`.
+   - Scroll animations: Lenis smooth scroll and CSS `view-timeline` scroll reveals (`fade-up`, `stagger-in`).
+   - Storytelling timeline styling: Connected timeline nodes and narrative chapter cards.
+
+2. `web/index.html` (Master Light Theme Landing Page):
+   - Notice ribbon: "🚀 Next Cohort starts Dec 5, 2026 • Early-Bird ₹5,000 Scholarship Active • 38 Seats Remaining".
+   - Floating porcelain glass nav: Courseo logo mark, links, ⌘K search trigger, Login, and "Apply for Cohort" CTA.
+   - Outcome-driven Hero:
+     * Eyebrow: `★ 4.9/5 RATED BY 12,400+ ENGINEERS & CREATORS • INDIA'S #1 AI COHORT`
+     * Headline: "Don't Just Watch AI Videos. Build Agent Swarms, Direct 4K Cinema & Scale $1M Campaigns."
+     * Subtitle focusing on hands-on production code, real models, and portfolio capstones.
+     * Dual CTAs: Primary "Explore All 12 Masterclasses" (Radiant Tangerine) & Secondary "Watch Free Preview" (modal video).
+     * Hiring partners ribbon: Google, Microsoft, Zomato, Swiggy, Flipkart, CRED, Zerodha, Razorpay.
+     * Hero Interactive Studio Card (NO DRM screen!): Live interactive tabs for (1) AI Agent DAG Scheduler, (2) Seedance 2.5 Cinema Prompt Timeline, (3) Meta Ads ₹1.2 Cr Scaling Dashboard.
+   - Storytelling Scroll Journey ("The Shift: Why Courseo?"):
+     * Chapter 1: The Broken College & Udemy Trap (syntax vs systems).
+     * Chapter 2: The 2026 AI Earthquake (1 AI engineer replaces 10 developers; Seedance replaces months of shooting).
+     * Chapter 3: The Courseo Standard (production sandboxes, real models, practitioner reviews).
+     * Chapter 4: The 3 Transformation Tracks.
+   - 12-Course Curriculum Explorer:
+     * Track filters: All (12), AI Engineering (6), Generative Media (4), Growth & Commerce (2).
+     * Interactive course cards with tech stack badges, outcome tags, mentor avatar, price in INR (₹14,999) and USD ($179), and "View Syllabus" CTA.
+   - Production Capstone Showcase: 3 detailed interactive project cards with live output previews.
+   - Practitioner Faculty: Dr. Aris Thorne (Ex-DeepMind), Maya Sen, Liam Vance, Nadia Kapoor.
+   - Wall of Love: Real student review cards with salary hikes (+142%), before/after roles.
+   - Transparent Pricing & Guarantees: Single Track (₹14,999) vs All-Access Fellowship (₹39,999), No-Cost EMI (₹1,249/mo), and 14-day 100% money-back guarantee.
+   - Interactive FAQ Accordion.
+   - High-Conversion Radiant Footer.
+   - WebOrient Voice Co-Browsing Guide widget (adapted for light theme).
+
+3. `web/courses.html`, `web/course_detail.html`, `web/classroom.html`:
+   - Updated with the new luminous porcelain light theme, unified brand typography, and INR / USD pricing.
+
+QUALITY & VERIFICATION GATES (CRITICAL):
+- Execute `cargo test --all-targets` to verify all 17 DRM tests remain 100% passing.
+- Ensure all HTML, CSS, and JS are syntactically valid and responsive across desktop and mobile.
+- Verify clean rendering with zero console errors.
