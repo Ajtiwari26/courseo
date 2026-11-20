@@ -1,0 +1,74 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480" role="img" aria-label="Rohan Verma — Staff AI Systems Architect">
+  <defs>
+    <linearGradient id="rv-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#090E1A"/>
+      <stop offset="55%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <radialGradient id="rv-indigo-glow" cx="78%" cy="22%" r="58%">
+      <stop offset="0%" stop-color="#4F46E5" stop-opacity="0.48"/>
+      <stop offset="55%" stop-color="#312E81" stop-opacity="0.16"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="rv-cyan-glow" cx="18%" cy="72%" r="52%">
+      <stop offset="0%" stop-color="#06B6D4" stop-opacity="0.34"/>
+      <stop offset="60%" stop-color="#0891B2" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="rv-suit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#0B1120"/>
+    </linearGradient>
+    <linearGradient id="rv-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#22D3EE" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#818CF8" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="rv-skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <pattern id="rv-grid" width="32" height="32" patternUnits="userSpaceOnUse">
+      <path d="M 32 0 L 0 0 0 32" fill="none" stroke="#94A3B8" stroke-opacity="0.07" stroke-width="1"/>
+    </pattern>
+  </defs>
+
+  <rect width="400" height="480" fill="url(#rv-bg)"/>
+  <rect width="400" height="480" fill="url(#rv-grid)"/>
+  <rect width="400" height="480" fill="url(#rv-indigo-glow)"/>
+  <rect width="400" height="480" fill="url(#rv-cyan-glow)"/>
+
+  <!-- Subtle Distributed Systems Node Motif -->
+  <g stroke="#38BDF8" stroke-opacity="0.18" stroke-width="1.2" fill="none">
+    <circle cx="324" cy="84" r="46"/>
+    <circle cx="324" cy="84" r="72" stroke-dasharray="4 6"/>
+    <line x1="252" y1="84" x2="64" y2="156"/>
+    <line x1="324" y1="156" x2="324" y2="248"/>
+    <circle cx="64" cy="156" r="4" fill="#22D3EE" fill-opacity="0.55"/>
+    <circle cx="324" cy="84" r="4" fill="#818CF8" fill-opacity="0.75"/>
+  </g>
+
+  <!-- Shoulders & Structured Blazer Silhouette -->
+  <path d="M52 480 C56 382 114 334 200 334 C286 334 344 382 348 480 Z" fill="url(#rv-suit)" stroke="url(#rv-rim)" stroke-width="1.5"/>
+  <!-- Shirt & Lapel Detail -->
+  <path d="M164 336 L200 412 L236 336 Z" fill="#0F172A"/>
+  <path d="M174 336 L200 392 L226 336" fill="none" stroke="#38BDF8" stroke-opacity="0.35" stroke-width="1.4"/>
+  <path d="M154 342 L182 426 L160 444 L132 362 Z" fill="#1E293B" opacity="0.85"/>
+  <path d="M246 342 L218 426 L240 444 L268 362 Z" fill="#1E293B" opacity="0.85"/>
+
+  <!-- Neck -->
+  <path d="M175 288 L225 288 L229 344 C212 356 188 356 171 344 Z" fill="url(#rv-skin)"/>
+
+  <!-- Head & Hair Silhouette -->
+  <ellipse cx="200" cy="214" rx="64" ry="78" fill="url(#rv-skin)" stroke="url(#rv-rim)" stroke-width="1.5"/>
+  <path d="M134 204 C132 146 160 120 202 120 C246 120 272 148 266 202 C256 174 236 160 202 160 C168 160 148 176 134 204 Z" fill="#0B1120"/>
+
+  <!-- Minimalist Glasses Accent -->
+  <g stroke="#38BDF8" stroke-opacity="0.65" stroke-width="2" fill="#0F172A" fill-opacity="0.35">
+    <rect x="154" y="198" width="38" height="22" rx="7"/>
+    <rect x="208" y="198" width="38" height="22" rx="7"/>
+    <line x1="192" y1="208" x2="208" y2="208"/>
+  </g>
+
+  <!-- Bottom Subtle Vignette -->
+  <rect y="390" width="400" height="90" fill="url(#rv-bg)" opacity="0.35"/>
+</svg>

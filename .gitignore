@@ -2,3 +2,14 @@ target/
 .etta/
 *.mp4
 *.mov
+__pycache__/
+*.pyc
+testscript/*.log
+testscript/*.txt
+testscript/comfyui_workflow.png
+testscript/gpu_dashboard.png
+testscript/chatgpt_screen.png
+testscript/trace_sample.png
+testscript/wandb_dashboard.png
+testscript/langgraph_studio.png
+

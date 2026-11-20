@@ -1,0 +1,61 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480" role="img" aria-label="Devika Sharma — Algorithmic Growth and Attribution">
+  <defs>
+    <linearGradient id="ds-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#181115"/>
+      <stop offset="55%" stop-color="#23171D"/>
+      <stop offset="100%" stop-color="#120E12"/>
+    </linearGradient>
+    <radialGradient id="ds-coral-glow" cx="76%" cy="24%" r="58%">
+      <stop offset="0%" stop-color="#FB7185" stop-opacity="0.5"/>
+      <stop offset="50%" stop-color="#E11D48" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#181115" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="ds-warm-glow" cx="18%" cy="76%" r="50%">
+      <stop offset="0%" stop-color="#F97316" stop-opacity="0.28"/>
+      <stop offset="100%" stop-color="#181115" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="ds-jacket" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#2A1F24"/>
+      <stop offset="100%" stop-color="#100B0E"/>
+    </linearGradient>
+    <linearGradient id="ds-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FDA4AF" stop-opacity="0.88"/>
+      <stop offset="100%" stop-color="#FB7185" stop-opacity="0.22"/>
+    </linearGradient>
+    <linearGradient id="ds-skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#4A363D"/>
+      <stop offset="100%" stop-color="#2A1F24"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="480" fill="url(#ds-bg)"/>
+  <rect width="400" height="480" fill="url(#ds-coral-glow)"/>
+  <rect width="400" height="480" fill="url(#ds-warm-glow)"/>
+
+  <!-- Telemetry & Attribution Geometric Motif -->
+  <g stroke="#FDA4AF" stroke-opacity="0.24" stroke-width="1.3" fill="none">
+    <polyline points="38,144 82,118 118,128 160,76 198,92"/>
+    <circle cx="82" cy="118" r="3.5" fill="#FB7185" fill-opacity="0.7"/>
+    <circle cx="160" cy="76" r="4" fill="#FDA4AF" fill-opacity="0.85"/>
+    <polygon points="328,64 358,116 298,116"/>
+    <polygon points="328,82 346,112 310,112" stroke-opacity="0.4"/>
+    <line x1="42" y1="416" x2="126" y2="416" stroke-dasharray="4 5"/>
+  </g>
+
+  <!-- Hair Back Silhouette -->
+  <path d="M124 218 C120 144 152 110 200 110 C248 110 280 144 276 218 C274 268 264 306 248 334 L152 334 C136 306 126 268 124 218 Z" fill="#100B0E"/>
+
+  <!-- Shoulders & Structured Blazer -->
+  <path d="M60 480 C66 386 118 338 200 338 C282 338 334 386 340 480 Z" fill="url(#ds-jacket)" stroke="url(#ds-rim)" stroke-width="1.5"/>
+  <path d="M166 338 L200 402 L234 338" fill="none" stroke="#FDA4AF" stroke-opacity="0.45" stroke-width="1.6"/>
+
+  <!-- Neck -->
+  <path d="M178 286 L222 286 L225 344 C209 354 191 354 175 344 Z" fill="url(#ds-skin)"/>
+
+  <!-- Head -->
+  <ellipse cx="200" cy="212" rx="58" ry="74" fill="url(#ds-skin)" stroke="url(#ds-rim)" stroke-width="1.5"/>
+  <path d="M140 198 C142 146 168 122 202 122 C238 122 260 148 260 196 C244 168 222 154 192 156 C166 158 148 174 140 198 Z" fill="#100B0E"/>
+
+  <!-- Bottom Subtle Vignette -->
+  <rect y="392" width="400" height="88" fill="url(#ds-bg)" opacity="0.35"/>
+</svg>

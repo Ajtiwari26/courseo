@@ -1,0 +1,62 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480" role="img" aria-label="Kabir Mehta — Generative Cinema Director">
+  <defs>
+    <linearGradient id="km-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#0C0A09"/>
+      <stop offset="55%" stop-color="#1C1917"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+    <radialGradient id="km-amber-glow" cx="80%" cy="26%" r="58%">
+      <stop offset="0%" stop-color="#F59E0B" stop-opacity="0.52"/>
+      <stop offset="50%" stop-color="#B45309" stop-opacity="0.18"/>
+      <stop offset="100%" stop-color="#0C0A09" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="km-studio-glow" cx="16%" cy="74%" r="48%">
+      <stop offset="0%" stop-color="#FBBF24" stop-opacity="0.24"/>
+      <stop offset="100%" stop-color="#0C0A09" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="km-jacket" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#27272A"/>
+      <stop offset="100%" stop-color="#09090B"/>
+    </linearGradient>
+    <linearGradient id="km-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#FCD34D" stop-opacity="0.9"/>
+      <stop offset="100%" stop-color="#D97706" stop-opacity="0.2"/>
+    </linearGradient>
+    <linearGradient id="km-skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#3F3F46"/>
+      <stop offset="100%" stop-color="#18181B"/>
+    </linearGradient>
+  </defs>
+
+  <rect width="400" height="480" fill="url(#km-bg)"/>
+  <rect width="400" height="480" fill="url(#km-amber-glow)"/>
+  <rect width="400" height="480" fill="url(#km-studio-glow)"/>
+
+  <!-- Cinema Viewfinder & Aperture Motif -->
+  <g stroke="#FBBF24" stroke-opacity="0.24" stroke-width="1.4" fill="none">
+    <path d="M36 68 L36 42 L62 42"/>
+    <path d="M364 68 L364 42 L338 42"/>
+    <path d="M36 412 L36 438 L62 438"/>
+    <path d="M364 412 L364 438 L338 438"/>
+    <circle cx="316" cy="104" r="40" stroke-dasharray="6 5"/>
+    <circle cx="316" cy="104" r="18"/>
+    <line x1="46" y1="132" x2="114" y2="132" stroke-opacity="0.3"/>
+  </g>
+
+  <!-- Shoulders & Minimalist Director Turtleneck -->
+  <path d="M56 480 C62 384 118 336 200 336 C282 336 338 384 344 480 Z" fill="url(#km-jacket)" stroke="url(#km-rim)" stroke-width="1.5"/>
+  <path d="M164 334 L236 334 L230 374 C210 382 190 382 170 374 Z" fill="#18181B" stroke="#F59E0B" stroke-opacity="0.35" stroke-width="1.2"/>
+
+  <!-- Neck -->
+  <path d="M176 286 L224 286 L226 338 C210 348 190 348 174 338 Z" fill="url(#km-skin)"/>
+
+  <!-- Head & Hair Silhouette -->
+  <ellipse cx="200" cy="212" rx="62" ry="76" fill="url(#km-skin)" stroke="url(#km-rim)" stroke-width="1.5"/>
+  <path d="M134 202 C132 142 162 114 204 116 C248 118 272 148 266 202 C252 170 232 156 198 156 C168 156 148 172 134 202 Z" fill="#09090B"/>
+
+  <!-- Subtle Beard Contour -->
+  <path d="M154 244 C164 274 182 288 200 288 C218 288 236 274 246 244 C232 262 218 270 200 270 C182 270 168 262 154 244 Z" fill="#09090B" opacity="0.7"/>
+
+  <!-- Bottom Subtle Vignette -->
+  <rect y="392" width="400" height="88" fill="url(#km-bg)" opacity="0.35"/>
+</svg>

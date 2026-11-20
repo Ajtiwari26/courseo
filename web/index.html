@@ -14,7 +14,7 @@
     href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Plus+Jakarta+Sans:wght@500;600;700;800&display=swap"
     rel="stylesheet"
   />
-  <link rel="stylesheet" href="./courseo.css" />
+  <link rel="stylesheet" href="./courseo.css?v=light-theme-v2" />
 </head>
 <body>
   <!-- 1. Floating Porcelain Glass Pill Navbar -->
@@ -51,137 +51,118 @@
   </header>
 
   <main id="top">
-    <!-- 2. Split-Screen Hero (50/50 Layout - jobhunt-hero) -->
-    <section class="jobhunt-hero">
-      <div class="container">
-        <div class="jobhunt-hero__grid">
-          <!-- Left Column -->
-          <div class="jobhunt-hero__left">
-            <span class="eyebrow-pill">[✦] AI Career &amp; Skill Matcher Active</span>
-
-            <h1 class="jobhunt-hero__title">
-              No More Solo Upskilling. Master Frontier AI with Real Systems.
-            </h1>
-
-            <p class="jobhunt-hero__subtitle">
-              Get matched cohorts, cloud GPU sandboxes, and production-tested starter repos in less than 60 seconds.
+    <!-- 300vh Pinned Scroll Reveal Hero (Dribbble Car Dealer Choreography) -->
+    <section class="scroll-story" id="hero-scroll-story" aria-label="From Lagging Behind to 10x AI Architect">
+      <div class="scroll-story__sticky">
+        <div class="scroll-story__shell">
+          <!-- Left Dynamic Narrative & Stage Rail -->
+          <div class="scroll-story__copy">
+            <div class="scroll-story__eyebrow">
+              <span class="courseo-hero__pulse" aria-hidden="true"></span>
+              <span>From Lagging Behind to 10x AI Architect</span>
+            </div>
+            <h1 class="scroll-story__title">Stop Copy-Pasting Prompts. <span class="text-gradient">Ship Autonomous AI Systems.</span></h1>
+            <p class="scroll-story__subtitle">
+              Trace the exact leap from isolated chat threads to production multi-agent swarms and cloud GPU sandboxes.
             </p>
 
-            <ul class="hero-checklist">
-              <li><span class="check-dot">✓</span> 12 Masterclasses</li>
-              <li><span class="check-dot">✓</span> Cloud GPU Sandboxes</li>
-              <li><span class="check-dot">✓</span> 100% Production Code</li>
-              <li><span class="check-dot">✓</span> 94.6% Completion</li>
-            </ul>
-
-            <div class="hero-cta-row">
+            <div class="hero-cta-row" style="display:flex; align-items:center; gap:12px; margin-top:1rem; margin-bottom:1.25rem; flex-wrap:wrap;">
               <a href="#pricing" class="btn btn--primary">Apply for Cohort ↗</a>
               <a href="#pillars" class="btn btn--outline">Explore All 12 Courses</a>
+              <button type="button" class="btn btn--outline" id="openShowreelBtn" style="display:inline-flex; align-items:center; gap:0.5rem; cursor:pointer;">
+                <svg width="16" height="16" viewBox="0 0 24 24" fill="#FD6902" aria-hidden="true"><path d="M8 5v14l11-7z"/></svg>
+                <span>Watch Showreel (0:48)</span>
+              </button>
             </div>
 
-            <div class="social-proof">
-              <div class="avatar-stack" aria-hidden="true">
-                <span class="avatar-stack__item" style="background:#0F172A;">AK</span>
-                <span class="avatar-stack__item" style="background:#FD6902;">SR</span>
-                <span class="avatar-stack__item" style="background:#334155;">PM</span>
-                <span class="avatar-stack__item" style="background:#EA580C;">VD</span>
-              </div>
-              <span class="social-proof__text">
-                <span class="social-proof__star">★ 4.9/5</span> rated by 12,400+ engineers &amp; creators
-              </span>
+            <ol class="scroll-story__steps" role="tablist">
+              <li class="scroll-step is-active" data-stage="0" tabindex="0" role="tab" aria-selected="true">
+                <span class="scroll-step__index">01</span>
+                <div class="scroll-step__meta">
+                  <h3>The Prompt Plateau</h3>
+                  <p>1x Leverage · Brittle prompts &amp; 4.5 hrs lost daily</p>
+                </div>
+              </li>
+              <li class="scroll-step" data-stage="1" tabindex="-1" role="tab" aria-selected="false">
+                <span class="scroll-step__index">02</span>
+                <div class="scroll-step__meta">
+                  <h3>The Deep Skills Leap</h3>
+                  <p>Deep Skills · Swarm DAGs, H100 clusters &amp; 4K cinema</p>
+                </div>
+              </li>
+              <li class="scroll-step" data-stage="2" tabindex="-1" role="tab" aria-selected="false">
+                <span class="scroll-step__index">03</span>
+                <div class="scroll-step__meta">
+                  <h3>The 10x Superpower</h3>
+                  <p>10x Leverage · +142% compensation lift &amp; verified repos</p>
+                </div>
+              </li>
+            </ol>
+
+            <div class="scroll-story__progress" aria-hidden="true">
+              <div class="scroll-story__progress-fill" id="scroll-progress-fill"></div>
             </div>
           </div>
 
-          <!-- Right Column: Signature JobHunt 3D Tilted Card -->
-          <div class="hero-stage" aria-label="AI Track Match Preview">
-            <div class="tilt-wrapper">
-              <div class="tilt-backdrop" aria-hidden="true"></div>
+          <!-- Right Pinned Visual Cockpit with macOS Window Chrome -->
+          <div class="scroll-story__viewport">
+            <div class="viewport-chrome" aria-hidden="true">
+              <div class="chrome-dots">
+                <span class="chrome-dot red"></span>
+                <span class="chrome-dot yellow"></span>
+                <span class="chrome-dot green"></span>
+              </div>
+              <div class="chrome-title">courseo://lab/frontier-systems</div>
+              <div class="chrome-status"><span class="chrome-status-dot"></span> Live Pipeline</div>
+            </div>
+            <div class="viewport-stage-container">
+              <figure class="cockpit-stage is-active" data-stage="0">
+                <img src="assets/hero/stage-1-prompt-plateau.png" alt="ChatGPT prompt friction and rate limits" loading="eager" />
+                <div class="cockpit-stage__badge">Stage 01 · 1x Bottleneck (Prompt Plateau)</div>
+              </figure>
+              <figure class="cockpit-stage" data-stage="1">
+                <img src="assets/hero/stage-2-deep-skills-leap.png" alt="LangSmith LangGraph multi-agent execution pipeline" loading="lazy" />
+                <div class="cockpit-stage__badge">Stage 02 · Swarm DAG + Trace Pipeline</div>
+              </figure>
+              <figure class="cockpit-stage" data-stage="2">
+                <img src="assets/hero/stage-3-10x-superpower.png" alt="Weights & Biases production AI telemetry dashboard" loading="lazy" />
+                <div class="cockpit-stage__badge">Stage 03 · 10x Production Architect (W&amp;B Telemetry)</div>
+              </figure>
+            </div>
+          </div>
+        </div>
 
-              <article class="match-card">
-                <div class="match-floating-badge">
-                  <span class="match-floating-badge__dot" aria-hidden="true"></span>
-                  98% Overall Match
-                </div>
-
-                <div class="match-card__header">
-                  <div>
-                    <div class="match-card__eyebrow">Matched Cohort Track</div>
-                    <h2 class="match-card__role">Autonomous AI Architect · OpenClaw &amp; Hermes</h2>
-                  </div>
-                  <span class="cohort-chip">Starts Dec 5</span>
-                </div>
-
-                <!-- 3 Circular Percentage Dials (dial-gauge SVG) -->
-                <div class="dial-grid">
-                  <div class="dial-item">
-                    <div class="dial-gauge" role="img" aria-label="99% Agent DAGs">
-                      <svg viewBox="0 0 80 80">
-                        <circle class="dial-gauge__track" cx="40" cy="40" r="32"></circle>
-                        <circle
-                          class="dial-gauge__progress"
-                          cx="40"
-                          cy="40"
-                          r="32"
-                          style="stroke-dashoffset: 2.01;"
-                        ></circle>
-                      </svg>
-                      <span class="dial-gauge__value">99%</span>
-                    </div>
-                    <span class="dial-item__label">Agent DAGs</span>
-                  </div>
-
-                  <div class="dial-item">
-                    <div class="dial-gauge" role="img" aria-label="95% LLM Inference">
-                      <svg viewBox="0 0 80 80">
-                        <circle class="dial-gauge__track" cx="40" cy="40" r="32"></circle>
-                        <circle
-                          class="dial-gauge__progress"
-                          cx="40"
-                          cy="40"
-                          r="32"
-                          style="stroke-dashoffset: 10.05;"
-                        ></circle>
-                      </svg>
-                      <span class="dial-gauge__value">95%</span>
-                    </div>
-                    <span class="dial-item__label">LLM Inference</span>
-                  </div>
-
-                  <div class="dial-item">
-                    <div class="dial-gauge" role="img" aria-label="97% Production Readiness">
-                      <svg viewBox="0 0 80 80">
-                        <circle class="dial-gauge__track" cx="40" cy="40" r="32"></circle>
-                        <circle
-                          class="dial-gauge__progress"
-                          cx="40"
-                          cy="40"
-                          r="32"
-                          style="stroke-dashoffset: 6.03;"
-                        ></circle>
-                      </svg>
-                      <span class="dial-gauge__value">97%</span>
-                    </div>
-                    <span class="dial-item__label">Production Readiness</span>
-                  </div>
-                </div>
-
-                <div class="match-skills">
-                  <div class="match-skills__title">Skills You'll Master</div>
-                  <div class="skill-pills">
-                    <span class="skill-pill">✓ Parallel Agent Swarms</span>
-                    <span class="skill-pill">✓ Tool-Call Sandboxes</span>
-                    <span class="skill-pill">✓ SecureWatch DRM Video</span>
-                    <span class="skill-pill">✓ Zero-Leak Secrets</span>
-                  </div>
-                </div>
-              </article>
+        <!-- Floating Glassmorphic Trust Dock at bottom of sticky viewport -->
+        <div class="scroll-story__dock">
+          <div class="dock-item">
+            <span class="dock-item__icon">⚡</span>
+            <div>
+              <strong>48,000+ DEPLOYMENTS</strong>
+              <p>Shipped to live URLs by cohorts</p>
+            </div>
+          </div>
+          <div class="dock-divider"></div>
+          <div class="dock-item">
+            <span class="dock-item__icon">📈</span>
+            <div>
+              <strong>+142% LIFT</strong>
+              <p>Median 6-month compensation lift</p>
+            </div>
+          </div>
+          <div class="dock-divider"></div>
+          <div class="dock-item">
+            <span class="dock-item__icon">🛡️</span>
+            <div>
+              <strong>H100 80GB CLUSTERS</strong>
+              <p>Zero cloud overhead or surprise billing</p>
             </div>
           </div>
         </div>
       </div>
     </section>
+    <script src="./hero-story.js" defer></script>
 
-    <!-- 3. Partner Marquee -->
+    <!-- 2. Partner Marquee -->
     <section class="marquee-section" aria-label="Hiring & Alumni Companies">
       <p class="marquee-label">Trusted by engineers and builders shipping AI systems at</p>
       <div class="marquee-viewport">
@@ -222,13 +203,13 @@
           <!-- Card 1 -->
           <article class="bento-card">
             <div>
-              <div class="bento-icon-badge" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <circle cx="12" cy="5" r="3"></circle>
-                  <circle cx="5" cy="19" r="3"></circle>
-                  <circle cx="19" cy="19" r="3"></circle>
-                  <path d="M10.5 7.5L6.5 16.5M13.5 7.5L17.5 16.5M8 19h8"></path>
-                </svg>
+              <div class="bento-card__media">
+                <img
+                  src="assets/tracks/track-agent-swarms.jpg"
+                  alt="Autonomous Agent Swarms 3D topology"
+                  class="bento-card__img"
+                  loading="lazy"
+                />
               </div>
               <h3 class="bento-card__title" style="margin-top:18px;">Autonomous Agent Swarms</h3>
               <p class="bento-card__text">
@@ -241,11 +222,13 @@
           <!-- Card 3 (Tall Center Prominent Card) -->
           <article class="bento-card bento-card--tall">
             <div>
-              <div class="bento-icon-badge" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="2" y="4" width="20" height="16" rx="3"></rect>
-                  <polygon points="10,9 16,12 10,15" fill="currentColor"></polygon>
-                </svg>
+              <div class="bento-card__media bento-card__media--tall">
+                <img
+                  src="assets/tracks/track-generative-cinema.jpg"
+                  alt="High-Production Generative Cinema 3D anamorphic lens"
+                  class="bento-card__img"
+                  loading="lazy"
+                />
               </div>
               <h3 class="bento-card__title" style="margin-top:18px;">High-Production Generative Cinema</h3>
               <p class="bento-card__text">
@@ -273,12 +256,13 @@
           <!-- Card 2 -->
           <article class="bento-card">
             <div>
-              <div class="bento-icon-badge" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <rect x="4" y="4" width="16" height="16" rx="2"></rect>
-                  <rect x="9" y="9" width="6" height="6"></rect>
-                  <path d="M9 1v3M15 1v3M9 20v3M15 20v3M1 9h3M1 15h3M20 9h3M20 15h3"></path>
-                </svg>
+              <div class="bento-card__media">
+                <img
+                  src="assets/tracks/track-local-llm.jpg"
+                  alt="Local LLM Inference unified-memory silicon die"
+                  class="bento-card__img"
+                  loading="lazy"
+                />
               </div>
               <h3 class="bento-card__title" style="margin-top:18px;">Local LLM Inference</h3>
               <p class="bento-card__text">
@@ -291,11 +275,13 @@
           <!-- Card 4 -->
           <article class="bento-card">
             <div>
-              <div class="bento-icon-badge" aria-hidden="true">
-                <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                  <path d="M3 17l6-6 4 4 8-8"></path>
-                  <path d="M17 7h4v4"></path>
-                </svg>
+              <div class="bento-card__media">
+                <img
+                  src="assets/tracks/track-algorithmic-growth.jpg"
+                  alt="Algorithmic Growth and Meta Ads telemetry sculpture"
+                  class="bento-card__img"
+                  loading="lazy"
+                />
               </div>
               <h3 class="bento-card__title" style="margin-top:18px;">Algorithmic Growth &amp; Meta Ads</h3>
               <p class="bento-card__text">
@@ -391,7 +377,10 @@
         <div class="faculty-viewport">
           <div class="faculty-track" id="facultyTrack">
             <article class="faculty-card">
-              <div class="faculty-avatar" style="background:linear-gradient(135deg,#0F172A,#334155);">RV</div>
+              <div class="faculty-card__media">
+                <img src="assets/faculty/rohan_verma.svg" alt="Rohan Verma" class="faculty-card__img" width="280" height="336" loading="lazy">
+                <span class="faculty-card__tag">Ex-Google</span>
+              </div>
               <div>
                 <h3 class="faculty-card__name">Rohan Verma</h3>
                 <p class="faculty-card__role">Staff AI Systems Architect · Ex-Google</p>
@@ -404,7 +393,10 @@
             </article>
 
             <article class="faculty-card">
-              <div class="faculty-avatar" style="background:linear-gradient(135deg,#FD6902,#FF8A00);">AN</div>
+              <div class="faculty-card__media">
+                <img src="assets/faculty/ananya_nair.svg" alt="Ananya Nair" class="faculty-card__img" width="280" height="336" loading="lazy">
+                <span class="faculty-card__tag">Ex-Microsoft</span>
+              </div>
               <div>
                 <h3 class="faculty-card__name">Ananya Nair</h3>
                 <p class="faculty-card__role">Inference &amp; MLX Runtime Lead · Ex-Microsoft</p>
@@ -417,7 +409,10 @@
             </article>
 
             <article class="faculty-card">
-              <div class="faculty-avatar" style="background:linear-gradient(135deg,#1E293B,#475569);">KM</div>
+              <div class="faculty-card__media">
+                <img src="assets/faculty/kabir_mehta.svg" alt="Kabir Mehta" class="faculty-card__img" width="280" height="336" loading="lazy">
+                <span class="faculty-card__tag">Studio Lead</span>
+              </div>
               <div>
                 <h3 class="faculty-card__name">Kabir Mehta</h3>
                 <p class="faculty-card__role">Generative Cinema Director · Studio Lead</p>
@@ -430,7 +425,10 @@
             </article>
 
             <article class="faculty-card">
-              <div class="faculty-avatar" style="background:linear-gradient(135deg,#EA580C,#FB923C);">DS</div>
+              <div class="faculty-card__media">
+                <img src="assets/faculty/devika_sharma.svg" alt="Devika Sharma" class="faculty-card__img" width="280" height="336" loading="lazy">
+                <span class="faculty-card__tag">Ex-CRED</span>
+              </div>
               <div>
                 <h3 class="faculty-card__name">Devika Sharma</h3>
                 <p class="faculty-card__role">Algorithmic Growth &amp; Attribution · Ex-CRED</p>
@@ -443,7 +441,10 @@
             </article>
 
             <article class="faculty-card">
-              <div class="faculty-avatar" style="background:linear-gradient(135deg,#0F172A,#FD6902);">VS</div>
+              <div class="faculty-card__media">
+                <img src="assets/faculty/vikramaditya_sen.svg" alt="Vikramaditya Sen" class="faculty-card__img" width="280" height="336" loading="lazy">
+                <span class="faculty-card__tag">DRM Security Lead</span>
+              </div>
               <div>
                 <h3 class="faculty-card__name">Vikramaditya Sen</h3>
                 <p class="faculty-card__role">Security &amp; SecureWatch DRM Architect</p>
@@ -829,5 +830,25 @@
       });
     })();
   </script>
+
+  <!-- Cohort Showreel Modal -->
+  <div id="showreelModal" class="showreel-modal" role="dialog" aria-modal="true" aria-labelledby="showreelTitle" hidden>
+    <div class="showreel-modal__backdrop" id="showreelBackdrop"></div>
+    <div class="showreel-modal__dialog">
+      <div class="showreel-modal__header">
+        <div class="showreel-modal__brand">
+          <img src="assets/brand/courseo_logo_primary.jpg" alt="Courseo" class="showreel-modal__logo">
+          <span id="showreelTitle" class="showreel-modal__title">Courseo Frontier AI Cohort Showreel</span>
+        </div>
+        <button type="button" class="showreel-modal__close" id="closeShowreelBtn" aria-label="Close showreel">&times;</button>
+      </div>
+      <div class="showreel-modal__player">
+        <video id="showreelVideo" class="showreel-video" controls playsinline preload="metadata" poster="assets/brand/motion_frame_05.jpg">
+          <source src="assets/courseo_motion_reveal.mp4" type="video/mp4">
+          Your browser does not support HTML5 video.
+        </video>
+      </div>
+    </div>
+  </div>
 </body>
 </html>

@@ -1,0 +1,81 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 400 480" width="400" height="480" role="img" aria-label="Vikramaditya Sen — Security &amp; SecureWatch DRM Architect">
+  <defs>
+    <linearGradient id="vs-bg" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#061214"/>
+      <stop offset="50%" stop-color="#0F172A"/>
+      <stop offset="100%" stop-color="#064E3B"/>
+    </linearGradient>
+    <radialGradient id="vs-emerald-glow" cx="80%" cy="25%" r="60%">
+      <stop offset="0%" stop-color="#10B981" stop-opacity="0.45"/>
+      <stop offset="50%" stop-color="#047857" stop-opacity="0.15"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <radialGradient id="vs-teal-glow" cx="20%" cy="75%" r="55%">
+      <stop offset="0%" stop-color="#14B8A6" stop-opacity="0.32"/>
+      <stop offset="60%" stop-color="#0D9488" stop-opacity="0.08"/>
+      <stop offset="100%" stop-color="#0F172A" stop-opacity="0"/>
+    </radialGradient>
+    <linearGradient id="vs-suit" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#1E293B"/>
+      <stop offset="100%" stop-color="#062822"/>
+    </linearGradient>
+    <linearGradient id="vs-rim" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#34D399" stop-opacity="0.85"/>
+      <stop offset="100%" stop-color="#10B981" stop-opacity="0.25"/>
+    </linearGradient>
+    <linearGradient id="vs-skin" x1="0%" y1="0%" x2="100%" y2="100%">
+      <stop offset="0%" stop-color="#334155"/>
+      <stop offset="100%" stop-color="#1E293B"/>
+    </linearGradient>
+    <pattern id="vs-cipher" width="28" height="28" patternUnits="userSpaceOnUse">
+      <path d="M 28 0 L 0 0 0 28" fill="none" stroke="#10B981" stroke-opacity="0.08" stroke-width="1"/>
+      <circle cx="14" cy="14" r="1.5" fill="#10B981" fill-opacity="0.15"/>
+    </pattern>
+  </defs>
+
+  <rect width="400" height="480" fill="url(#vs-bg)"/>
+  <rect width="400" height="480" fill="url(#vs-cipher)"/>
+  <rect width="400" height="480" fill="url(#vs-emerald-glow)"/>
+  <rect width="400" height="480" fill="url(#vs-teal-glow)"/>
+
+  <!-- Security / Cryptographic Watermark Shield Motif -->
+  <g stroke="#34D399" stroke-opacity="0.2" stroke-width="1.3" fill="none">
+    <path d="M 310 70 L 350 90 L 350 140 C 350 170 310 190 310 190 C 310 190 270 170 270 140 L 270 90 Z"/>
+    <circle cx="310" cy="130" r="14" stroke-dasharray="3 4"/>
+    <line x1="310" y1="120" x2="310" y2="140"/>
+    <line x1="300" y1="130" x2="320" y2="130"/>
+    <circle cx="80" cy="140" r="32" stroke-dasharray="2 4"/>
+    <circle cx="80" cy="140" r="3" fill="#10B981" fill-opacity="0.6"/>
+  </g>
+
+  <!-- Shoulders & Structured Jacket -->
+  <path d="M52 480 C56 382 114 334 200 334 C286 334 344 382 348 480 Z" fill="url(#vs-suit)" stroke="url(#vs-rim)" stroke-width="1.5"/>
+  <!-- Lapel Detail -->
+  <path d="M164 336 L200 415 L236 336 Z" fill="#0B1321"/>
+  <path d="M174 336 L200 395 L226 336" fill="none" stroke="#34D399" stroke-opacity="0.35" stroke-width="1.4"/>
+  <path d="M154 342 L182 426 L160 444 L132 362 Z" fill="#1E293B" opacity="0.85"/>
+  <path d="M246 342 L218 426 L240 444 L268 362 Z" fill="#1E293B" opacity="0.85"/>
+
+  <!-- Neck -->
+  <path d="M175 288 L225 288 L229 344 C212 356 188 356 171 344 Z" fill="url(#vs-skin)"/>
+
+  <!-- Head Base -->
+  <ellipse cx="200" cy="226" rx="55" ry="68" fill="url(#vs-skin)" stroke="#34D399" stroke-opacity="0.3" stroke-width="1"/>
+
+  <!-- Sharp Architect Hair -->
+  <path d="M142 208 C140 148 160 128 200 128 C240 128 260 148 258 208 C250 178 238 162 200 162 C162 162 150 178 142 208 Z" fill="#09141D"/>
+
+  <!-- Glasses / Minimalist Visor Rim -->
+  <rect x="156" y="210" width="38" height="24" rx="4" fill="none" stroke="#34D399" stroke-width="2"/>
+  <rect x="206" y="210" width="38" height="24" rx="4" fill="none" stroke="#34D399" stroke-width="2"/>
+  <line x1="194" y1="220" x2="206" y2="220" stroke="#34D399" stroke-width="2"/>
+
+  <!-- Subtle Rim Light Accent -->
+  <path d="M145 220 C143 250 155 285 185 292" fill="none" stroke="#10B981" stroke-width="2.5" stroke-linecap="round" opacity="0.8"/>
+
+  <!-- Badge / Monogram Pill -->
+  <g transform="translate(135, 436)">
+    <rect width="130" height="28" rx="14" fill="#091815" stroke="#34D399" stroke-width="1.2"/>
+    <text x="65" y="18" fill="#E2E8F0" font-family="-apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif" font-size="11" font-weight="700" text-anchor="middle" letter-spacing="0.05em">VIKRAMADITYA SEN</text>
+  </g>
+</svg>

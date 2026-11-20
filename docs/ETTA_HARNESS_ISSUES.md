@@ -72,3 +72,28 @@ This document tracks all runtime anomalies, governor glitches, and tool executio
 - **Current Status & Fix:**
   - **Deliverable Status:** Deliverables (`web/courseo.css` and `web/index.html`) were successfully authored and written to disk before the verification traversal check.
   - **Resolution / Workaround:** Avoid relative parent symlinks inside subdirectories within Etta workspaces; replace symlinks with physical directories or copy assets directly so that the directory traversal graph remains strictly acyclic.
+
+---
+
+### [ETH-004] Unbounded Governor Verification Spin on Alternating Edge Case / Acceptance Gate Polling
+- **Date & Version:** 2026-11-20 | Etta v2.31.83
+- **Model Involved:** Gemini 4 Neon (`--model neon` / `e6fa609c3fa255c0`)
+- **Severity:** High (Governor enters infinite non-yielding loop emitting `→ Verification: Edge Case validation...` and `→ Verification: Validating acceptance gate criteria...`, exceeding 15,000 log lines and consuming CPU indefinitely until manual SIGKILL)
+- **Observed Terminal Symptoms & Logs:**
+  ```text
+  ● file::write  Wrote web/assets/faculty/rohan_verma.svg
+  ● file::write  Wrote web/assets/faculty/ananya_nair.svg
+  ● file::write  Wrote web/assets/faculty/kabir_mehta.svg
+  ● file::write  Wrote web/assets/faculty/devika_sharma.svg
+  → Verification: Validating acceptance gate criteria...
+  → Verification: Edge Case validation...
+  → Verification: Validating acceptance gate criteria...
+  → Verification: Edge Case validation...
+  (repeats 15,000+ times without turn termination or error timeout)
+  ```
+- **Root Cause Diagnosis:**
+  When Etta executes a sequence of tool writes that creates new assets without an intermediate shell execution, the verification governor state machine toggles between `Edge Case validation` and `Validating acceptance gate criteria` without a sleep/backoff or loop counter cap when evaluating pending tool results.
+- **Current Status & Fix:**
+  - **Deliverable Status:** Deliverables (`web/assets/faculty/rohan_verma.svg`, `ananya_nair.svg`, `kabir_mehta.svg`, `devika_sharma.svg`) were successfully authored and written to disk before the verification spin.
+  - **Workaround:** Terminated PID 10944 via SIGKILL; completed remaining single asset (`vikramaditya_sen.svg`), layout un-nesting in `web/courseo.css`, and HTML/showreel modal integration.
+  - **Fix for Etta core:** Add a hard maximum loop iteration ceiling (e.g. 5 iterations) to the verification edge-case evaluation state machine so it yields or surfaces a diagnosis rather than spinning unbounded.
