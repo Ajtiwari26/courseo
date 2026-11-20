@@ -1,0 +1,10 @@
+target/
+.etta/
+testscript/
+src/
+assets/
+desktop/
+Cargo.lock
+Cargo.toml
+docs/
+*.md
